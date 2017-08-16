@@ -1,0 +1,1198 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("_CONTAINER_H" variable (:constant-flag t) nil [30 42])
+            ("stdio.h" include (:system-flag t) nil [46 64])
+            ("stdint.h" include (:system-flag t) nil [65 84])
+            ("inttypes.h" include (:system-flag t) nil [85 106])
+            ("stdlib.h" include (:system-flag t) nil [107 126])
+            ("unistd.h" include (:system-flag t) nil [127 146])
+            ("string.h" include (:system-flag t) nil [147 166])
+            ("sys/types.h" include (:system-flag t) nil [167 189])
+            ("fcntl.h" include (:system-flag t) nil [190 208])
+            ("errno.h" include (:system-flag t) nil [209 227])
+            ("sys/ioctl.h" include (:system-flag t) nil [228 250])
+            ("pthread.h" include (:system-flag t) nil [251 271])
+            ("sys/ioctl.h" include (:system-flag t) nil [272 294])
+            ("sys/stat.h" include (:system-flag t) nil [295 316])
+            ("linux/fs.h" include (:system-flag t) nil [317 338])
+            ("list.h" include nil nil [341 358])
+            ("../btree/conf.h" include nil nil [359 385])
+            ("db_handle" type
+               (:typedef ("db_handle" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [386 421])
+            ("../btree/btree.h" include nil nil [422 449])
+            ("off64_t" variable (:constant-flag t) nil [460 467])
+            ("FREE_BLOCK" variable (:constant-flag t) nil [495 505])
+            ("DELETE_KEY" variable (:constant-flag t) nil [518 528])
+            ("VOLUME_IS_OPEN" variable (:constant-flag t) nil [542 556])
+            ("VOLUME_IS_CLOSING" variable (:constant-flag t) nil [570 587])
+            ("VOLUME_IS_CLOSED" variable (:constant-flag t) nil [601 617])
+            ("COW_FOR_LEAF" variable (:constant-flag t) nil [868 880])
+            ("COW_FOR_INDEX" variable (:constant-flag t) nil [894 907])
+            ("KEY_LOG_EXPANSION" variable (:constant-flag t) nil [921 938])
+            ("KV_LOG_EXPANSION" variable (:constant-flag t) nil [952 968])
+            ("KEY_LOG_SPLIT" variable (:constant-flag t) nil [982 995])
+            ("INDEX_SPLIT" variable (:constant-flag t) nil [1009 1020])
+            ("LEAF_SPLIT" variable (:constant-flag t) nil [1034 1044])
+            ("NOT_IMPLEMENTED_YET" variable (:constant-flag t) nil [1058 1077])
+            ("NEW_ROOT" variable (:constant-flag t) nil [1091 1099])
+            ("NEW_SUPERINDEX" variable (:constant-flag t) nil [1113 1127])
+            ("GROUP_COW" variable (:constant-flag t) nil [1141 1150])
+            ("NEW_GROUP" variable (:constant-flag t) nil [1164 1173])
+            ("NEW_LEVEL_0_TREE" variable (:constant-flag t) nil [1187 1203])
+            ("NEW_LEVEL_1_TREE" variable (:constant-flag t) nil [1259 1275])
+            ("EXTEND_BUFFER" variable (:constant-flag t) nil [1331 1344])
+            ("DELETE_LOG_EXPANSION" variable (:constant-flag t) nil [1378 1398])
+            ("SUPERINDEX_SIZE" variable (:constant-flag t) nil [1412 1427])
+            ("SNAP_INTERRUPT_ENABLE" variable (:constant-flag t) nil [1442 1463])
+            ("SNAP_INTERRUPT_DISABLE" variable (:constant-flag t) nil [1477 1499])
+            ("mappedVolumes" variable
+               (:pointer 1
+                :typemodifiers ("extern")
+                :type ("LIST" type (:type "class") nil nil))
+                nil [1506 1534])
+            ("MAPPED" variable
+               (:typemodifiers ("extern")
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [1581 1604])
+            ("FD" variable
+               (:typemodifiers ("extern")
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [1605 1623])
+            ("superindex_db_entry" type
+               (:typedef ("superindex_db_entry" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [1625 1680])
+            ("superindex_db_group" type
+               (:members 
+                  ( ("epoch" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1720 1735])
+                    ("future_extensions" variable
+                       (:dereference 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1737 1768])
+                    ("db_entries" variable
+                       (:dereference 1
+                        :type ("superindex_db_entry" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1771 1815]))                  
+                :type "struct")
+                nil [1682 1838])
+            ("superindex_db_group" type
+               (:typedef ("superindex_db_group" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [1682 1838])
+            ("superindex" type
+               (:members 
+                  ( ("epoch" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1937 1952])
+                    ("free_log_position" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2072 2099])
+                    ("free_log_last_free" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2102 2130])
+                    ("segments" variable
+                       (:dereference 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2132 2153])
+                    ("db_group_index" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("superindex_db_group" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2232 2287]))                  
+                :type "struct")
+                nil [1862 2339])
+            ("superindex" type
+               (:typedef ("superindex" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [1862 2339])
+            ("superblock" type
+               (:members 
+                  ( ("super_index" variable
+                       (:pointer 1
+                        :type ("superindex" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2394 2419])
+                    ("bitmap_size_in_blocks" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2545 2575])
+                    ("dev_size_in_blocks" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2578 2605])
+                    ("dev_addressed_in_blocks" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2608 2640])
+                    ("unmapped_blocks" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2643 2667])
+                    ("pad" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [2669 2684]))                  
+                :type "struct")
+                nil [2364 2697])
+            ("superblock" type
+               (:typedef ("superblock" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [2364 2697])
+            ("volume_descriptor" type
+               (:members 
+                  ( ("soft_superindex" variable
+                       (:pointer 1
+                        :type ("superindex" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2729 2758])
+                    ("dev_superindex" variable
+                       (:pointer 1
+                        :type ("superindex" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2822 2850])
+                    ("log_cleaner" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2901 2923])
+                    ("cond" variable (:type ("pthread_cond_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2988 3009])
+                    ("mutex" variable (:type ("pthread_mutex_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3052 3074])
+                    ("FREE_LOG_LOCK" variable (:type ("pthread_mutex_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3106 3136])
+                    ("allocator_lock" variable (:type ("pthread_mutex_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3215 3246])
+                    ("last_snapshot" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3314 3337])
+                    ("last_sync" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3387 3406])
+                    ("volume_id" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3433 3450])
+                    ("volume_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3506 3525])
+                    ("start_addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [3566 3584])
+                    ("offset" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3638 3654])
+                    ("size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3657 3671])
+                    ("bitmap_start" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [3703 3723])
+                    ("bitmap_end" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [3771 3789])
+                    ("allocator_state" variable
+                       (:pointer 1
+                        :type "unsigned char")
+                        (reparse-symbol classsubparts) [4046 4077])
+                    ("sync_signal" variable
+                       (:pointer 1
+                        :type "unsigned char")
+                        (reparse-symbol classsubparts) [4082 4110])
+                    ("volume_superblock" variable
+                       (:pointer 1
+                        :type ("superblock" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4146 4177])
+                    ("open_databases" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4215 4237])
+                    ("log_size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4286 4304])
+                    ("start" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4308 4323])
+                    ("end" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4327 4340])
+                    ("latest_addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [4390 4409])
+                    ("full" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4465 4479])
+                    ("max_suffix" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4569 4588])
+                    ("segment_utilization_vector" variable
+                       (:pointer 1
+                        :type ("uint16_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4826 4864])
+                    ("segment_ulitization_vector_size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4866 4907])
+                    ("collisions" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4933 4953])
+                    ("hits" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4956 4970])
+                    ("free_ops" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4973 4991])
+                    ("reference_count" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5017 5041])
+                    ("allocator_size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5044 5067])
+                    ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5070 5081])
+                    ("id_pilar" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5112 5129])
+                    ("state" variable
+                       (:typemodifiers ("volatile")
+                        :type "char")
+                        (reparse-symbol classsubparts) [5145 5165])
+                    ("snap_preemption" variable
+                       (:typemodifiers ("volatile")
+                        :type "char")
+                        (reparse-symbol classsubparts) [5224 5254]))                  
+                :type "struct")
+                nil [2699 5257])
+            ("key_deletion_request" type
+               (:members 
+                  ( ("epoch" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5299 5314])
+                    ("deleted_kv_addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [5316 5339]))                  
+                :type "struct")
+                nil [5260 5363])
+            ("key_deletion_request" type
+               (:typedef ("key_deletion_request" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5260 5363])
+            ("volume_init" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("dev_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [5581 5597])
+                    ("start" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5598 5612])
+                    ("size" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5613 5626])
+                    ("typeOfVolume" variable (:type "int") (reparse-symbol arg-sub-list) [5627 5644]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [5561 5645])
+            ("destoy_db_list_node" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5672 5684]))                  
+                :type "void")
+                nil [5647 5685])
+            ("destroy_volume_node" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5711 5722]))                  
+                :type "void")
+                nil [5686 5723])
+            ("allocator_init" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5745 5777]))                  
+                :type "void")
+                nil [5725 5778])
+            ("set_priority" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5798 5814])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [5815 5836])
+                    ("num_bytes" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5837 5856]))                  
+                :type "void")
+                nil [5780 5857])
+            ("allocate" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("_volume_desc" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5873 5893])
+                    ("num_bytes" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5894 5913])
+                    ("extensions" variable (:type "int") (reparse-symbol arg-sub-list) [5914 5929])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [5930 5951]))                  
+                :type "void")
+                nil [5858 5952])
+            ("allocate_segment" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("_handle" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5976 5991])
+                    ("num_bytes" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5992 6011])
+                    ("level_id" variable (:type "int") (reparse-symbol arg-sub-list) [6012 6025])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [6026 6047]))                  
+                :type "void")
+                nil [5953 6048])
+            ("free_block" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("_volume_desc" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6066 6086])
+                    ("block_address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6087 6107])
+                    ("length" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6108 6124])
+                    ("height" variable (:type "int") (reparse-symbol arg-sub-list) [6125 6136]))                  
+                :type "void")
+                nil [6050 6137])
+            ("snapshot" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6153 6185]))                  
+                :type "void")
+                nil [6139 6186])
+            ("get_timestamp" function
+               (:prototype-flag t
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [6187 6212]))          
+      :file "allocator.h"
+      :pointmax 6220
+      :fsize 6219
+      :lastmodtime '(22897 65113)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("COW_FOR_LEAF" . ((number "0x00" 881 . 885)))
+          ("LEAF_SPLIT" . ((number "0x07" 1045 . 1049)))
+          ("NOT_IMPLEMENTED_YET" . ((number "0x08" 1078 . 1082)))
+          ("KV_LOG_EXPANSION" . ((number "0x04" 969 . 973)))
+          ("GROUP_COW" . ((number "0x0E" 1151 . 1155)))
+          ("SNAP_INTERRUPT_DISABLE" . ((number "0x0B" 1500 . 1504)))
+          ("FREE_BLOCK" . ((number "124" 506 . 509)))
+          ("VOLUME_IS_OPEN" . ((number "0x00" 557 . 561)))
+          ("VOLUME_IS_CLOSING" . ((number "0x01" 588 . 592)))
+          ("NEW_ROOT" . ((number "0x0A" 1100 . 1104)))
+          ("SNAP_INTERRUPT_ENABLE" . ((number "0x0A" 1464 . 1468)))
+          ("EXTEND_BUFFER" . ((number "0x0D" 1345 . 1349)))
+          ("SUPERINDEX_SIZE" . ((number "4096" 1428 . 1432)))
+          ("NEW_LEVEL_1_TREE" . ((number "0x20" 1276 . 1280)))
+          ("NEW_GROUP" . ((number "0x0F" 1174 . 1178)))
+          ("COW_FOR_INDEX" . ((number "0x01" 908 . 912)))
+          ("KEY_LOG_EXPANSION" . ((number "0x03" 939 . 943)))
+          ("INDEX_SPLIT" . ((number "0x06" 1021 . 1025)))
+          ("off64_t" . 
+              ((UNSIGNED "unsigned" 468 . 476) (LONG "long" 477 . 481) (LONG "long" 482 . 486)))
+          ("KEY_LOG_SPLIT" . ((number "0x05" 996 . 1000)))
+          ("_CONTAINER_H" . ((number "1" 43 . 44)))
+          ("VOLUME_IS_CLOSED" . ((number "0x02" 618 . 622)))
+          ("NEW_LEVEL_0_TREE" . ((number "0x10" 1204 . 1208)))
+          ("NEW_SUPERINDEX" . ((number "0x0B" 1128 . 1132)))
+          ("DELETE_LOG_EXPANSION" . ((number "0xA3" 1399 . 1403)))
+          ("DELETE_KEY" . ((number "100" 529 . 532)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 19])
+            ("NODE" type
+               (:members 
+                  ( ("data" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [46 58])
+                    ("tag" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [60 71])
+                    ("destroy_node" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("node" variable
+                               (:pointer 1
+                                :type ("NODE" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [153 171]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [132 172])
+                    ("prev" variable
+                       (:pointer 1
+                        :type ("NODE" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [175 194])
+                    ("next" variable
+                       (:pointer 1
+                        :type ("NODE" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [197 216]))                  
+                :type "struct")
+                nil [23 223])
+            ("NODE" type
+               (:typedef ("NODE" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [23 223])
+            ("LIST" type
+               (:members 
+                  ( ("first" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [249 262])
+                    ("last" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [264 276])
+                    ("size" variable (:type "int") (reparse-symbol classsubparts) [278 287]))                  
+                :type "struct")
+                nil [225 295])
+            ("LIST" type
+               (:typedef ("LIST" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [225 295])
+            ("initList" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("destroy_node" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("node" variable
+                               (:pointer 1
+                                :type ("NODE" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [334 345]))                          
+                        :type "void")
+                        nil nil))                  
+                :type ("LIST" type (:type "class") nil nil))
+                nil [297 347])
+            ("addFirst" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [362 374])
+                    ("data" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [375 387])
+                    ("tag" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [388 405]))                  
+                :type "void")
+                nil [348 406])
+            ("addLast" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [420 432])
+                    ("data" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [433 445])
+                    ("tag" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [446 463]))                  
+                :type "void")
+                nil [407 464])
+            ("getFirst" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [481 493]))                  
+                :type "void")
+                nil [465 494])
+            ("findElement" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [514 526])
+                    ("key" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [527 538]))                  
+                :type "void")
+                nil [495 539])
+            ("removeFirst" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [559 571]))                  
+                :type "void")
+                nil [540 572])
+            ("removeElement" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [591 603])
+                    ("data" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [604 616]))                  
+                :type "int")
+                nil [573 617])
+            ("destroyNode" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [635 646]))                  
+                :type "void")
+                nil [618 647])
+            ("destroyList" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("LIST" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [665 677]))                  
+                :type "void")
+                nil [648 678]))          
+      :file "list.h"
+      :pointmax 686
+      :fsize 685
+      :lastmodtime '(22892 45645)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("_LARGEFILE64_SOURCE" variable (:constant-flag t) nil [9 28])
+            ("unistd.h" include (:system-flag t) nil [30 49])
+            ("stdio.h" include (:system-flag t) nil [50 68])
+            ("semaphore.h" include (:system-flag t) nil [69 91])
+            ("time.h" include (:system-flag t) nil [92 109])
+            ("assert.h" include (:system-flag t) nil [110 129])
+            ("errno.h" include (:system-flag t) nil [130 148])
+            ("signal.h" include (:system-flag t) nil [149 168])
+            ("sys/types.h" include (:system-flag t) nil [169 191])
+            ("sys/mman.h" include (:system-flag t) nil [192 213])
+            ("sys/stat.h" include (:system-flag t) nil [214 235])
+            ("sys/time.h" include (:system-flag t) nil [236 257])
+            ("errno.h" include (:system-flag t) nil [258 276])
+            ("string.h" include (:system-flag t) nil [277 296])
+            ("stdarg.h" include (:system-flag t) nil [297 316])
+            ("fcntl.h" include (:system-flag t) nil [317 335])
+            ("ctype.h" include (:system-flag t) nil [336 354])
+            ("string.h" include (:system-flag t) nil [355 374])
+            ("math.h" include (:system-flag t) nil [375 392])
+            ("execinfo.h" include (:system-flag t) nil [393 414])
+            ("stdbool.h" include (:system-flag t) nil [415 435])
+            ("pthread.h" include (:system-flag t) nil [436 456])
+            ("dmap-ioctl.h" include nil nil [457 480])
+            ("allocator.h" include nil nil [481 503])
+            ("../btree/conf.h" include nil nil [504 530])
+            ("../btree/btree.h" include nil nil [531 558])
+            ("_FILE_OFFSET_BITS" variable (:constant-flag t) nil [568 585])
+            ("__NR_mlock2" variable (:constant-flag t) nil [618 629])
+            ("mappedVolumes" variable
+               (:pointer 1
+                :default-value "NULL"
+                :type ("LIST" type (:type "class") nil nil))
+                nil [635 663])
+            ("internal_tree_cow_for_leaf" variable
+               (:default-value "0"
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [682 722])
+            ("internal_tree_cow_for_index" variable
+               (:default-value "0"
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [723 764])
+            ("written_buffered_bytes" variable
+               (:default-value "0"
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [765 801])
+            ("ins_prefix_hit_l0" variable
+               (:default-value "0"
+                :type "unsigned long long")
+                nil [803 844])
+            ("ins_prefix_hit_l1" variable
+               (:default-value "0"
+                :type "unsigned long long")
+                nil [845 886])
+            ("ins_prefix_miss_l0" variable
+               (:default-value "0"
+                :type "unsigned long long")
+                nil [887 929])
+            ("ins_prefix_miss_l1" variable
+               (:default-value "0"
+                :type "unsigned long long")
+                nil [930 972])
+            ("ins_hack_hit" variable
+               (:default-value "0"
+                :type "unsigned long long")
+                nil [973 1009])
+            ("ins_hack_miss" variable
+               (:default-value "0"
+                :type "unsigned long long")
+                nil [1010 1047])
+            ("ins_prefix_hit" variable (:type "unsigned long long") nil [1049 1083])
+            ("ins_prefix_miss" variable (:type "unsigned long long") nil [1084 1119])
+            ("hash_hit" variable (:type "unsigned long long") nil [1120 1148])
+            ("hash_miss" variable (:type "unsigned long long") nil [1149 1178])
+            ("find_prefix_hit" variable (:type "unsigned long long") nil [1179 1214])
+            ("find_prefix_miss" variable (:type "unsigned long long") nil [1215 1251])
+            ("scan_prefix_hit" variable (:type "unsigned long long") nil [1252 1287])
+            ("scan_prefix_miss" variable (:type "unsigned long long") nil [1288 1324])
+            ("highest_bit_mask" variable
+               (:default-value "0x8000000000000000"
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [1326 1373])
+            ("open_dbs" variable
+               (:pointer 1
+                :typemodifiers ("extern")
+                :type ("db_handle" type (:type "class") nil nil))
+                nil [1374 1401])
+            ("EUTROPIA_LOCK" variable
+               (:default-value "PTHREAD_MUTEX_INITIALIZER"
+                :type ("pthread_mutex_t" type (:type "class") nil nil))
+                nil [1402 1460])
+            ("MAPPED" variable
+               (:default-value "0"
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [1462 1482])
+            ("FD" variable (:type ("int32_t" type (:type "class") nil nil)) nil [1540 1551])
+            ("next_word" function
+               (:prototype-flag t
+                :pointer 1
+                :typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1595 1627])
+                    ("op_code" variable (:type "unsigned char") (reparse-symbol arg-sub-list) [1628 1650]))                  
+                :type "void")
+                nil [1565 1651])
+            ("log2" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("x" variable (:type "double") (reparse-symbol arg-sub-list) [1664 1673]))                  
+                :type "double")
+                nil [1652 1674])
+            ("ffsl" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("i" variable (:type "long int") (reparse-symbol arg-sub-list) [1684 1695]))                  
+                :type "int")
+                nil [1675 1696])
+            ("check" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("test" variable (:type "int") (reparse-symbol arg-sub-list) [1717 1726])
+                    ("message" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1727 1747])
+                    ("..." variable (:type "vararg") (reparse-symbol arg-sub-list) [1748 1752]))                  
+                :type "void")
+                nil [1699 1924])
+            ("__add_log_entry" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1947 1978])
+                    ("address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1979 1993])
+                    ("length" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1994 2010])
+                    ("type_of_entry" variable (:type "char") (reparse-symbol arg-sub-list) [2011 2030]))                  
+                :type "void")
+                nil [1926 2031])
+            ("mount_volume" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2050 2068])
+                    ("start" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2069 2083])
+                    ("size" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2084 2097]))                  
+                :type "void")
+                nil [2032 2098])
+            ("clean_log_entries" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2158 2176]))                  
+                :type "void")
+                nil [2135 2177])
+            ("mark_block" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2194 2226])
+                    ("block_address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2227 2247])
+                    ("length" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2248 2264])
+                    ("free" variable (:type "char") (reparse-symbol arg-sub-list) [2265 2275])
+                    ("bit_idx" variable
+                       (:pointer 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2276 2295]))                  
+                :type "void")
+                nil [2178 2296])
+            ("lread" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2311 2322])
+                    ("offset" variable (:type ("off64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2323 2338])
+                    ("whence" variable (:type "int") (reparse-symbol arg-sub-list) [2339 2350])
+                    ("ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2351 2361])
+                    ("size" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2361 2373]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [2297 2374])
+            ("lwrite" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2390 2401])
+                    ("offset" variable (:type ("off64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2402 2417])
+                    ("whence" variable (:type "int") (reparse-symbol arg-sub-list) [2418 2429])
+                    ("ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2430 2440])
+                    ("size" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2440 2452]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [2375 2453])
+            ("mount_volume" function
+               (:arguments 
+                  ( ("volume_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2474 2492])
+                    ("start" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2493 2507])
+                    ("unused_size" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2508 2528]))                  
+                :type "void")
+                nil [2456 3959])
+            ("lread" function
+               (:arguments 
+                  ( ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4278 4289])
+                    ("offset" variable (:type ("off64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4290 4305])
+                    ("whence" variable (:type "int") (reparse-symbol arg-sub-list) [4306 4317])
+                    ("ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4318 4328])
+                    ("size" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4336 4348]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [4264 4982])
+            ("lwrite" function
+               (:arguments 
+                  ( ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5311 5322])
+                    ("offset" variable (:type ("off64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5323 5338])
+                    ("whence" variable (:type "int") (reparse-symbol arg-sub-list) [5339 5350])
+                    ("ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5351 5361])
+                    ("size" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5361 5373]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [5296 5587])
+            ("volume_init" function
+               (:arguments 
+                  ( ("dev_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [5866 5881])
+                    ("start" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5882 5896])
+                    ("size" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5897 5910])
+                    ("typeOfVolume" variable (:type "int") (reparse-symbol arg-sub-list) [5911 5928]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [5846 13834])
+            ("destoy_db_list_node" function
+               (:arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13861 13873]))                  
+                :type "void")
+                nil [13836 13949])
+            ("destroy_volume_node" function
+               (:arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13975 13986]))                  
+                :type "void")
+                nil [13950 14258])
+            ("volume_close" function
+               (:arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14638 14669]))                  
+                :type "void")
+                nil [14620 15517])
+            ("next_word" function
+               (:pointer 1
+                :typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [15878 15910])
+                    ("op_code" variable (:type "unsigned char") (reparse-symbol arg-sub-list) [15911 15933]))                  
+                :type "void")
+                nil [15848 19210])
+            ("set_priority" function
+               (:arguments 
+                  ( ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [19230 19246])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [19247 19268])
+                    ("num_bytes" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [19269 19288]))                  
+                :type "void")
+                nil [19212 20586])
+            ("allocate_segment" function
+               (:pointer 1
+                :arguments 
+                  ( ("_handle" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [20655 20670])
+                    ("num_bytes" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [20671 20690])
+                    ("level_id" variable (:type "int") (reparse-symbol arg-sub-list) [20691 20704])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [20705 20726]))                  
+                :type "void")
+                nil [20632 25073])
+            ("allocate" function
+               (:pointer 1
+                :arguments 
+                  ( ("_volume_desc" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [25092 25112])
+                    ("num_bytes" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [25113 25132])
+                    ("unused" variable (:type "int") (reparse-symbol arg-sub-list) [25133 25144])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [25145 25166]))                  
+                :type "void")
+                nil [25077 34836])
+            ("allocator_init" function
+               (:arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [34858 34890]))                  
+                :type "void")
+                nil [34838 43384])
+            ("get_timestamp" function (:type ("uint64_t" type (:type "class") nil nil)) nil [43387 43523])
+            ("__add_log_entry" function
+               (:arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [43548 43579])
+                    ("address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [43580 43594])
+                    ("length" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [43595 43611])
+                    ("type_of_entry" variable (:type "char") (reparse-symbol arg-sub-list) [43612 43631]))                  
+                :type "void")
+                nil [43527 45688])
+            ("free_block" function
+               (:arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [45706 45720])
+                    ("block_address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [45721 45741])
+                    ("length" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [45742 45758])
+                    ("height" variable (:type "int") (reparse-symbol arg-sub-list) [45759 45770]))                  
+                :type "void")
+                nil [45690 46312])
+            ("clean_log_entries" function
+               (:arguments 
+                  ( ("v_desc" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [46484 46497]))                  
+                :type "void")
+                nil [46461 51164])
+            ("mark_block" function
+               (:arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [51227 51259])
+                    ("block_address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [51260 51280])
+                    ("length" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [51281 51297])
+                    ("free" variable (:type "char") (reparse-symbol arg-sub-list) [51298 51308])
+                    ("bit_idx" variable
+                       (:pointer 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [51309 51328]))                  
+                :type "void")
+                nil [51211 56922])
+            ("snapshot" function
+               (:arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [57005 57037]))                  
+                :type "void")
+                nil [56991 63781]))          
+      :file "allocator.c"
+      :pointmax 63788
+      :fsize 63787
+      :lastmodtime '(22892 45645)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_LARGEFILE64_SOURCE")
+          ("_FILE_OFFSET_BITS" . ((number "64" 586 . 588)))
+          ("__NR_mlock2" . ((number "284" 630 . 633)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("__LINUX_DMAP_IOCTL" variable (:constant-flag t) nil [36 54])
+            ("linux/types.h" include (:system-flag t) nil [56 80])
+            ("sys/ioctl.h" include (:system-flag t) nil [101 123])
+            ("stdint.h" include (:system-flag t) nil [124 143])
+            ("DMAP_IOC_MAGIC" variable (:constant-flag t) nil [640 654])
+            ("DMAP_SET_PAGE_PRIORITY" variable (:constant-flag t) nil [669 691])
+            ("DMAP_CHANGE_PAGE_PRIORITY" variable (:constant-flag t) nil [751 776])
+            ("DMAP_GETPAGE_STATS" variable (:constant-flag t) nil [835 853])
+            ("DMAP_PREFETCH" variable (:constant-flag t) nil [916 929])
+            ("DMAP_FLUSH_EVICTION_QUEUES" variable (:constant-flag t) nil [993 1019])
+            ("DMAP_DONTNEED" variable (:constant-flag t) nil [1053 1066])
+            ("FAKE_BLK_IOC_TEST_CAP" variable (:constant-flag t) nil [1171 1192])
+            ("FAKE_BLK_IOC_RESET_STATS" variable (:constant-flag t) nil [1260 1284])
+            ("FAKE_BLK_IOC_GET_STATS" variable (:constant-flag t) nil [1318 1340])
+            ("FAKE_BLK_IOC_ZERO_FULL" variable (:constant-flag t) nil [1444 1466])
+            ("FAKE_BLK_IOC_FILL_FULL" variable (:constant-flag t) nil [1502 1524])
+            ("FAKE_BLK_IOC_ZERO_PAGE" variable (:constant-flag t) nil [1611 1633])
+            ("FAKE_BLK_IOC_FILL_PAGE" variable (:constant-flag t) nil [1696 1718])
+            ("FAKE_BLK_IOC_TEST_PAGE" variable (:constant-flag t) nil [1781 1803])
+            ("FAKE_BLK_IOC_ZERO_RANGE" variable (:constant-flag t) nil [1977 2000])
+            ("FAKE_BLK_IOC_FILL_RANGE" variable (:constant-flag t) nil [2064 2087])
+            ("FAKE_BLK_IOC_GET_DEVPGNUM" variable (:constant-flag t) nil [2222 2247])
+            ("FAKE_BLK_IOC_FLIP_COPY_BITMAP" variable (:constant-flag t) nil [2376 2405])
+            ("FAKE_BLK_IOC_ZERO_PAGES" variable (:constant-flag t) nil [2527 2550])
+            ("DMAP_IOC_MAXNR" variable (:constant-flag t) nil [2615 2629])
+            ("dmap_page_prio" type
+               (:members 
+                  ( ("pageno" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2659 2672])
+                    ("prio" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2674 2684]))                  
+                :type "struct")
+                nil [2634 2711])
+            ("dmap_page_stats" type
+               (:members 
+                  ( ("pageno" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2752 2765])
+                    ("priority" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2781 2795])
+                    ("num_page_faults" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2797 2819])
+                    ("major_page_faults" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2821 2845])
+                    ("minor_page_faults" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2847 2871])
+                    ("num_evict" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2873 2889])
+                    ("num_evict_clean" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2891 2913])
+                    ("num_evict_dirty" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2915 2937])
+                    ("num_syncs" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2939 2955])
+                    ("num_reads" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2957 2973])
+                    ("num_mkwrite" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2975 2993])
+                    ("num_mkwrite_failed" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2995 3020])
+                    ("num_hit_in_buffer" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3022 3046])
+                    ("num_hit_in_buffer_valid" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3048 3078])
+                    ("num_hit_in_buffer_invalid" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3080 3112])
+                    ("num_recovered" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3114 3134]))                  
+                :type "struct")
+                nil [2713 3161])
+            ("dmap_prefetch" type
+               (:members 
+                  ( ("wait" variable (:type ("__u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3187 3198])
+                    ("num_pages" variable (:type ("__u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3200 3216])
+                    ("pg_offset" variable
+                       (:dereference 1
+                        :type ("__u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3218 3239]))                  
+                :type "struct")
+                nil [3163 3266])
+            ("dmap_dontneed" type
+               (:members 
+                  ( ("page_offset" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3292 3310])
+                    ("num_pages" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3312 3328]))                  
+                :type "struct")
+                nil [3268 3355])
+            ("fake_blk_stats" type
+               (:members 
+                  ( ("writes" variable (:type ("__s32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3382 3395])
+                    ("reads" variable (:type ("__s32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3397 3409])
+                    ("filter_reads" variable (:type ("__s32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3411 3430]))                  
+                :type "struct")
+                nil [3357 3457])
+            ("fake_blk_page_num" type
+               (:members 
+                  ( ("num" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3487 3497]))                  
+                :type "struct")
+                nil [3459 3524])
+            ("fake_blk_pages_num" type
+               (:members 
+                  ( ("blocks" variable
+                       (:dereference 1
+                        :type ("__u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3555 3573])
+                    ("num" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3600 3610]))                  
+                :type "struct")
+                nil [3526 3637])
+            ("fake_blk_page_range" type
+               (:members 
+                  ( ("offset" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3669 3682])
+                    ("length" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3684 3697]))                  
+                :type "struct")
+                nil [3639 3724])
+            ("fake_blk_page_bitmap" type
+               (:members 
+                  ( ("offset" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3757 3770])
+                    ("bpage" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3787 3804]))                  
+                :type "struct")
+                nil [3726 3831])
+            ("dmap_set_page_priority" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [3893 3900])
+                    ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3901 3917])
+                    ("priority" variable (:type ("uint8_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3918 3935]))                  
+                :type "int")
+                nil [3852 4056])
+            ("dmap_change_page_priority" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [4102 4109])
+                    ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4110 4126])
+                    ("priority" variable (:type ("uint8_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4127 4144]))                  
+                :type "int")
+                nil [4058 4268])
+            ("dmap_prefetch_pages" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [4308 4315])
+                    ("dp" variable
+                       (:pointer 1
+                        :type ("dmap_prefetch" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4316 4341]))                  
+                :type "int")
+                nil [4270 4382])
+            ("dmap_flush_victims" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [4421 4428]))                  
+                :type "int")
+                nil [4384 4478])
+            ("dmap_dontneed" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [4512 4519])
+                    ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4520 4536])
+                    ("len" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4537 4550]))                  
+                :type "int")
+                nil [4480 4664]))          
+      :file "dmap-ioctl.h"
+      :pointmax 4702
+      :fsize 4701
+      :lastmodtime '(22892 45874)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("DMAP_IOC_MAGIC" . ((number "0xED" 655 . 659)))
+          ("FAKE_BLK_IOC_ZERO_PAGE" . ((symbol "_IOW" 1638 . 1642) (semantic-list "(DMAP_IOC_MAGIC, 6, struct fake_blk_page_num)" 1642 . 1687)))
+          ("FAKE_BLK_IOC_GET_DEVPGNUM" . ((symbol "_IOR" 2249 . 2253) (semantic-list "(DMAP_IOC_MAGIC, 11, struct fake_blk_page_num)" 2253 . 2299)))
+          ("FAKE_BLK_IOC_TEST_CAP" . ((symbol "_IO" 1197 . 1200) (semantic-list "(DMAP_IOC_MAGIC, 1)" 1200 . 1219)))
+          ("DMAP_IOC_MAXNR" . ((number "19" 2630 . 2632)))
+          ("DMAP_FLUSH_EVICTION_QUEUES" . ((symbol "_IO" 1020 . 1023) (semantic-list "(DMAP_IOC_MAGIC, 	17)" 1023 . 1044)))
+          ("FAKE_BLK_IOC_FLIP_COPY_BITMAP" . ((symbol "_IOW" 2408 . 2412) (semantic-list "(DMAP_IOC_MAGIC, 12, struct fake_blk_page_bitmap)" 2412 . 2461)))
+          ("__LINUX_DMAP_IOCTL")
+          ("FAKE_BLK_IOC_ZERO_PAGES" . ((symbol "_IOW" 2554 . 2558) (semantic-list "(DMAP_IOC_MAGIC, 13, struct fake_blk_pages_num)" 2558 . 2605)))
+          ("FAKE_BLK_IOC_FILL_FULL" . ((symbol "_IO" 1529 . 1532) (semantic-list "(DMAP_IOC_MAGIC, 5)" 1532 . 1551)))
+          ("FAKE_BLK_IOC_TEST_PAGE" . ((symbol "_IOW" 1808 . 1812) (semantic-list "(DMAP_IOC_MAGIC, 8, struct fake_blk_page_num)" 1812 . 1857)))
+          ("DMAP_SET_PAGE_PRIORITY" . ((symbol "_IOW" 694 . 698) (semantic-list "(DMAP_IOC_MAGIC, 	 0, struct dmap_page_prio)" 698 . 742)))
+          ("DMAP_DONTNEED" . ((symbol "_IOW" 1074 . 1078) (semantic-list "(DMAP_IOC_MAGIC,  18, struct dmap_dontneed)" 1078 . 1121)))
+          ("FAKE_BLK_IOC_FILL_PAGE" . ((symbol "_IOW" 1723 . 1727) (semantic-list "(DMAP_IOC_MAGIC, 7, struct fake_blk_page_num)" 1727 . 1772)))
+          ("FAKE_BLK_IOC_FILL_RANGE" . ((symbol "_IOW" 2091 . 2095) (semantic-list "(DMAP_IOC_MAGIC, 10, struct fake_blk_page_range)" 2095 . 2143)))
+          ("DMAP_PREFETCH" . ((symbol "_IOW" 937 . 941) (semantic-list "(DMAP_IOC_MAGIC, 	16, struct dmap_prefetch)" 941 . 984)))
+          ("FAKE_BLK_IOC_RESET_STATS" . ((symbol "_IO" 1287 . 1290) (semantic-list "(DMAP_IOC_MAGIC, 2)" 1290 . 1309)))
+          ("FAKE_BLK_IOC_GET_STATS" . ((symbol "_IOR" 1345 . 1349) (semantic-list "(DMAP_IOC_MAGIC, 3, struct fake_blk_stats)" 1349 . 1391)))
+          ("FAKE_BLK_IOC_ZERO_FULL" . ((symbol "_IO" 1471 . 1474) (semantic-list "(DMAP_IOC_MAGIC, 4)" 1474 . 1493)))
+          ("DMAP_CHANGE_PAGE_PRIORITY" . ((symbol "_IOW" 778 . 782) (semantic-list "(DMAP_IOC_MAGIC, 	14, struct dmap_page_prio)" 782 . 826)))
+          ("DMAP_GETPAGE_STATS" . ((symbol "_IOWR" 858 . 863) (semantic-list "(DMAP_IOC_MAGIC, 15, struct dmap_page_stats)" 863 . 907)))
+          ("FAKE_BLK_IOC_ZERO_RANGE" . ((symbol "_IOW" 2004 . 2008) (semantic-list "(DMAP_IOC_MAGIC, 9, struct fake_blk_page_range)" 2008 . 2055)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("sys/stat.h" include (:system-flag t) nil [1 22])
+            ("sys/mman.h" include (:system-flag t) nil [23 44])
+            ("errno.h" include (:system-flag t) nil [45 63])
+            ("string.h" include (:system-flag t) nil [64 83])
+            ("stdarg.h" include (:system-flag t) nil [84 103])
+            ("fcntl.h" include (:system-flag t) nil [104 122])
+            ("stdio.h" include (:system-flag t) nil [123 141])
+            ("stdlib.h" include (:system-flag t) nil [142 161])
+            ("ctype.h" include (:system-flag t) nil [162 180])
+            ("allocator.h" include nil nil [181 203])
+            ("lread" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [219 230])
+                    ("offset" variable (:type ("off64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [231 246])
+                    ("whence" variable (:type "int") (reparse-symbol arg-sub-list) [247 258])
+                    ("ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [259 269])
+                    ("size" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [270 282]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [205 283])
+            ("lwrite" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fd" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [299 310])
+                    ("offset" variable (:type ("off64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [311 326])
+                    ("whence" variable (:type "int") (reparse-symbol arg-sub-list) [327 338])
+                    ("ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [339 349])
+                    ("size" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [350 362]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [284 363])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [375 384])
+                    ("argv" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [385 398]))                  
+                :type "int")
+                nil [365 2197]))          
+      :file "mkfs_Eutropia.c"
+      :pointmax 2200
+      :fsize 2199
+      :lastmodtime '(22892 45645)
+      :unmatched-syntax nil))
+  :file "!ssh:gxanth@jedi4:!home1!public!gxanth!HEutropia!kreon!allocator!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,40 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [1 20])
+            ("map" include (:system-flag t) nil [21 35])
+            ("stdlib.h" include (:system-flag t) nil [37 56])
+            ("string.h" include (:system-flag t) nil [57 76])
+            ("allocator/allocator.h" include (:typemodifiers ("extern" "\"C\"")) (reparse-symbol extern-c-contents) [116 148])
+            ("btree/btree.h" include (:typemodifiers ("extern" "\"C\"")) (reparse-symbol extern-c-contents) [91 115])
+            ("TEXT_NORMAL" variable (:constant-flag t) nil [160 171])
+            ("TEXT_RED" variable (:constant-flag t) nil [192 200])
+            ("TEXT_GREEN" variable (:constant-flag t) nil [227 237])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [286 295])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [296 308]))                  
+                :type "int")
+                nil [277 2856]))          
+      :file "simple.cc"
+      :pointmax 2857
+      :fsize 2856
+      :lastmodtime '(22888 47591 887697 934000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("TEXT_NORMAL" . ((string "\"\\033[0m\"" 174 . 183)))
+          ("TEXT_GREEN" . ((string "\"\\033[0;32m\"" 241 . 253)))
+          ("TEXT_RED" . ((string "\"\\033[0;31m\"" 206 . 218)))
+          )
+))
+  :file "!home!hacker!HEutropia!kreon!microbenchmark!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

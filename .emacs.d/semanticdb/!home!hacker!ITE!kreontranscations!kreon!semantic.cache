@@ -1,0 +1,172 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("__LINUX_DMAP_IOCTL" variable (:constant-flag t) nil [36 54])
+            ("linux/types.h" include (:system-flag t) nil [56 80])
+            ("sys/ioctl.h" include (:system-flag t) nil [101 123])
+            ("stdint.h" include (:system-flag t) nil [124 143])
+            ("DMAP_IOC_MAGIC" variable (:constant-flag t) nil [640 654])
+            ("DMAP_SET_PAGE_PRIORITY" variable (:constant-flag t) nil [669 691])
+            ("DMAP_CHANGE_PAGE_PRIORITY" variable (:constant-flag t) nil [751 776])
+            ("DMAP_GETPAGE_STATS" variable (:constant-flag t) nil [835 853])
+            ("DMAP_PREFETCH" variable (:constant-flag t) nil [916 929])
+            ("DMAP_FLUSH_EVICTION_QUEUES" variable (:constant-flag t) nil [993 1019])
+            ("FAKE_BLK_IOC_TEST_CAP" variable (:constant-flag t) nil [1093 1114])
+            ("FAKE_BLK_IOC_RESET_STATS" variable (:constant-flag t) nil [1182 1206])
+            ("FAKE_BLK_IOC_GET_STATS" variable (:constant-flag t) nil [1240 1262])
+            ("FAKE_BLK_IOC_ZERO_FULL" variable (:constant-flag t) nil [1366 1388])
+            ("FAKE_BLK_IOC_FILL_FULL" variable (:constant-flag t) nil [1424 1446])
+            ("FAKE_BLK_IOC_ZERO_PAGE" variable (:constant-flag t) nil [1533 1555])
+            ("FAKE_BLK_IOC_FILL_PAGE" variable (:constant-flag t) nil [1618 1640])
+            ("FAKE_BLK_IOC_TEST_PAGE" variable (:constant-flag t) nil [1703 1725])
+            ("FAKE_BLK_IOC_ZERO_RANGE" variable (:constant-flag t) nil [1899 1922])
+            ("FAKE_BLK_IOC_FILL_RANGE" variable (:constant-flag t) nil [1986 2009])
+            ("FAKE_BLK_IOC_GET_DEVPGNUM" variable (:constant-flag t) nil [2144 2169])
+            ("FAKE_BLK_IOC_FLIP_COPY_BITMAP" variable (:constant-flag t) nil [2298 2327])
+            ("FAKE_BLK_IOC_ZERO_PAGES" variable (:constant-flag t) nil [2449 2472])
+            ("DMAP_IOC_MAXNR" variable (:constant-flag t) nil [2537 2551])
+            ("dmap_page_prio" type
+               (:members 
+                  ( ("pageno" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2581 2594])
+                    ("prio" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2596 2606]))                  
+                :type "struct")
+                nil [2556 2633])
+            ("dmap_page_stats" type
+               (:members 
+                  ( ("pageno" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2674 2687])
+                    ("priority" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2703 2717])
+                    ("num_page_faults" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2719 2741])
+                    ("major_page_faults" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2743 2767])
+                    ("minor_page_faults" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2769 2793])
+                    ("num_evict" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2795 2811])
+                    ("num_evict_clean" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2813 2835])
+                    ("num_evict_dirty" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2837 2859])
+                    ("num_syncs" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2861 2877])
+                    ("num_reads" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2879 2895])
+                    ("num_mkwrite" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2897 2915])
+                    ("num_mkwrite_failed" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2917 2942])
+                    ("num_hit_in_buffer" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2944 2968])
+                    ("num_hit_in_buffer_valid" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2970 3000])
+                    ("num_hit_in_buffer_invalid" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3002 3034])
+                    ("num_recovered" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3036 3056]))                  
+                :type "struct")
+                nil [2635 3083])
+            ("dmap_prefetch" type
+               (:members 
+                  ( ("wait" variable (:type ("__u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3109 3120])
+                    ("num_pages" variable (:type ("__u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3122 3138])
+                    ("pg_offset" variable
+                       (:dereference 1
+                        :type ("__u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3140 3161]))                  
+                :type "struct")
+                nil [3085 3188])
+            ("fake_blk_stats" type
+               (:members 
+                  ( ("writes" variable (:type ("__s32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3215 3228])
+                    ("reads" variable (:type ("__s32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3230 3242])
+                    ("filter_reads" variable (:type ("__s32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3244 3263]))                  
+                :type "struct")
+                nil [3190 3290])
+            ("fake_blk_page_num" type
+               (:members 
+                  ( ("num" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3320 3330]))                  
+                :type "struct")
+                nil [3292 3357])
+            ("fake_blk_pages_num" type
+               (:members 
+                  ( ("blocks" variable
+                       (:dereference 1
+                        :type ("__u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3388 3406])
+                    ("num" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3433 3443]))                  
+                :type "struct")
+                nil [3359 3470])
+            ("fake_blk_page_range" type
+               (:members 
+                  ( ("offset" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3502 3515])
+                    ("length" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3517 3530]))                  
+                :type "struct")
+                nil [3472 3557])
+            ("fake_blk_page_bitmap" type
+               (:members 
+                  ( ("offset" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3590 3603])
+                    ("bpage" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3620 3637]))                  
+                :type "struct")
+                nil [3559 3664])
+            ("dmap_set_page_priority" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [3726 3733])
+                    ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3734 3750])
+                    ("priority" variable (:type ("uint8_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3751 3768]))                  
+                :type "int")
+                nil [3685 3889])
+            ("dmap_change_page_priority" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [3935 3942])
+                    ("pageno" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3943 3959])
+                    ("priority" variable (:type ("uint8_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3960 3977]))                  
+                :type "int")
+                nil [3891 4101])
+            ("dmap_prefetch_pages" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [4141 4148])
+                    ("dp" variable
+                       (:pointer 1
+                        :type ("dmap_prefetch" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4149 4174]))                  
+                :type "int")
+                nil [4103 4215])
+            ("dmap_flush_victims" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [4254 4261]))                  
+                :type "int")
+                nil [4217 4453]))          
+      :file "dmap-ioctl.h"
+      :pointmax 4491
+      :fsize 4490
+      :lastmodtime '(22875 21509 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("DMAP_IOC_MAGIC" . ((number "0xED" 655 . 659)))
+          ("FAKE_BLK_IOC_ZERO_PAGE" . ((symbol "_IOW" 1560 . 1564) (semantic-list "(DMAP_IOC_MAGIC, 6, struct fake_blk_page_num)" 1564 . 1609)))
+          ("FAKE_BLK_IOC_GET_DEVPGNUM" . ((symbol "_IOR" 2171 . 2175) (semantic-list "(DMAP_IOC_MAGIC, 11, struct fake_blk_page_num)" 2175 . 2221)))
+          ("FAKE_BLK_IOC_TEST_CAP" . ((symbol "_IO" 1119 . 1122) (semantic-list "(DMAP_IOC_MAGIC, 1)" 1122 . 1141)))
+          ("DMAP_IOC_MAXNR" . ((number "18" 2552 . 2554)))
+          ("DMAP_FLUSH_EVICTION_QUEUES" . ((symbol "_IO" 1020 . 1023) (semantic-list "(DMAP_IOC_MAGIC, 17)" 1023 . 1043)))
+          ("FAKE_BLK_IOC_FLIP_COPY_BITMAP" . ((symbol "_IOW" 2330 . 2334) (semantic-list "(DMAP_IOC_MAGIC, 12, struct fake_blk_page_bitmap)" 2334 . 2383)))
+          ("__LINUX_DMAP_IOCTL")
+          ("FAKE_BLK_IOC_ZERO_PAGES" . ((symbol "_IOW" 2476 . 2480) (semantic-list "(DMAP_IOC_MAGIC, 13, struct fake_blk_pages_num)" 2480 . 2527)))
+          ("FAKE_BLK_IOC_FILL_FULL" . ((symbol "_IO" 1451 . 1454) (semantic-list "(DMAP_IOC_MAGIC, 5)" 1454 . 1473)))
+          ("FAKE_BLK_IOC_TEST_PAGE" . ((symbol "_IOW" 1730 . 1734) (semantic-list "(DMAP_IOC_MAGIC, 8, struct fake_blk_page_num)" 1734 . 1779)))
+          ("DMAP_SET_PAGE_PRIORITY" . ((symbol "_IOW" 694 . 698) (semantic-list "(DMAP_IOC_MAGIC, 	 0, struct dmap_page_prio)" 698 . 742)))
+          ("FAKE_BLK_IOC_FILL_PAGE" . ((symbol "_IOW" 1645 . 1649) (semantic-list "(DMAP_IOC_MAGIC, 7, struct fake_blk_page_num)" 1649 . 1694)))
+          ("FAKE_BLK_IOC_FILL_RANGE" . ((symbol "_IOW" 2013 . 2017) (semantic-list "(DMAP_IOC_MAGIC, 10, struct fake_blk_page_range)" 2017 . 2065)))
+          ("DMAP_PREFETCH" . ((symbol "_IOW" 937 . 941) (semantic-list "(DMAP_IOC_MAGIC, 	16, struct dmap_prefetch)" 941 . 984)))
+          ("FAKE_BLK_IOC_RESET_STATS" . ((symbol "_IO" 1209 . 1212) (semantic-list "(DMAP_IOC_MAGIC, 2)" 1212 . 1231)))
+          ("FAKE_BLK_IOC_GET_STATS" . ((symbol "_IOR" 1267 . 1271) (semantic-list "(DMAP_IOC_MAGIC, 3, struct fake_blk_stats)" 1271 . 1313)))
+          ("FAKE_BLK_IOC_ZERO_FULL" . ((symbol "_IO" 1393 . 1396) (semantic-list "(DMAP_IOC_MAGIC, 4)" 1396 . 1415)))
+          ("DMAP_CHANGE_PAGE_PRIORITY" . ((symbol "_IOW" 778 . 782) (semantic-list "(DMAP_IOC_MAGIC, 	14, struct dmap_page_prio)" 782 . 826)))
+          ("DMAP_GETPAGE_STATS" . ((symbol "_IOWR" 858 . 863) (semantic-list "(DMAP_IOC_MAGIC, 15, struct dmap_page_stats)" 863 . 907)))
+          ("FAKE_BLK_IOC_ZERO_RANGE" . ((symbol "_IOW" 1926 . 1930) (semantic-list "(DMAP_IOC_MAGIC, 9, struct fake_blk_page_range)" 1930 . 1977)))
+          )
+))
+  :file "!home!hacker!ITE!kreontranscations!kreon!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

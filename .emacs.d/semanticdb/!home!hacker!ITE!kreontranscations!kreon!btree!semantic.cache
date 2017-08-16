@@ -1,0 +1,2056 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("_BTREE_H_" variable (:constant-flag t) nil [119 128])
+            ("volume_descriptor" type
+               (:typedef ("volume_descriptor" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [168 219])
+            ("pthread.h" include (:system-flag t) nil [221 241])
+            ("stdlib.h" include (:system-flag t) nil [242 261])
+            ("../allocator/allocator.h" include nil nil [262 297])
+            ("stats.h" include nil nil [298 316])
+            ("SUCCESS" variable (:constant-flag t) nil [327 334])
+            ("FAILED" variable (:constant-flag t) nil [345 351])
+            ("O_CREATE_DB" variable (:constant-flag t) nil [364 375])
+            ("O_NOT_CREATE_DB" variable (:constant-flag t) nil [389 404])
+            ("DYNAMIC_KEYS" variable (:constant-flag t) nil [418 430])
+            ("TUCANA_2" variable (:constant-flag t) nil [442 450])
+            ("MAX_TS" variable (:constant-flag t) nil [460 466])
+            ("SPLIT" variable (:constant-flag t) nil [496 501])
+            ("COW" variable (:constant-flag t) nil [514 517])
+            ("NO_OP" variable (:constant-flag t) nil [530 535])
+            ("MERGE_WITH_LEFT" variable (:constant-flag t) nil [548 563])
+            ("MERGE_WITH_RIGHT" variable (:constant-flag t) nil [576 592])
+            ("PURGE" variable (:constant-flag t) nil [605 610])
+            ("LEFT_ROTATE_INDEX" variable (:constant-flag t) nil [622 639])
+            ("LEFT_ROTATE_LEAF" variable (:constant-flag t) nil [650 666])
+            ("RIGHT_ROTATE_INDEX" variable (:constant-flag t) nil [677 695])
+            ("RIGHT_ROTATE_LEAF" variable (:constant-flag t) nil [706 723])
+            ("OK" variable (:constant-flag t) nil [734 736])
+            ("KEY_NOT_FOUND" variable (:constant-flag t) nil [748 761])
+            ("MERGE_NODE" variable (:constant-flag t) nil [773 783])
+            ("QUALLIE_MASK" variable (:constant-flag t) nil [799 811])
+            ("ROW_KEY_MASK" variable (:constant-flag t) nil [831 843])
+            ("NUM_OF_PERSISTENT_LEVELS" variable (:constant-flag t) nil [898 922])
+            ("NUM_OF_TREES_PER_LEVEL" variable (:constant-flag t) nil [933 955])
+            ("TOTAL_TREES" variable (:constant-flag t) nil [966 977])
+            ("MAX_DB_NAME_SIZE" variable (:constant-flag t) nil [1047 1063])
+            ("NUM_OF_DB_GROUPS" variable (:constant-flag t) nil [1076 1092])
+            ("DB_ENTRY_SIZE" variable (:constant-flag t) nil [1105 1118])
+            ("GROUP_SIZE" variable (:constant-flag t) nil [1131 1141])
+            ("ENABLE_HASH_NO" variable (:constant-flag t) nil [1153 1167])
+            ("HASH_SIZE" variable (:constant-flag t) nil [1176 1185])
+            ("FIXED_SIZE_KEYS_NO" variable (:constant-flag t) nil [1197 1215])
+            ("PREFIX_SIZE" variable (:constant-flag t) nil [1224 1235])
+            ("LOCK_SPLIT" variable (:constant-flag t) nil [1332 1342])
+            ("LOCK_REUSE" variable (:constant-flag t) nil [1353 1363])
+            ("WRITE_LOCK" variable (:constant-flag t) nil [1374 1384])
+            ("SEARCH_PERSISTENT_TREE" variable (:constant-flag t) nil [1437 1459])
+            ("SEARCH_DIRTY_TREE" variable (:constant-flag t) nil [1473 1490])
+            ("KV_FORMAT" variable (:constant-flag t) nil [1608 1617])
+            ("KV_PREFIX" variable (:constant-flag t) nil [1629 1638])
+            ("SYSTEM_ID" variable (:constant-flag t) nil [1650 1659])
+            ("KV_LOG_ID" variable (:constant-flag t) nil [1670 1679])
+            ("SPILL_ALL_DBS_IMMEDIATELY" variable (:constant-flag t) nil [1691 1716])
+            ("SPILLS_ISSUED" variable (:constant-flag t) nil [1730 1743])
+            ("ins_prefix_hit_l0" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [1750 1794])
+            ("ins_prefix_hit_l1" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [1795 1839])
+            ("ins_prefix_miss_l0" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [1840 1885])
+            ("ins_prefix_miss_l1" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [1886 1931])
+            ("nodeType_t" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("leafNode" variable
+                             (:constant-flag t
+                              :default-value (1962 1971)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [1951 1972])
+                          ("internalNode" variable
+                             (:constant-flag t
+                              :default-value (1989 1998)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [1974 1999])
+                          ("rootNode" variable
+                             (:constant-flag t
+                              :default-value (2012 2021)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2001 2022])
+                          ("leafRootNode" variable
+                             (:constant-flag t
+                              :default-value (2039 2090)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2024 2091]))                        
+                      :type "enum")
+                      nil nil)
+                :type "typedef")
+                nil [1933 2103])
+            ("block_header" type
+               (:members 
+                  ( ("next_block" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [2136 2154]))                  
+                :type "struct")
+                nil [2105 2170])
+            ("block_header" type
+               (:typedef ("block_header" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [2105 2170])
+            ("node_header" type
+               (:members 
+                  ( ("epoch" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2281 2296])
+                    ("fragmentation" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2379 2402])
+                    ("v1" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2404 2416])
+                    ("v2" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2418 2430])
+                    ("first_key_block" variable
+                       (:pointer 1
+                        :type ("block_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2488 2518])
+                    ("last_key_block" variable
+                       (:pointer 1
+                        :type ("block_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2520 2549])
+                    ("key_log_size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2551 2573])
+                    ("height" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2575 2590])
+                    ("type" variable (:type ("nodeType_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2668 2684])
+                    ("numberOfEntriesInNode" variable (:type ("uint16_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2712 2743])
+                    ("pad" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [2745 2757]))                  
+                :type "struct")
+                nil [2250 2772])
+            ("node_header" type
+               (:typedef ("node_header" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [2250 2772])
+            ("superindex_db_entry" type
+               (:members 
+                  ( ("db_name" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [2805 2836])
+                    ("segments" variable
+                       (:dereference 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2838 2871])
+                    ("root_r" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2873 2907])
+                    ("total_keys" variable
+                       (:dereference 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2909 2942])
+                    ("g_first_kv_log" variable
+                       (:pointer 1
+                        :type ("block_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2944 2974])
+                    ("g_last_kv_log" variable
+                       (:pointer 1
+                        :type ("block_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2976 3005])
+                    ("g_kv_log_size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3007 3030]))                  
+                :type "struct")
+                nil [2774 3033])
+            ("db_descriptor" type
+               (:members 
+                  ( ("db_name" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3249 3280])
+                    ("segments" variable
+                       (:dereference 1
+                        :type ("uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3282 3315])
+                    ("root_r" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3318 3352])
+                    ("root_w" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3354 3388])
+                    ("total_keys" variable
+                       (:dereference 1
+                        :type ("int64_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3390 3422])
+                    ("spiller" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3424 3442])
+                    ("spiller_lock" variable (:type ("pthread_mutex_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3444 3473])
+                    ("write_lock" variable (:type ("pthread_mutex_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3475 3502])
+                    ("last_spilled_leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3505 3536])
+                    ("last_spilled_position" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3538 3569])
+                    ("tree_status" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3571 3601])
+                    ("zero_level_memory_size" variable
+                       (:typemodifiers ("volatile")
+                        :type "unsigned long long")
+                        (reparse-symbol classsubparts) [3603 3654])
+                    ("g_first_kv_log" variable
+                       (:pointer 1
+                        :type ("block_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3656 3686])
+                    ("g_last_kv_log" variable
+                       (:pointer 1
+                        :type ("block_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3688 3717])
+                    ("g_kv_log_size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3719 3742])
+                    ("reference_count" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3745 3769])
+                    ("group_id" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3771 3788])
+                    ("group_index" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [3790 3810])
+                    ("active_tree" variable
+                       (:typemodifiers ("volatile")
+                        :type ("int32_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3812 3841])
+                    ("dirty" variable (:type "char") (reparse-symbol classsubparts) [3906 3917]))                  
+                :type "struct")
+                nil [3217 3933])
+            ("db_descriptor" type
+               (:typedef ("db_descriptor" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [3217 3933])
+            ("db_handle" type
+               (:members 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4067 4098])
+                    ("db_desc" variable
+                       (:pointer 1
+                        :type ("db_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4100 4123]))                  
+                :type "struct")
+                nil [4046 4126])
+            ("allocator_descriptor" type
+               (:members 
+                  ( ("allocate_space" function
+                       (:prototype-flag t
+                        :pointer 1
+                        :function-pointer t
+                        :arguments 
+                          ( ("" variable
+                               (:pointer 1
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [4622 4629])
+                            ("" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4630 4639])
+                            ("" variable (:type "int") (reparse-symbol arg-sub-list) [4640 4644])
+                            ("" variable (:type "char") (reparse-symbol arg-sub-list) [4645 4650]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [4597 4651])
+                    ("free_space" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("" variable
+                               (:pointer 1
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [4725 4732])
+                            ("" variable
+                               (:pointer 1
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [4733 4740])
+                            ("" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4741 4750])
+                            ("" variable (:type "int") (reparse-symbol arg-sub-list) [4751 4755]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [4704 4756])
+                    ("handle" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [4758 4772])
+                    ("level_id" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4821 4838]))                  
+                :type "struct")
+                nil [4503 4861])
+            ("allocator_descriptor" type
+               (:typedef ("allocator_descriptor" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [4503 4861])
+            ("insertKV_request" type
+               (:members 
+                  ( ("allocator_desc" variable (:type ("allocator_descriptor" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4899 4935])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4938 4956])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [4958 4972])
+                    ("data_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [4974 4989])
+                    ("level_id" variable (:type "int") (reparse-symbol classsubparts) [4991 5004])
+                    ("key_format" variable (:type "char") (reparse-symbol classsubparts) [5006 5022]))                  
+                :type "struct")
+                nil [4863 5042])
+            ("insertKV_request" type
+               (:typedef ("insertKV_request" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [4863 5042])
+            ("insertKV_reply" type
+               (:members 
+                  ( ("left_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5078 5103])
+                    ("right_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5133 5159])
+                    ("new_addr" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5161 5184])
+                    ("middle_key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [5213 5235])
+                    ("new_offset" variable (:type "int") (reparse-symbol classsubparts) [5237 5252]))                  
+                :type "struct")
+                nil [5044 5305])
+            ("insertKV_reply" type
+               (:typedef ("insertKV_reply" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5044 5305])
+            ("delete_request" type
+               (:members 
+                  ( ("allocator_desc" variable (:type ("allocator_descriptor" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5340 5376])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5379 5398])
+                    ("parent" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5400 5421])
+                    ("offset" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5423 5439])
+                    ("self" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5464 5483]))                  
+                :type "struct")
+                nil [5307 5500])
+            ("delete_request" type
+               (:typedef ("delete_request" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5307 5500])
+            ("delete_reply" type
+               (:members 
+                  ( ("new_self" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5533 5556])
+                    ("new_left_brother" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5576 5607])
+                    ("new_right_brother" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5627 5659])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [5679 5690])
+                    ("status" variable (:type "int") (reparse-symbol classsubparts) [5692 5703]))                  
+                :type "struct")
+                nil [5502 5718])
+            ("delete_reply" type
+               (:typedef ("delete_reply" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5502 5718])
+            ("split_request" type
+               (:members 
+                  ( ("allocator_desc" variable (:type ("allocator_descriptor" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5753 5789])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5792 5811])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5813 5832])
+                    ("insert_mode" variable (:type "char") (reparse-symbol classsubparts) [5834 5851]))                  
+                :type "struct")
+                nil [5720 5868])
+            ("split_request" type
+               (:typedef ("split_request" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5720 5868])
+            ("split_reply" type
+               (:members 
+                  ( ("left_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5901 5926])
+                    ("right_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5928 5954])
+                    ("middle_key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [5956 5978]))                  
+                :type "struct")
+                nil [5870 5993])
+            ("split_reply" type
+               (:typedef ("split_reply" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5870 5993])
+            ("spill_request" type
+               (:members 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6027 6045])
+                    ("src_root" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6047 6070])
+                    ("src_tree_id" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6072 6092])
+                    ("dst_tree_id" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6094 6114]))                  
+                :type "struct")
+                nil [5995 6130])
+            ("spill_request" type
+               (:typedef ("spill_request" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [5995 6130])
+            ("db_open" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("volumeName" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [6194 6212])
+                    ("start" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6213 6228])
+                    ("size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6229 6243])
+                    ("db_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [6244 6259])
+                    ("CREATE_FLAG" variable (:type "char") (reparse-symbol arg-sub-list) [6260 6277]))                  
+                :type ("db_handle" type (:type "class") nil nil))
+                nil [6174 6278])
+            ("flush_volume" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6297 6329])
+                    ("force_spill" variable (:type "char") (reparse-symbol arg-sub-list) [6330 6347]))                  
+                :type "void")
+                nil [6279 6348])
+            ("mutation_batch" type
+               (:members 
+                  ( ("num_of_mutations" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6484 6510])
+                    ("position" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6513 6531])
+                    ("size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6533 6547])
+                    ("type" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6549 6563])
+                    ("buffer" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [6651 6665]))                  
+                :type "struct")
+                nil [6451 6683])
+            ("mutation_batch" type
+               (:typedef ("mutation_batch" type (:type "struct") nil nil)
+                :type "typedef")
+                nil [6451 6683])
+            ("insert_key_value" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6711 6730])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6731 6741])
+                    ("value" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6742 6755])
+                    ("key_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6756 6774])
+                    ("value_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6775 6795]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [6686 6796])
+            ("insert_write_batch" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6824 6843])
+                    ("ops" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6844 6865]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [6797 6866])
+            ("create_mutation_batch" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6940 6953]))                  
+                :type ("mutation_batch" type (:type "class") nil nil))
+                nil [6901 6954])
+            ("create_mutation_batch_from_buffer" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("buffer" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7050 7064])
+                    ("size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7065 7079])
+                    ("num_of_items" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7080 7102]))                  
+                :type ("mutation_batch" type (:type "class") nil nil))
+                nil [6999 7103])
+            ("initiate_mutation_batch_from_buffer" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("batch" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7145 7167])
+                    ("buffer" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7167 7181])
+                    ("size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7181 7194])
+                    ("num_of_mutations" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7194 7219]))                  
+                :type "void")
+                nil [7104 7220])
+            ("clear_mutation_batch" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("mutation" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7249 7274]))                  
+                :type "void")
+                nil [7223 7275])
+            ("destroy_mutation_batch" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("mutation" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7304 7329]))                  
+                :type "void")
+                nil [7276 7330])
+            ("add_mutation" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("batch" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7352 7375])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7376 7387])
+                    ("data" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7388 7399])
+                    ("key_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7400 7418])
+                    ("data_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7419 7438]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [7331 7439])
+            ("find_key" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7457 7475])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7476 7486])
+                    ("key_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7487 7505]))                  
+                :type "void")
+                nil [7441 7506])
+            ("delete_key" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7526 7544])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7545 7555])
+                    ("size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7556 7570]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [7507 7571])
+            ("_tucana_key_cmp" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("index_key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7597 7617])
+                    ("query_key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7618 7638])
+                    ("index_key_format" variable (:type "char") (reparse-symbol arg-sub-list) [7639 7661])
+                    ("query_key_format" variable (:type "char") (reparse-symbol arg-sub-list) [7662 7684]))                  
+                :type ("int64_t" type (:type "class") nil nil))
+                nil [7573 7685])
+            ("prefix_compare" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("l" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [7705 7713])
+                    ("r" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [7714 7722])
+                    ("unused" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7723 7737]))                  
+                :type "int")
+                nil [7686 7738])
+            ("free_buffered" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("_handle" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7759 7773])
+                    ("address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7774 7788])
+                    ("num_bytes" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7789 7808])
+                    ("height" variable (:type "int") (reparse-symbol arg-sub-list) [7809 7820]))                  
+                :type "void")
+                nil [7740 7821])
+            ("__insert" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7899 7922])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("insertKV_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7923 7944])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7945 7964])
+                    ("nodestack" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7964 7990])
+                    ("iterator" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [7990 8010]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [7882 8011])
+            ("__findKey" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8030 8049])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [8050 8064])
+                    ("dirty" variable (:type "char") (reparse-symbol arg-sub-list) [8065 8076]))                  
+                :type "void")
+                nil [8013 8077])
+            ("_index_node_binary_search" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8123 8142])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [8143 8158])
+                    ("query_key_format" variable (:type "char") (reparse-symbol arg-sub-list) [8159 8181]))                  
+                :type "void")
+                nil [8089 8182])
+            ("free_logical_node" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8207 8245])
+                    ("node_index" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8246 8271]))                  
+                :type "void")
+                nil [8184 8272])
+            ("insertKVAtLeaf" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8293 8315])
+                    ("leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8317 8336])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [8337 8358]))                  
+                :type "int")
+                nil [8274 8359])
+            ("findLeafNode" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("root" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8388 8407])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [8408 8422]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [8361 8423])
+            ("print_node" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8440 8459]))                  
+                :type "void")
+                nil [8424 8460])
+            ("print_key" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [8476 8489])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [8490 8497]))                  
+                :type "void")
+                nil [8461 8498]))          
+      :file "btree.h"
+      :pointmax 8523
+      :fsize 8522
+      :lastmodtime '(22888 46135 66945 475000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("OK" . ((number "10" 737 . 739)))
+          ("QUALLIE_MASK" . ((number "0x0000FFFF" 812 . 822)))
+          ("TOTAL_TREES" . ((number "8" 978 . 979)))
+          ("MAX_DB_NAME_SIZE" . ((number "168" 1064 . 1067)))
+          ("HASH_SIZE" . ((number "0" 1186 . 1187)))
+          ("TUCANA_2")
+          ("LOCK_REUSE" . ((number "2" 1364 . 1365)))
+          ("SEARCH_DIRTY_TREE" . ((number "0x02" 1491 . 1495)))
+          ("_BTREE_H_")
+          ("SUCCESS" . ((number "4" 335 . 336)))
+          ("KEY_NOT_FOUND" . ((number "11" 762 . 764)))
+          ("PREFIX_SIZE" . ((number "8" 1236 . 1237)))
+          ("SPLIT" . ((number "1" 503 . 504)))
+          ("NO_OP" . ((number "0" 537 . 538)))
+          ("LEFT_ROTATE_INDEX" . ((number "6" 640 . 641)))
+          ("WRITE_LOCK" . ((number "3" 1385 . 1386)))
+          ("SYSTEM_ID" . ((number "0" 1660 . 1661)))
+          ("KV_LOG_ID" . ((number "5" 1680 . 1681)))
+          ("COW" . ((number "2" 519 . 520)))
+          ("NUM_OF_PERSISTENT_LEVELS" . ((number "2" 923 . 924)))
+          ("GROUP_SIZE" . ((number "7" 1142 . 1143)))
+          ("O_CREATE_DB" . ((number "0x04" 376 . 380)))
+          ("DB_ENTRY_SIZE" . ((number "512" 1119 . 1122)))
+          ("MERGE_WITH_LEFT" . ((number "3" 565 . 566)))
+          ("PURGE" . ((number "5" 612 . 613)))
+          ("RIGHT_ROTATE_INDEX" . ((number "8" 696 . 697)))
+          ("MERGE_NODE" . ((number "12" 784 . 786)))
+          ("ROW_KEY_MASK" . ((number "0xFFFF0000" 844 . 854)))
+          ("NUM_OF_TREES_PER_LEVEL" . ((number "4" 956 . 957)))
+          ("SEARCH_PERSISTENT_TREE" . ((number "0x01" 1460 . 1464)))
+          ("LEFT_ROTATE_LEAF" . ((number "7" 667 . 668)))
+          ("MAX_TS" . ((number "0xFFFFFFFFFFFFFFFF" 468 . 486)))
+          ("RIGHT_ROTATE_LEAF" . ((number "9" 724 . 725)))
+          ("SPILL_ALL_DBS_IMMEDIATELY" . ((number "0x01" 1717 . 1721)))
+          ("SPILLS_ISSUED" . ((number "0x00" 1744 . 1748)))
+          ("MERGE_WITH_RIGHT" . ((number "4" 594 . 595)))
+          ("DYNAMIC_KEYS" . ((number "0" 431 . 432)))
+          ("NUM_OF_DB_GROUPS" . ((number "504" 1093 . 1096)))
+          ("ENABLE_HASH_NO")
+          ("FIXED_SIZE_KEYS_NO")
+          ("LOCK_SPLIT" . ((number "1" 1343 . 1344)))
+          ("KV_PREFIX" . ((number "20" 1639 . 1641)))
+          ("FAILED" . ((number "5" 353 . 354)))
+          ("O_NOT_CREATE_DB" . ((number "0xCE" 405 . 409)))
+          ("KV_FORMAT" . ((number "19" 1618 . 1620)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("STATS_NO" variable (:constant-flag t) nil [9 17])
+            ("DIRTY_BYTES" variable (:constant-flag t) nil [27 38])
+            ("STATISTICS" variable (:constant-flag t) nil [70 80])
+            ("INIT_DB_STATS" variable (:constant-flag t) nil [295 308])
+            ("INC_MERGE" variable (:constant-flag t) nil [538 547])
+            ("INC_PURGE" variable (:constant-flag t) nil [633 642])
+            ("INC_LEAF_COW_EVENTS" variable (:constant-flag t) nil [670 689])
+            ("INC_INDEX_COW_EVENTS" variable (:constant-flag t) nil [733 753])
+            ("INC_LEAF_SPLITS" variable (:constant-flag t) nil [798 813])
+            ("INC_INDEX_SPLITS" variable (:constant-flag t) nil [852 868])
+            ("INC_DIRTY_BYTES" variable (:constant-flag t) nil [908 923])
+            ("INIT_DIRTY_BYTES" variable (:constant-flag t) nil [936 952])
+            ("INC_LEAF_COLLISIONS" variable (:constant-flag t) nil [962 981]))          
+      :file "stats.h"
+      :pointmax 1016
+      :fsize 1015
+      :lastmodtime '(22850 16108 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("INC_MERGE" . 
+              ((IF "if" 548 . 550) (semantic-list "(type == internalNode)" 550 . 572) (semantic-list "{handle->index_merge++;}" 572 . 596) (ELSE "else" 596 . 600) (semantic-list "{handle->leaf_merge++;}" 600 . 623)))
+          ("INC_INDEX_SPLITS" . 
+              ((symbol "req" 869 . 872) (punctuation "-" 872 . 873) (punctuation ">" 873 . 874) (symbol "handle" 874 . 880) (punctuation "-" 880 . 881) (punctuation ">" 881 . 882) (symbol "index_splits" 882 . 894) (punctuation "+" 894 . 895) (punctuation "+" 895 . 896) (punctuation ";" 896 . 897)))
+          ("INC_DIRTY_BYTES")
+          ("INC_INDEX_COW_EVENTS" . 
+              ((symbol "req" 754 . 757) (punctuation "-" 757 . 758) (punctuation ">" 758 . 759) (symbol "handle" 759 . 765) (punctuation "-" 765 . 766) (punctuation ">" 766 . 767) (symbol "inner_cow_events" 767 . 783) (punctuation "+" 783 . 784) (punctuation "+" 784 . 785) (punctuation ";" 785 . 786)))
+          ("STATS_NO")
+          ("STATISTICS" . 
+              ((symbol "uint64_t" 82 . 90) (symbol "leaf_cow_events" 91 . 106) (punctuation ";" 106 . 107) (symbol "uint64_t" 107 . 115) (symbol "inner_cow_events" 116 . 132) (punctuation ";" 132 . 133) (symbol "uint64_t" 133 . 141) (symbol "leaf_splits" 142 . 153) (punctuation ";" 153 . 154) (symbol "uint64_t" 154 . 162) (symbol "index_splits" 163 . 175) (punctuation ";" 175 . 176) (symbol "uint64_t" 176 . 184) (symbol "wasted_leaf_bytes" 185 . 202) (punctuation ";" 202 . 203) (symbol "uint64_t" 203 . 211) (symbol "index_merge" 212 . 223) (punctuation ";" 223 . 224) (symbol "uint64_t" 224 . 232) (symbol "leaf_merge" 233 . 243) (punctuation ";" 243 . 244) (symbol "uint64_t" 244 . 252) (symbol "purges" 253 . 259) (punctuation ";" 259 . 260) (symbol "uint64_t" 260 . 268) (symbol "leaf_collisions" 269 . 284) (punctuation ";" 284 . 285)))
+          ("DIRTY_BYTES" . 
+              ((symbol "uint32_t" 39 . 47) (symbol "dirty_bytes" 48 . 59) (punctuation ";" 59 . 60)))
+          ("INIT_DB_STATS" . 
+              ((symbol "open_dbs" 309 . 317) (semantic-list "[i]" 317 . 320) (punctuation "." 320 . 321) (symbol "leaf_cow_events" 321 . 336) (punctuation "=" 336 . 337) (number "0" 337 . 338) (punctuation ";" 338 . 339) (symbol "open_dbs" 339 . 347) (semantic-list "[i]" 347 . 350) (punctuation "." 350 . 351) (symbol "inner_cow_events" 351 . 367) (punctuation "=" 367 . 368) (number "0" 368 . 369) (punctuation ";" 369 . 370) (symbol "open_dbs" 370 . 378) (semantic-list "[i]" 378 . 381) (punctuation "." 381 . 382) (symbol "leaf_splits" 382 . 393) (punctuation "=" 393 . 394) (number "0" 394 . 395) (punctuation ";" 395 . 396) (symbol "open_dbs" 396 . 404) (semantic-list "[i]" 404 . 407) (punctuation "." 407 . 408) (symbol "index_splits" 408 . 420) (punctuation "=" 420 . 421) (number "0" 421 . 422) (punctuation ";" 422 . 423) (symbol "open_dbs" 423 . 431) (semantic-list "[i]" 431 . 434) (punctuation "." 434 . 435) (symbol "purges" 435 . 441) (punctuation "=" 441 . 442) (number "0" 442 . 443) (punctuation ";" 443 . 444) (symbol "open_dbs" 444 . 452) (semantic-list "[i]" 452 . 455) (punctuation "." 455 . 456) (symbol "leaf_merge" 456 . 466) (punctuation "=" 466 . 467) (number "0" 467 . 468) (punctuation ";" 468 . 469) (symbol "open_dbs" 470 . 478) (semantic-list "[i]" 478 . 481) (punctuation "." 481 . 482) (symbol "index_merge" 482 . 493) (punctuation "=" 493 . 494) (number "0" 494 . 495) (punctuation ";" 495 . 496) (symbol "open_dbs" 497 . 505) (semantic-list "[i]" 505 . 508) (punctuation "." 508 . 509) (symbol "leaf_collisions" 509 . 524) (punctuation "=" 524 . 525) (number "0" 525 . 526) (punctuation ";" 526 . 527)))
+          ("INC_LEAF_COLLISIONS" . 
+              ((symbol "req" 982 . 985) (punctuation "-" 985 . 986) (punctuation ">" 986 . 987) (symbol "handle" 987 . 993) (punctuation "-" 993 . 994) (punctuation ">" 994 . 995) (symbol "leaf_collisions" 995 . 1010) (punctuation "+" 1010 . 1011) (punctuation "+" 1011 . 1012) (punctuation ";" 1012 . 1013)))
+          ("INIT_DIRTY_BYTES")
+          ("INC_LEAF_SPLITS" . 
+              ((symbol "req" 814 . 817) (punctuation "-" 817 . 818) (punctuation ">" 818 . 819) (symbol "handle" 819 . 825) (punctuation "-" 825 . 826) (punctuation ">" 826 . 827) (symbol "leaf_splits" 827 . 838) (punctuation "+" 838 . 839) (punctuation "+" 839 . 840) (punctuation ";" 840 . 841)))
+          ("INC_PURGE" . 
+              ((symbol "handle" 643 . 649) (punctuation "-" 649 . 650) (punctuation ">" 650 . 651) (symbol "purges" 651 . 657) (punctuation "+" 657 . 658) (punctuation "+" 658 . 659) (punctuation ";" 659 . 660)))
+          ("INC_LEAF_COW_EVENTS" . 
+              ((symbol "req" 690 . 693) (punctuation "-" 693 . 694) (punctuation ">" 694 . 695) (symbol "handle" 695 . 701) (punctuation "-" 701 . 702) (punctuation ">" 702 . 703) (symbol "leaf_cow_events" 703 . 718) (punctuation "+" 718 . 719) (punctuation "+" 719 . 720) (punctuation ";" 720 . 721)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("OFFSET_IN_KEY" variable (:constant-flag t) nil [9 22])
+            ("DEBUG_ALLOCATOR_NO" variable (:constant-flag t) nil [59 77])
+            ("DEBUG_CLEANER_NO" variable (:constant-flag t) nil [86 102])
+            ("DEBUG_SNAPSHOT_NO" variable (:constant-flag t) nil [111 128])
+            ("DEBUG_INSERT_NO" variable (:constant-flag t) nil [137 152])
+            ("DEBUG_READ_NO" variable (:constant-flag t) nil [161 174])
+            ("DEBUG_TUCANA_2_NO" variable (:constant-flag t) nil [183 200])
+            ("DEBUG_SCAN_NO" variable (:constant-flag t) nil [209 222])
+            ("DEBUG_DELETE_NO" variable (:constant-flag t) nil [231 246])
+            ("DEV_NAME_MAX" variable (:constant-flag t) nil [276 288])
+            ("DATA_PER_BITMAP_BLOCK" variable (:constant-flag t) nil [354 375])
+            ("BITSPERBYTE" variable (:constant-flag t) nil [453 464])
+            ("SETBITS64" variable (:constant-flag t) nil [478 487])
+            ("ZEROBITS32" variable (:constant-flag t) nil [519 529])
+            ("SETBITS32" variable (:constant-flag t) nil [553 562])
+            ("FREE_LOG_SIZE" variable (:constant-flag t) nil [586 599])
+            ("DELETE_LOG_SIZE" variable (:constant-flag t) nil [682 697])
+            ("LOG_SIZE" variable (:constant-flag t) nil [780 788])
+            ("MAX_HANDLES" variable (:constant-flag t) nil [875 886])
+            ("DEVICE_BLOCK_SIZE" variable (:constant-flag t) nil [903 920])
+            ("CLEAN_SIZE" variable (:constant-flag t) nil [934 944])
+            ("SEC" variable (:constant-flag t) nil [965 968])
+            ("CLEAN_INTERVAL" variable (:constant-flag t) nil [988 1002])
+            ("SNAPSHOT_INTERVAL" variable (:constant-flag t) nil [1022 1039])
+            ("debug" variable (:constant-flag t) nil [1059 1064])
+            ("nodemo" variable (:constant-flag t) nil [1073 1079])
+            ("WORD_SIZE" variable (:constant-flag t) nil [1088 1097])
+            ("BREAKPOINT" variable (:constant-flag t) nil [1109 1119])
+            ("MARK_BLOCK_NO" variable (:constant-flag t) nil [1154 1167])
+            ("SPINNING" variable (:constant-flag t) nil [1176 1184])
+            ("no_profile" variable (:constant-flag t) nil [1193 1203])
+            ("DEV" variable (:constant-flag t) nil [1212 1215])
+            ("MAPPRIVATE_NO" variable (:constant-flag t) nil [1224 1237])
+            ("MSYNC" variable (:constant-flag t) nil [1280 1285])
+            ("MMAP" variable (:constant-flag t) nil [1322 1326])
+            ("MALLOC_SIZE" variable (:constant-flag t) nil [1371 1382])
+            ("SINGLE_LOG" variable (:constant-flag t) nil [1461 1471])
+            ("KB" variable (:constant-flag t) nil [1482 1484])
+            ("PG" variable (:constant-flag t) nil [1500 1502])
+            ("MB" variable (:constant-flag t) nil [1518 1520])
+            ("KEY_BLOCK_SIZE" variable (:constant-flag t) nil [1541 1555])
+            ("KV_BLOCK_SIZE" variable (:constant-flag t) nil [1579 1592])
+            ("MEMCMP" variable (:constant-flag t) nil [1620 1626])
+            ("MAX_ROW_KEY" variable (:constant-flag t) nil [1659 1670])
+            ("MAX_SIZE" variable (:constant-flag t) nil [1700 1708])
+            ("NODE_SIZE" variable (:constant-flag t) nil [1723 1732])
+            ("COUNTERS_no" variable (:constant-flag t) nil [1746 1757])
+            ("REPORTING_PERIOD" variable (:constant-flag t) nil [1792 1808])
+            ("LLU" variable (:constant-flag t) nil [1868 1871])
+            ("BDFS_BLOCK_SERVER_NO" variable (:constant-flag t) nil [1900 1920])
+            ("FAKE_MODE" variable (:constant-flag t) nil [1944 1953])
+            ("LEAF_BUFFER_SIZE" variable (:constant-flag t) nil [2000 2016])
+            ("LEAF_SPLIT_NEEDED" variable (:constant-flag t) nil [2038 2055])
+            ("LEAF_METADATA_SIZE" variable (:constant-flag t) nil [2068 2086])
+            ("LEAF_INSERT_OK" variable (:constant-flag t) nil [2133 2147])
+            ("MAX_KEY_SIZE" variable (:constant-flag t) nil [2158 2170])
+            ("MAX_DATA_SIZE" variable (:constant-flag t) nil [2182 2195])
+            ("AGGRESIVE_FREE_POLICY" variable (:constant-flag t) nil [2240 2261])
+            ("TO_SPILL_KEYS" variable (:constant-flag t) nil [2270 2283])
+            ("ZERO_LEVEL_MEMORY_UPPER_BOUND" variable (:constant-flag t) nil [2347 2376])
+            ("ZERO_LEVEL_MEMORY_SPILL_THREASHOLD" variable (:constant-flag t) nil [2565 2599])
+            ("BUFFER_SEGMENT_SIZE" variable (:constant-flag t) nil [2701 2720])
+            ("SEGMENT_MEMORY_THREASHOLD" variable (:constant-flag t) nil [2737 2762])
+            ("THROTTLE_SLEEP_TIME" variable (:constant-flag t) nil [2828 2847])
+            ("MAX_ALLOCATION_TRIES" variable (:constant-flag t) nil [2863 2883]))          
+      :file "conf.h"
+      :pointmax 2886
+      :fsize 2886
+      :lastmodtime '(22850 16108 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("DEBUG_CLEANER_NO")
+          ("DEBUG_READ_NO")
+          ("DEV_NAME_MAX" . ((number "512" 292 . 295)))
+          ("MAX_KEY_SIZE" . ((number "32" 2171 . 2173)))
+          ("MAX_DATA_SIZE" . ((number "128" 2196 . 2199)))
+          ("OFFSET_IN_KEY" . ((number "0" 23 . 24)))
+          ("DEBUG_ALLOCATOR_NO")
+          ("DEVICE_BLOCK_SIZE" . ((number "4096" 921 . 925)))
+          ("nodemo")
+          ("KEY_BLOCK_SIZE" . ((number "4096" 1556 . 1560)))
+          ("THROTTLE_SLEEP_TIME" . ((number "200000" 2848 . 2854)))
+          ("MAX_ALLOCATION_TRIES" . ((number "2" 2884 . 2885)))
+          ("KV_BLOCK_SIZE" . ((number "131072" 1594 . 1600)))
+          ("NODE_SIZE" . ((number "4096" 1733 . 1737)))
+          ("LEAF_METADATA_SIZE" . ((number "4096" 2087 . 2091)))
+          ("LEAF_INSERT_OK" . ((number "7" 2148 . 2149)))
+          ("BREAKPOINT" . 
+              ((symbol "asm" 1121 . 1124) (VOLATILE "volatile" 1125 . 1133) (semantic-list "(\"int3;\")" 1134 . 1143) (punctuation ";" 1143 . 1144)))
+          ("MARK_BLOCK_NO")
+          ("MAX_HANDLES" . ((number "5090" 890 . 894)))
+          ("MAPPRIVATE_NO")
+          ("MALLOC_SIZE" . ((number "49392123904" 1383 . 1394)))
+          ("DEBUG_TUCANA_2_NO")
+          ("BITSPERBYTE" . ((number "8" 468 . 469)))
+          ("SNAPSHOT_INTERVAL" . ((semantic-list "(120*SEC)" 1040 . 1049)))
+          ("MMAP")
+          ("KB" . ((semantic-list "(1024)" 1485 . 1491)))
+          ("LEAF_BUFFER_SIZE" . ((number "2097152" 2017 . 2024)))
+          ("ZERO_LEVEL_MEMORY_UPPER_BOUND" . ((number "201326592" 2377 . 2386)))
+          ("DEBUG_SCAN_NO")
+          ("CLEAN_INTERVAL" . ((semantic-list "(2*SEC)" 1006 . 1013)))
+          ("MEMCMP")
+          ("LEAF_SPLIT_NEEDED" . ((number "9" 2058 . 2059)))
+          ("DEBUG_INSERT_NO")
+          ("SEC" . ((semantic-list "(1000000L)" 969 . 979)))
+          ("SINGLE_LOG")
+          ("FAKE_MODE" . ((number "0" 1954 . 1955)))
+          ("TO_SPILL_KEYS" . ((number "16384" 2287 . 2292)))
+          ("CLEAN_SIZE" . ((number "500000" 949 . 955)))
+          ("debug")
+          ("no_profile")
+          ("DEV")
+          ("MAX_SIZE" . ((number "4096" 1709 . 1713)))
+          ("COUNTERS_no")
+          ("ZERO_LEVEL_MEMORY_SPILL_THREASHOLD" . ((semantic-list "(0.9 * ZERO_LEVEL_MEMORY_UPPER_BOUND)" 2600 . 2637)))
+          ("BUFFER_SEGMENT_SIZE" . ((number "2097152" 2721 . 2728)))
+          ("LOG_SIZE" . ((number "512000" 794 . 800)))
+          ("MAX_ROW_KEY" . ((number "256" 1671 . 1674)))
+          ("LLU" . 
+              ((LONG "long" 1872 . 1876) (LONG "long" 1877 . 1881) (UNSIGNED "unsigned" 1882 . 1890)))
+          ("BDFS_BLOCK_SERVER_NO")
+          ("AGGRESIVE_FREE_POLICY")
+          ("DEBUG_DELETE_NO")
+          ("DATA_PER_BITMAP_BLOCK" . ((semantic-list "((DEVICE_BLOCK_SIZE-8)*8)" 377 . 402)))
+          ("SETBITS64" . ((number "0xFFFFFFFFFFFFFFFF" 492 . 510)))
+          ("ZEROBITS32" . ((number "0x00000000" 534 . 544)))
+          ("DELETE_LOG_SIZE" . ((number "256000" 700 . 706)))
+          ("WORD_SIZE" . ((number "64" 1098 . 1100)))
+          ("DEBUG_SNAPSHOT_NO")
+          ("FREE_LOG_SIZE" . ((number "256000" 604 . 610)))
+          ("SPINNING")
+          ("MB" . ((semantic-list "(KB*KB)" 1521 . 1528)))
+          ("SEGMENT_MEMORY_THREASHOLD" . ((number "511" 2763 . 2766)))
+          ("SETBITS32" . ((number "0xFFFFFFFF" 567 . 577)))
+          ("MSYNC")
+          ("PG" . ((semantic-list "(4*KB)" 1503 . 1509)))
+          ("REPORTING_PERIOD" . ((number "20" 1809 . 1811)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("malloc.h" include (:system-flag t) nil [303 322])
+            ("stdlib.h" include (:system-flag t) nil [323 342])
+            ("inttypes.h" include (:system-flag t) nil [343 364])
+            ("string.h" include (:system-flag t) nil [365 384])
+            ("signal.h" include (:system-flag t) nil [385 404])
+            ("pthread.h" include (:system-flag t) nil [405 425])
+            ("assert.h" include (:system-flag t) nil [426 445])
+            ("emmintrin.h" include (:system-flag t) nil [446 468])
+            ("dmap-ioctl.h" include nil nil [469 492])
+            ("../scanner/scanner.h" include nil nil [494 525])
+            ("../btree/stats.h" include nil nil [527 554])
+            ("../btree/assertions.h" include nil nil [555 587])
+            ("../btree/conf.h" include nil nil [588 614])
+            ("PREFIX_STATISTICS_NO" variable (:constant-flag t) nil [624 644])
+            ("MIN" variable (:constant-flag t) nil [653 656])
+            ("internal_tree_cow_for_leaf" variable
+               (:typemodifiers ("extern")
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [700 743])
+            ("internal_tree_cow_for_index" variable
+               (:typemodifiers ("extern")
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [744 788])
+            ("written_buffered_bytes" variable
+               (:typemodifiers ("extern")
+                :type ("uint64_t" type (:type "class") nil nil))
+                nil [789 828])
+            ("ins_prefix_hit_l0" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [830 874])
+            ("ins_prefix_hit_l1" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [875 919])
+            ("ins_prefix_miss_l0" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [920 965])
+            ("ins_prefix_miss_l1" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [966 1011])
+            ("ins_hack_hit" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [1012 1051])
+            ("ins_hack_miss" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long long")
+                nil [1052 1092])
+            ("index_order" variable (:type ("int32_t" type (:type "class") nil nil)) nil [1095 1115])
+            ("leaf_order" variable (:type ("int32_t" type (:type "class") nil nil)) nil [1116 1135])
+            ("DB_NO_SPILLING" variable
+               (:pointer 1
+                :default-value "NULL"
+                :type "char")
+                nil [1136 1165])
+            ("init_lock" variable
+               (:default-value "PTHREAD_MUTEX_INITIALIZER"
+                :type ("pthread_mutex_t" type (:type "class") nil nil))
+                nil [1166 1220])
+            ("SPILL_ENABLE" variable (:constant-flag t) nil [1230 1242])
+            ("SPILLING_IN_PROGRESS" variable (:constant-flag t) nil [1251 1271])
+            ("NO_SPILLING" variable (:constant-flag t) nil [1285 1296])
+            ("PAGE_SIZE" variable (:constant-flag t) nil [1310 1319])
+            ("LEAF_ROOT_NODE_SPLITTED" variable (:constant-flag t) nil [1333 1356])
+            ("LEVEL_0" variable (:constant-flag t) nil [1371 1378])
+            ("MUTATION_LOG_SIZE" variable (:constant-flag t) nil [1389 1406])
+            ("STATIC" variable (:constant-flag t) nil [1420 1426])
+            ("DYNAMIC" variable (:constant-flag t) nil [1440 1447])
+            ("MUTATION_BATCH_EXPANDED" variable (:constant-flag t) nil [1461 1484])
+            ("_insert_key_value" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1517 1536])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1537 1551])
+                    ("data_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1552 1567])
+                    ("LEVEL" variable (:type "int") (reparse-symbol arg-sub-list) [1568 1578]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [1491 1579])
+            ("__insert" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1597 1620])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("insertKV_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1621 1642])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1643 1662])
+                    ("nodestack" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1662 1688])
+                    ("iterator" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [1688 1708]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [1580 1709])
+            ("insertKeyAtIndex" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1732 1770])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1771 1790])
+                    ("left_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1791 1816])
+                    ("right_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1817 1843])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1844 1858])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [1859 1880]))                  
+                :type "void")
+                nil [1710 1881])
+            ("update_index" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1900 1918])
+                    ("left_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1919 1944])
+                    ("right_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1945 1971])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1972 1986]))                  
+                :type "void")
+                nil [1882 1987])
+            ("split_index" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("split_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2005 2024])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("split_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2025 2043]))                  
+                :type "void")
+                nil [1988 2044])
+            ("__update_leaf_index" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2070 2092])
+                    ("leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2093 2112])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2113 2128])
+                    ("key_format" variable (:type "char") (reparse-symbol arg-sub-list) [2129 2145]))                  
+                :type "int")
+                nil [2046 2146])
+            ("split_leaf" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("split_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2162 2182])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("split_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2183 2200]))                  
+                :type "int")
+                nil [2147 2201])
+            ("__cow_in_node_header" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2290 2328])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2329 2348])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2349 2368])
+                    ("size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2369 2382])
+                    ("TYPE_OF_COW" variable (:type "int") (reparse-symbol arg-sub-list) [2383 2399]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [2254 2400])
+            ("__update_index_key_in_place" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2434 2471])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2472 2490])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2491 2510])
+                    ("node_index_addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2511 2534])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [2535 2550])
+                    ("type" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2551 2564]))                  
+                :type "void")
+                nil [2401 2565])
+            ("__merge_nodes" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2644 2682])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2683 2702])
+                    ("node_a" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2703 2724])
+                    ("node_b" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2725 2746]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [2616 2747])
+            ("__left_rotate" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2769 2788])
+                    ("left_brother" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2789 2816])
+                    ("self" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2817 2836]))                  
+                :type "void")
+                nil [2748 2837])
+            ("__right_rotate" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2867 2885])
+                    ("self" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2885 2904])
+                    ("right_brother" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2905 2933]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [2838 2934])
+            ("__rebalance_controller" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2966 2985])
+                    ("parent" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2986 3007])
+                    ("offset" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3008 3024]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [2935 3025])
+            ("_delete_key" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("delete_req" variable
+                       (:pointer 1
+                        :type ("delete_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3045 3073])
+                    ("delete_rep" variable
+                       (:pointer 1
+                        :type ("delete_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3074 3100])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [3102 3112]))                  
+                :type "void")
+                nil [3028 3113])
+            ("__find_key" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3163 3182])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [3183 3193])
+                    ("root" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3194 3213])
+                    ("SEARCH_MODE" variable (:type "char") (reparse-symbol arg-sub-list) [3214 3231]))                  
+                :type "void")
+                nil [3145 3232])
+            ("__find_key_addr_in_leaf" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3264 3283])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [3284 3294]))                  
+                :type "void")
+                nil [3233 3295])
+            ("spill_buffer" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("_spill_req" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [3314 3332]))                  
+                :type "void")
+                nil [3296 3333])
+            ("destroy_spill_request" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3363 3374]))                  
+                :type "void")
+                nil [3336 3375])
+            ("createEmptyNode" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3399 3437])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3438 3456])
+                    ("type" variable (:type ("nodeType_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3457 3473])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [3474 3495]))                  
+                :type "void")
+                nil [3376 3496])
+            ("lockstack" variable (:constant-flag t) nil [3702 3711])
+            ("jenkins_one_at_a_time_hash" function
+               (:typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("key" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [3766 3776])
+                    ("len" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3777 3789]))                  
+                :type ("uint32_t" type (:type "class") nil nil))
+                nil [3716 4008])
+            ("prefix_compare" function
+               (:arguments 
+                  ( ("l" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [4077 4085])
+                    ("r" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [4086 4094])
+                    ("unused" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4095 4109]))                  
+                :type "int")
+                nil [4058 4143])
+            ("free_buffered" function
+               (:arguments 
+                  ( ("_handle" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4223 4237])
+                    ("address" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4238 4252])
+                    ("num_bytes" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4253 4272])
+                    ("height" variable (:type "int") (reparse-symbol arg-sub-list) [4273 4284]))                  
+                :type "void")
+                nil [4204 6044])
+            ("_tucana_key_cmp" function
+               (:arguments 
+                  ( ("index_key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6385 6405])
+                    ("query_key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6406 6426])
+                    ("index_key_format" variable (:type "char") (reparse-symbol arg-sub-list) [6427 6449])
+                    ("query_key_format" variable (:type "char") (reparse-symbol arg-sub-list) [6450 6472]))                  
+                :type ("int64_t" type (:type "class") nil nil))
+                nil [6361 8331])
+            ("db_open" function
+               (:pointer 1
+                :arguments 
+                  ( ("volumeName" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [8426 8444])
+                    ("start" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8445 8460])
+                    ("size" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8461 8475])
+                    ("db_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [8476 8491])
+                    ("CREATE_FLAG" variable (:type "char") (reparse-symbol arg-sub-list) [8492 8509]))                  
+                :type ("db_handle" type (:type "class") nil nil))
+                nil [8406 20633])
+            ("destroy_spill_request" function
+               (:arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("NODE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [20663 20674]))                  
+                :type "void")
+                nil [20636 20738])
+            ("flush_volume" function
+               (:arguments 
+                  ( ("volume_desc" variable
+                       (:pointer 1
+                        :type ("volume_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [20792 20823])
+                    ("force_spill" variable (:type "char") (reparse-symbol arg-sub-list) [20824 20841]))                  
+                :type "void")
+                nil [20774 23888])
+            ("insert_write_batch" function
+               (:arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [23917 23936])
+                    ("batch" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [23937 23960]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [23890 24922])
+            ("insert_key_value" function
+               (:arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [24949 24968])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [24969 24979])
+                    ("value" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [24980 24993])
+                    ("key_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [24994 25012])
+                    ("value_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [25013 25033]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [24924 25980])
+            ("_insert_key_value" function
+               (:arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [26216 26235])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [26236 26250])
+                    ("data_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [26251 26266])
+                    ("LEVEL" variable (:type "int") (reparse-symbol arg-sub-list) [26267 26277]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [26190 30089])
+            ("free_logical_node" function
+               (:arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [30198 30236])
+                    ("node_index" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [30237 30262]))                  
+                :type "void")
+                nil [30175 31566])
+            ("__insert" function
+               (:arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [31688 31711])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("insertKV_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [31712 31733])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [31734 31753])
+                    ("nodestack" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [31753 31779])
+                    ("iterator" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [31779 31798]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [31671 40802])
+            ("delete_key" function
+               (:arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [40824 40842])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [40843 40853])
+                    ("size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40854 40868]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [40805 42924])
+            ("_delete_key" function
+               (:arguments 
+                  ( ("delete_req" variable
+                       (:pointer 1
+                        :type ("delete_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [42944 42972])
+                    ("delete_rep" variable
+                       (:pointer 1
+                        :type ("delete_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [42973 42999])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [43001 43011]))                  
+                :type "void")
+                nil [42927 57320])
+            ("__cow_in_node_header" function
+               (:pointer 1
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [57382 57420])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [57421 57440])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [57441 57460])
+                    ("size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [57461 57474])
+                    ("TYPE_OF_COW" variable (:type "int") (reparse-symbol arg-sub-list) [57475 57491]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [57346 58370])
+            ("__update_index_key_in_place" function
+               (:arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [58406 58443])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [58444 58462])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [58463 58482])
+                    ("node_index_addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [58483 58506])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [58507 58522])
+                    ("type" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [58522 58535]))                  
+                :type "void")
+                nil [58373 60055])
+            ("__merge_nodes" function
+               (:pointer 1
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [60253 60291])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [60292 60311])
+                    ("node_a" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [60312 60333])
+                    ("node_b" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [60334 60355]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [60225 63765])
+            ("__left_rotate" function
+               (:pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [63834 63853])
+                    ("left_brother" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [63854 63881])
+                    ("self" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [63882 63901]))                  
+                :type "void")
+                nil [63813 66628])
+            ("__right_rotate" function
+               (:pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [66705 66723])
+                    ("self" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [66723 66742])
+                    ("right_brother" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [66743 66771]))                  
+                :type ("node_header" type (:type "class") nil nil))
+                nil [66676 69426])
+            ("__rebalance_controller" function
+               (:arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [69793 69812])
+                    ("parent" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [69813 69834])
+                    ("offset" variable (:type ("uint64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [69835 69851]))                  
+                :type ("int32_t" type (:type "class") nil nil))
+                nil [69762 71902])
+            ("__find_key" function
+               (:pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [71989 72008])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [72009 72019])
+                    ("unused" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [72020 72041])
+                    ("SEARCH_MODE" variable (:type "char") (reparse-symbol arg-sub-list) [72042 72059]))                  
+                :type "void")
+                nil [71971 73941])
+            ("__find_key_addr_in_leaf" function
+               (:pointer 1
+                :arguments 
+                  ( ("leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [74035 74054])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [74055 74065]))                  
+                :type "void")
+                nil [74004 76276])
+            ("find_key" function
+               (:pointer 1
+                :arguments 
+                  ( ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [76295 76313])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [76314 76324])
+                    ("key_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [76325 76343]))                  
+                :type "void")
+                nil [76279 76610])
+            ("update_index" function
+               (:arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [76824 76842])
+                    ("left_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [76843 76868])
+                    ("right_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [76869 76895])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [76896 76910]))                  
+                :type "void")
+                nil [76806 79332])
+            ("insertKeyAtIndex" function
+               (:arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [79706 79743])
+                    ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [79744 79763])
+                    ("left_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [79764 79789])
+                    ("right_child" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [79790 79816])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [79817 79831])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [79832 79853]))                  
+                :type "void")
+                nil [79684 81549])
+            ("__update_leaf_index" function
+               (:arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [81739 81761])
+                    ("leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [81762 81781])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [81782 81797])
+                    ("key_format" variable (:type "char") (reparse-symbol arg-sub-list) [81798 81814]))                  
+                :type "int")
+                nil [81715 87514])
+            ("print_key" function
+               (:arguments 
+                  ( ("pre" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [88327 88343])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [88344 88355]))                  
+                :type "void")
+                nil [88312 88940])
+            ("split_index" function
+               (:arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("split_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [89185 89204])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("split_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [89205 89223]))                  
+                :type "void")
+                nil [89168 90602])
+            ("insertKVAtLeaf" function
+               (:arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("insertKV_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [90784 90806])
+                    ("leaf" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [90807 90826])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [90827 90848]))                  
+                :type "int")
+                nil [90765 93891])
+            ("split_leaf" function
+               (:arguments 
+                  ( ("req" variable
+                       (:pointer 1
+                        :type ("split_request" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [94000 94020])
+                    ("rep" variable
+                       (:pointer 1
+                        :type ("split_reply" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [94021 94038]))                  
+                :type "int")
+                nil [93985 96741])
+            ("_index_node_binary_search" function
+               (:pointer 1
+                :arguments 
+                  ( ("node" variable
+                       (:pointer 1
+                        :type ("node_header" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [97062 97081])
+                    ("key_buf" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [97082 97096])
+                    ("query_key_format" variable (:type "char") (reparse-symbol arg-sub-list) [97097 97119]))                  
+                :type "void")
+                nil [97029 98584])
+            ("createEmptyNode" function
+               (:pointer 1
+                :arguments 
+                  ( ("allocator_desc" variable
+                       (:pointer 1
+                        :type ("allocator_descriptor" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [98727 98765])
+                    ("handle" variable
+                       (:pointer 1
+                        :type ("db_handle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [98766 98784])
+                    ("type" variable (:type ("nodeType_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [98785 98801])
+                    ("allocation_code" variable (:type "char") (reparse-symbol arg-sub-list) [98802 98823]))                  
+                :type "void")
+                nil [98704 100180])
+            ("spill_buffer" function
+               (:arguments 
+                  ( ("_spill_req" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [100200 100218]))                  
+                :type "void")
+                nil [100182 105943])
+            ("create_mutation_batch" function
+               (:pointer 1
+                :arguments 
+                  ( ("size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [106095 106108]))                  
+                :type ("mutation_batch" type (:type "class") nil nil))
+                nil [106056 106459])
+            ("create_mutation_batch_from_buffer" function
+               (:pointer 1
+                :arguments 
+                  ( ("buffer" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [106512 106526])
+                    ("size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [106527 106541])
+                    ("num_of_mutations" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [106542 106568]))                  
+                :type ("mutation_batch" type (:type "class") nil nil))
+                nil [106461 106842])
+            ("initiate_mutation_batch_from_buffer" function
+               (:arguments 
+                  ( ("batch" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [106885 106907])
+                    ("buffer" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [106907 106921])
+                    ("size" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [106921 106934])
+                    ("num_of_mutations" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [106934 106959]))                  
+                :type "void")
+                nil [106844 107102])
+            ("clear_mutation_batch" function
+               (:arguments 
+                  ( ("mutation" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [107130 107155]))                  
+                :type "void")
+                nil [107104 107217])
+            ("destroy_mutation_batch" function
+               (:arguments 
+                  ( ("mutation" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [107247 107272]))                  
+                :type "void")
+                nil [107219 107430])
+            ("add_mutation" function
+               (:arguments 
+                  ( ("batch" variable
+                       (:pointer 1
+                        :type ("mutation_batch" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [107453 107476])
+                    ("key" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [107477 107488])
+                    ("value" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [107489 107501])
+                    ("key_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [107502 107520])
+                    ("value_size" variable (:type ("uint32_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [107521 107541]))                  
+                :type ("uint8_t" type (:type "class") nil nil))
+                nil [107432 108825]))          
+      :file "btree.c"
+      :pointmax 111020
+      :fsize 111019
+      :lastmodtime '(22890 5841 4462 165000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("LEVEL_0" . ((number "0" 1379 . 1380)))
+          ("STATIC" . ((number "0x01" 1427 . 1431)))
+          ("NO_SPILLING" . ((number "0x00" 1297 . 1301)))
+          ("MIN" (spp-arg-list ("x" "y") 656 . 661) . ((semantic-list "((x > y)?(y):(x))" 662 . 679)))
+          ("LEAF_ROOT_NODE_SPLITTED" . ((number "0xFC" 1357 . 1361)))
+          ("DYNAMIC" . ((number "0x02" 1448 . 1452)))
+          ("SPILL_ENABLE")
+          ("SPILLING_IN_PROGRESS" . ((number "0x01" 1272 . 1276)))
+          ("PREFIX_STATISTICS_NO")
+          ("PAGE_SIZE" . ((number "4096" 1320 . 1324)))
+          ("MUTATION_LOG_SIZE" . ((number "2048" 1407 . 1411)))
+          ("MUTATION_BATCH_EXPANDED" . ((number "0x03" 1485 . 1489)))
+          ("lockstack" . ((number "6" 3712 . 3713)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("REBALANCE_CHECK" variable (:constant-flag t) nil [9 24]))          
+      :file "assertions.h"
+      :pointmax 598
+      :fsize 597
+      :lastmodtime '(22850 16108 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("REBALANCE_CHECK" . 
+              ((symbol "printf" 28 . 34) (semantic-list "(\"DEBUG_REBALANCE: calling rebalance for my child %llu left bro %llu right bro %llu, type %d\\n\", child_addr, left_brother_addr, right_brother_addr, node->type)" 34 . 193) (punctuation ";" 193 . 194) (IF "if" 197 . 199) (semantic-list "(left_brother_addr == NULL && right_brother_addr == NULL)" 199 . 256) (semantic-list "{\\
+      		printf(\"FATAL both bro's null?\\n\");\\
+           	exit(-1);\\
+     	}" 257 . 335) (IF "if" 343 . 345) (semantic-list "(left_brother_addr == child_addr)" 345 . 378) (semantic-list "{\\
+     		printf(\"FATAL, same with my left brother?\\n\");\\
+         	exit(-1);\\
+     	}" 379 . 465) (IF "if" 472 . 474) (semantic-list "(right_brother_addr == child_addr)" 474 . 508) (semantic-list "{\\
+    		printf(\"FATAL, same with my right brother?\\n\");\\
+        	exit(-1);\\
+     	}" 509 . 594)))
+          )
+))
+  :file "!home!hacker!ITE!kreontranscations!kreon!btree!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

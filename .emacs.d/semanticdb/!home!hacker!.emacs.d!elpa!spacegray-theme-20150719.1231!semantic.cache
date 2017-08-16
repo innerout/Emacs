@@ -1,0 +1,16 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode emacs-lisp-mode
+      :tags nil
+      :file "spacegray-theme-autoloads.el"
+      :pointmax 325
+      :fsize 642
+      :lastmodtime '(22893 56082 805233 79000)
+      :unmatched-syntax nil))
+  :file "!home!hacker!.emacs.d!elpa!spacegray-theme-20150719.1231!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

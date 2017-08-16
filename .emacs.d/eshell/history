@@ -1,0 +1,5 @@
+ls
+make clean
+ls
+ls
+make clean
