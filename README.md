@@ -1,5 +1,5 @@
 ### Installation
-1. git clone git@gitlab.com:innerout/Emacs.git
+1. git clone https://github.com/innerout/Emacs.git
 2. cd Emacs
 3. ./install.sh
 
