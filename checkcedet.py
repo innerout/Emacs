@@ -1,15 +1,10 @@
 #!/bin/python
-from tkinter import *
 import os
+import time 
 from pathlib import Path
 
-root=Tk()
-w=Label(root,text="Emacs will test if cedet exists!\n \
- if its not it will download and compile it\n \
-")
-w.pack()
-root.after(1000,lambda:root.destroy())
-root.mainloop()
+print("Cedet check is starting\n")
+
 if(not os.path.isdir("~/cedet")):
     home=str(Path.home())
     os.chdir(home)
@@ -20,3 +15,6 @@ if(not os.path.isdir("~/cedet")):
     home2=str(Path.home())+"/cedet/contrib"
     os.chdir(home2)
     os.system('make')
+
+print("Cedet is configured proceeding to uncompressing emacs tar\n")
+time.sleep(5)
