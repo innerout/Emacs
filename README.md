@@ -13,7 +13,7 @@ eclipse when it comes to java)).
 3. neotree
 4. helm
 5. autopair
-6. cscope
+6. xcscope
 7. indent-guide
 8. yasnippet
 9. autocomplete
