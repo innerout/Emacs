@@ -19,5 +19,7 @@ eclipse when it comes to java)).
 9. [autocomplete](https://github.com/auto-complete/auto-complete)
 10. [autocomplete-c-headers](https://github.com/mooz/auto-complete-c-headers)
 11. [The theme is spacegray](https://github.com/bruce/emacs-spacegray-theme)
+12. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
+13. [Origami](https://github.com/gregsexton/origami.el)
 
 Soon i will update with the macros and how to use them.
