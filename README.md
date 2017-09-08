@@ -1,13 +1,38 @@
-### Installation
+# Requirements 
+* [Emacs](https://www.archlinux.org/packages/extra/i686/emacs/) configuration based on the version of Arch linux.
+
+### Arch
+
+#### ```sudo pacman -S emacs```
+
+### Ubuntu
+
+#### ```sudo apt-get install emacs```
+Probably it will work.
+If after running install.sh emacs reports an error then uninstall emacs.Find a repository that has the latest emacs version import and download it after that you will have no problems probably.
+If errors occur after that then contact me to help you.
+
+
+### Fedora
+
+
+#### ```sudo dnf install emacs```
+
+## Installation
+If you have reached here you got emacs installed by now.The only thing you have to do is to run these 3 commands and you will have the whole configuration running.
+
 1. git clone https://github.com/innerout/Emacs.git
 2. cd Emacs
 3. ./install.sh
 
-After that you will have a fully working emacs IDE for C/C++ projects( 
-and Java if you want by installing only jdee (Better use a netbeans or 
-eclipse when it comes to java)).
+install.sh is running a python script that is setting up cedet in your home directory and then is backing up your .emacs and .emacs.d directory if any of them exists in a tar file in your home directory called **oldemacs.tar.gz** and lastly emacs.tar.gz is unpacked in your home directory.
 
-### Installed plugins
+After that you will have a fully working emacs IDE for C/C++ projects.
+The plugins that i have already installed support more languages and with a few additions you could have great support for other languages too.
+
+For example if you want python auto completion install **[JEDI](https://github.com/tkf/emacs-jedi)** and you got a python IDE.
+
+## Installed plugins
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
 2. [cedet](http://cedet.sourceforge.net/)
 3. [neotree](https://github.com/jaypei/emacs-neotree)
@@ -22,4 +47,8 @@ eclipse when it comes to java)).
 12. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
 13. [Origami](https://github.com/gregsexton/origami.el)
 
-Soon i will update with the macros and how to use them.
+## Notes
+* Soon i will update with the macros and how to use them.
+* Repo will be updated everytime i add a plugin to my configuration.
+* I am searching for a good refactoring tool for the setup to be complete 
+  after that i dont think any plugins will be needed (If i find anything usefull besides the refactoring tool i will add it).
