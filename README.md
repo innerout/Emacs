@@ -19,6 +19,7 @@ If errors occur after that then contact me to help you.
 #### ```sudo dnf install emacs```
 
 ## Installation
+
 If you have reached here you got emacs installed by now.The only thing you have to do is to run these 3 commands and you will have the whole configuration running.
 
 1. git clone https://github.com/innerout/Emacs.git
