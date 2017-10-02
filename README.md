@@ -50,6 +50,7 @@ For example if you want python auto completion install **[JEDI](https://github.c
 12. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
 13. [Origami](https://github.com/gregsexton/origami.el)
 14. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
+15. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
 
 ## Notes
 * Soon i will update with the macros and how to use them.
