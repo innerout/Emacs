@@ -47,6 +47,7 @@ For example if you want python auto completion install **[JEDI](https://github.c
 11. [The theme is spacegray](https://github.com/bruce/emacs-spacegray-theme)
 12. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
 13. [Origami](https://github.com/gregsexton/origami.el)
+14. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
 
 ## Notes
 * Soon i will update with the macros and how to use them.
