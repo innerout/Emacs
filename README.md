@@ -53,6 +53,7 @@ For example if you want python auto completion install **[JEDI](https://github.c
 14. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
 15. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
 16. [Magit](https://github.com/magit/magit)
+17. [Flycheck](https://github.com/flycheck/flycheck)
 
 ## Notes
 * Soon i will update with the macros and how to use them.
