@@ -1,7 +1,7 @@
 [![alt text](https://img.shields.io/badge/built%20with-Emacs-800080.svg "Emacs")](https://www.gnu.org/software/emacs/)
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-2.0/)
 
-# Requirements 
+# Requirements
 * [Emacs](https://www.archlinux.org/packages/extra/i686/emacs/) based on the version of Arch linux.
 
 ### Arch
@@ -54,9 +54,10 @@ For example if you want python auto completion install **[JEDI](https://github.c
 15. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
 16. [Magit](https://github.com/magit/magit)
 17. [Flycheck](https://github.com/flycheck/flycheck)
+18. [use-package](https://github.com/jwiegley/use-package)
 
 ## Notes
 * Soon i will update with the macros and how to use them.
 * Repo will be updated everytime i add a plugin to my configuration.
-* I am searching for a good refactoring tool for the setup to be complete 
+* I am searching for a good refactoring tool for the setup to be complete
   after that i dont think any plugins will be needed (If i find anything usefull besides the refactoring tool i will add it).
