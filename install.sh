@@ -1,11 +1,14 @@
 mv emacs ~/.emacs
+dir="$HOME/cedet"
 echo "Cedet check is starting\n"
-cd ~/
-git clone http://git.code.sf.net/p/cedet/git cedet
-cd cedet
-make
-cd contrib
-make
+if [ ! -d "$dir" ]; then
+	cd ~/
+	git clone http://git.code.sf.net/p/cedet/git cedet
+	cd cedet
+	make
+	cd contrib
+	make
+fi
 echo "Cedet is configured proceeding to setup .emacs\n"
 cd ~/
 if ( [  -d ~/.emacs.d ] && [  -f ~/.emacs ] ) then
