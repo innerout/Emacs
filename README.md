@@ -55,6 +55,7 @@ For example if you want python auto completion install **[JEDI](https://github.c
 16. [Magit](https://github.com/magit/magit)
 17. [Flycheck](https://github.com/flycheck/flycheck)
 18. [use-package](https://github.com/jwiegley/use-package)
+19. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
 
 ## Notes
 * Soon i will update with the macros and how to use them.

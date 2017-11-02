@@ -4,7 +4,8 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/emacs-async")
 (add-to-list 'load-path "~/.emacs.d/elpa/helm")
 (column-number-mode t)
-(global-linum-mode t)
+;; (global-linum-mode t)
+;; (setq linum-format "%d ")
 (show-paren-mode 1)
 
 (when (>= emacs-major-version 24)
@@ -18,15 +19,21 @@
   (package-refresh-contents)
   (package-install 'use-package)
   )
+(require 'bind-key)
+(async-bytecomp-package-mode 1)
+
 (use-package spacegray-theme
   :ensure t
+  )
+(use-package linum
+  :config
+  (global-linum-mode t)
+  (setq linum-format "%d ")
   )
 (use-package color-identifiers-mode
   :ensure t
   :init (global-color-identifiers-mode)
   )
-;; (add-hook 'after-init-hook 'global-color-identifiers-mode)
-
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
@@ -41,12 +48,13 @@
 	 (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
 			     (thing-at-point 'line)))))
   )
-
-(use-package helm-config
-  :ensure helm
-  :config
-  (global-set-key (kbd "C-x b") 'helm-buffers-list)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(use-package helm
+  :ensure t
+  :bind(("C-x C-f" . helm-find-files)
+	("C-x b" . helm-buffers-list)
+	)
+  ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
+  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
   )
 
 (use-package cc-mode
@@ -125,8 +133,8 @@
 (use-package git-gutter
   :ensure t
   :init
-  (global-git-gutter-mode +1)  ;; If you enable global minor mod
   (git-gutter:linum-setup)  ;; to use git-gutter.el and linum-mode
+  (global-git-gutter-mode +1)  ;; If you enable global minor mod
   :config
   ;; Jump to next/previous hunk
   (global-set-key (kbd "C-x c p") 'git-gutter:previous-hunk)
