@@ -1,5 +1,3 @@
-(load-file (concat user-emacs-directory "~/cedet/cedet-devel-load.el"))
-(load-file (concat user-emacs-directory "~/cedet/contrib/cedet-contrib-load.el"))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'load-path "~/.emacs.d/elpa/emacs-async")
 (add-to-list 'load-path "~/.emacs.d/elpa/helm")
@@ -100,14 +98,12 @@
   :ensure t
   :init(indent-guide-global-mode)
   )
-(use-package semantic
-  :config
-  (ede-enable-generic-projects )
-  (semantic-mode 1)
-  (global-semantic-highlight-func-mode t)
-  ;;(global-semantic-idle-scheduler-mode t)
-  (semantic-load-enable-code-helpers)
-  )
+;; (ede-enable-generic-projects )
+(semantic-mode 1)
+(global-semantic-highlight-func-mode t)
+(global-semantic-idle-scheduler-mode t)
+;; (semantic-load-enable-code-helpers)
+
 
 (use-package yasnippet
   :ensure t
@@ -116,17 +112,21 @@
 
 (use-package auto-complete
   :ensure t
-  :init (ac-config-default)
-  :config
+  :init
+  (ac-config-default)
   (ac-set-trigger-key "TAB")
+  :config
+  (defun ac-common-setup()
+    (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers)))
+    )
   )
 (use-package ac-c-headers
   :ensure t
   :config
   (add-hook 'c-mode-hook
 	    (lambda ()
-	      (add-to-list 'ac-sources 'ac-source-c-headers 'ac-source-semantic)
-	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
+	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t))
+	    )
   )
 
 ;;git-gutter
@@ -150,6 +150,7 @@
   (global-ethan-wspace-mode 1)
   (add-hook 'after-save-hook 'ethan-wspace-clean-all)
   )
+
 ;; (ede-cpp-root-project "kreon" :file "/home/hacker/HEutropia/kreon/btree/btree.c"
 ;; 					 :include-path '( "../allocator" "../BdfsBlockServer" "../debug" "../filter_ulitilities" "../HadoopDriver" "../include" "../jbtree" "../red_black_tree" "../scanner" ) )
 (custom-set-variables
