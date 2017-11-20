@@ -2,8 +2,6 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/emacs-async")
 (add-to-list 'load-path "~/.emacs.d/elpa/helm")
 (column-number-mode t)
-;; (global-linum-mode t)
-;; (setq linum-format "%d ")
 (show-paren-mode 1)
 
 (when (>= emacs-major-version 24)
@@ -11,15 +9,25 @@
   (add-to-list
    'package-archives
    '("melpa" . "http://melpa.org/packages/")
-   t)
+   '("elpy" . "https://jorgenschaefer.github.io/packages/"))
   (package-initialize))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
   )
+
 (require 'bind-key)
 (async-bytecomp-package-mode 1)
 
+(use-package elpy
+  :config
+  (elpy-enable)
+  (setq elpy-rpc-backend "jedi")
+  (when (require 'flycheck nil t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode 'flycheck-mode))
+  )
 (use-package spacegray-theme
   :ensure t
   )
@@ -51,8 +59,6 @@
   :bind(("C-x C-f" . helm-find-files)
 	("C-x b" . helm-buffers-list)
 	)
-  ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
-  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
   )
 
 (use-package cc-mode
@@ -117,7 +123,7 @@
   (ac-set-trigger-key "TAB")
   :config
   (defun ac-common-setup()
-    (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers)))
+    (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
     )
   )
 (use-package ac-c-headers
@@ -175,7 +181,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (magit markdown-mode markdown-mode+ git-gutter origami color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
+    (elpy magit markdown-mode markdown-mode+ git-gutter origami color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
