@@ -73,14 +73,14 @@
   )
 (use-package origami
   :ensure t
-  :config
-  (global-origami-mode)
-  (global-set-key (kbd "C-c v o") 'origami-open-node)
-  (global-set-key (kbd "C-c v c") 'origami-close-node)
-  (global-set-key (kbd "C-c v n") 'origami-next-fold)
-  (global-set-key (kbd "C-c v p") 'origami-previous-fold)
-  (global-set-key (kbd "C-c v 0") 'origami-close-all-nodes)
-  (global-set-key (kbd "C-c v 1") 'origami-open-all-nodes)
+  :init (global-origami-mode)
+  :bind( ("C-c v o" . origami-open-node)
+	 ("C-c v c" . origami-close-node)
+	 ("C-c v n" . origami-next-fold)
+	 ("C-c v p" . origami-previous-fold)
+	 ("C-c v 0" . origami-close-all-nodes)
+	 ("C-c v 1" . origami-open-all-nodes)
+         )
   )
 
 (use-package autopair

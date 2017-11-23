@@ -10,3 +10,4 @@ if ( [  -d ~/.emacs.d ] && [  -f ~/.emacs ] ) then
 	echo "Backing only your ~/.emacs config in oldemacs.tar.gz .emacs.d folder does not exist"
 	tar -cf oldemacs.tar.gz .emacs
    fi
+	#sudo pip install rope jedi flake8 importmagic autopep8
