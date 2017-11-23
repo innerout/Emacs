@@ -10,7 +10,8 @@
    'package-archives
    '("melpa" . "http://melpa.org/packages/")
    '("elpy" . "https://jorgenschaefer.github.io/packages/"))
-  (package-initialize))
+  (package-initialize)
+  )
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -18,9 +19,13 @@
   )
 
 (require 'bind-key)
-(async-bytecomp-package-mode 1)
+
+(use-package spacegray-theme
+  :ensure t
+  )
 
 (use-package elpy
+  :ensure t
   :config
   (elpy-enable)
   (setq elpy-rpc-backend "jedi")
@@ -28,22 +33,23 @@
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
     (add-hook 'elpy-mode 'flycheck-mode))
   )
-(use-package spacegray-theme
-  :ensure t
-  )
+
 (use-package linum
   :config
   (global-linum-mode t)
   (setq linum-format "%d ")
   )
+
 (use-package color-identifiers-mode
   :ensure t
   :init (global-color-identifiers-mode)
   )
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
   )
+
 (use-package aggressive-indent
   :ensure t
   :init (global-aggressive-indent-mode 1)
@@ -54,6 +60,7 @@
 	 (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
 			     (thing-at-point 'line)))))
   )
+
 (use-package helm
   :ensure t
   :bind(("C-x C-f" . helm-find-files)
@@ -71,6 +78,7 @@
   :ensure t
   :config (global-set-key [f8] 'neotree-toggle)
   )
+
 (use-package origami
   :ensure t
   :init (global-origami-mode)
@@ -126,6 +134,7 @@
     (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
     )
   )
+
 (use-package ac-c-headers
   :ensure t
   :config
@@ -150,12 +159,23 @@
 (use-package magit
   :ensure t
   )
+
 (use-package ethan-wspace
   :ensure t
   :config
   (global-ethan-wspace-mode 1)
   (add-hook 'after-save-hook 'ethan-wspace-clean-all)
   )
+
+(use-package markdown-mode
+  :ensure t
+  )
+
+(use-package markdown-mode+
+  :ensure t
+  )
+
+(async-bytecomp-package-mode 1)
 
 ;; (ede-cpp-root-project "kreon" :file "/home/hacker/HEutropia/kreon/btree/btree.c"
 ;; 					 :include-path '( "../allocator" "../BdfsBlockServer" "../debug" "../filter_ulitilities" "../HadoopDriver" "../include" "../jbtree" "../red_black_tree" "../scanner" ) )
