@@ -31,10 +31,8 @@ If you have reached here you got emacs installed by now.The only thing you have 
 
 install.sh is running a python script that is setting up cedet in your home directory and then is backing up your .emacs and .emacs.d directory if any of them exists in a tar file in your home directory called **oldemacs.tar.gz** and lastly emacs.tar.gz is unpacked in your home directory.
 
-After that you will have a fully working emacs IDE for C/C++ projects.
+After that you will have a fully working emacs IDE for C/C++/Python projects.
 The plugins that i have already installed support more languages and with a few additions you could have great support for other languages too.
-
-For example if you want python auto completion install **[JEDI](https://github.com/tkf/emacs-jedi)** and you got a python IDE.
 
 ## Installed plugins
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
@@ -56,6 +54,7 @@ For example if you want python auto completion install **[JEDI](https://github.c
 17. [Flycheck](https://github.com/flycheck/flycheck)
 18. [use-package](https://github.com/jwiegley/use-package)
 19. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
+20. [elpy](https://github.com/jorgenschaefer/elpy)
 
 ## Notes
 * Soon i will update with the macros and how to use them.
