@@ -1,5 +1,5 @@
 [![alt text](https://img.shields.io/badge/built%20with-Emacs-800080.svg "Emacs")](https://www.gnu.org/software/emacs/)
-[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-2.0/)
+[![AUR](https://img.shields.io/aur/license/yaourt.svg)](https://opensource.org/licenses/GPL-2.0/)
 
 # Requirements
 * [Emacs](https://www.archlinux.org/packages/extra/i686/emacs/) based on the version of Arch linux.
@@ -8,16 +8,13 @@
 
 #### ```sudo pacman -S emacs```
 
-### Ubuntu
+### Ubuntu/Debian
 
-#### ```sudo apt-get install emacs```
-Probably it will work.
-If after running install.sh emacs reports an error then uninstall emacs.Find a repository that has the latest emacs version import and download it after that you will have no problems probably.
-If errors occur after that then contact me to help you.
-
+#### ```sudo add-apt-repository ppa:kelleyk/emacs```
+#### ```sudo apt-get update```
+#### ```sudo apt-get install emacs25```
 
 ### Fedora
-
 
 #### ```sudo dnf install emacs```
 
@@ -29,10 +26,11 @@ If you have reached here you got emacs installed by now.The only thing you have 
 2. cd Emacs
 3. ./install.sh
 
-install.sh is running a python script that is setting up cedet in your home directory and then is backing up your .emacs and .emacs.d directory if any of them exists in a tar file in your home directory called **oldemacs.tar.gz** and lastly emacs.tar.gz is unpacked in your home directory.
+install.sh is backing up your .emacs and .emacs.d directory if any of them exists in a tar file in your home directory called **oldemacs.tar.gz** and is copying emacs to ~/.emacs.
 
 After that you will have a fully working emacs IDE for C/C++/Python projects.
-The plugins that i have already installed support more languages and with a few additions you could have great support for other languages too.
+
+The plugins i have already installed support more languages and with a few additions you could have great support for other languages too.
 
 ## Installed plugins
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
@@ -57,7 +55,8 @@ The plugins that i have already installed support more languages and with a few 
 20. [elpy](https://github.com/jorgenschaefer/elpy)
 
 ## Notes
-* Soon i will update with the macros and how to use them.
+* I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
+That way you can change them to your liking.
 * Repo will be updated everytime i add a plugin to my configuration.
-* I am searching for a good refactoring tool for the setup to be complete
-  after that i dont think any plugins will be needed (If i find anything usefull besides the refactoring tool i will add it).
+* I am searching for a good refactoring tool (C/C++) for the setup to be complete
+  after that i dont think any plugins will be needed.

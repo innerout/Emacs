@@ -1,4 +1,3 @@
-mv emacs ~/.emacs
 cd ~/
 if ( [  -d ~/.emacs.d ] && [  -f ~/.emacs ] ) then
    echo "Backing up your configuration in oldemacs.tar.gz"
@@ -11,4 +10,6 @@ if ( [  -d ~/.emacs.d ] && [  -f ~/.emacs ] ) then
 	tar -cf oldemacs.tar.gz .emacs
    fi
 echo "You need to run sudo pip install rope jedi flake8 importmagic autopep8 for elpy"
+mv emacs ~/.emacs
+
 #sudo pip install rope jedi flake8 importmagic autopep8
