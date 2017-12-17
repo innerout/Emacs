@@ -53,6 +53,7 @@ The plugins i have already installed support more languages and with a few addit
 18. [use-package](https://github.com/jwiegley/use-package)
 19. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
 20. [elpy](https://github.com/jorgenschaefer/elpy)
+21. [Flycheck-Pos-Tip](https://github.com/flycheck/flycheck-pos-tip)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

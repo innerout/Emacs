@@ -49,6 +49,8 @@
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
+  (with-eval-after-load 'flycheck
+    (flycheck-pos-tip-mode))
   )
 
 (use-package aggressive-indent
@@ -116,7 +118,7 @@
 ;; (ede-enable-generic-projects )
 (semantic-mode 1)
 (global-semantic-highlight-func-mode t)
-(global-semantic-idle-scheduler-mode t)
+;;(global-semantic-idle-scheduler-mode t)
 ;; (semantic-load-enable-code-helpers)
 
 
@@ -176,6 +178,8 @@
   :ensure t
   )
 
+(use-package flycheck-pos-tip
+  :ensure t)
 (async-bytecomp-package-mode 1)
 
 ;; (ede-cpp-root-project "kreon" :file "/home/hacker/HEutropia/kreon/btree/btree.c"
@@ -202,7 +206,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (elpy magit markdown-mode markdown-mode+ git-gutter origami color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
+    (flycheck-title elpy magit markdown-mode markdown-mode+ git-gutter origami color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
