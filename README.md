@@ -1,6 +1,3 @@
-[![GNU Emacs](https://img.shields.io/badge/built%20with-Emacs-800080.svg "Emacs")](https://www.gnu.org/software/emacs/)
-[![LICENSE](https://img.shields.io/aur/license/yaourt.svg)](https://opensource.org/licenses/GPL-2.0/)
-
 # Requirements
 * [Emacs](https://www.archlinux.org/packages/extra/i686/emacs/) based on the version of Arch linux.
 
