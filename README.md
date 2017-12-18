@@ -1,4 +1,4 @@
-[![alt text](https://img.shields.io/badge/built%20with-Emacs-800080.svg "Emacs")](https://www.gnu.org/software/emacs/)
+[![GNU Emacs](https://img.shields.io/badge/built%20with-Emacs-800080.svg "Emacs")](https://www.gnu.org/software/emacs/)
 [![AUR](https://img.shields.io/aur/license/yaourt.svg)](https://opensource.org/licenses/GPL-2.0/)
 
 # Requirements
