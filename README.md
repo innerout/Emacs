@@ -42,7 +42,7 @@ The plugins i have already installed support more languages and with a few addit
 10. [autocomplete-c-headers](https://github.com/mooz/auto-complete-c-headers)
 11. [The theme is spacemacs-theme](https://github.com/nashamri/spacemacs-theme)
 12. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
-13. [Origami](https://github.com/gregsexton/origami.el)
+13. [hs-minor-mode](https://www.emacswiki.org/emacs/HideShow)
 14. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
 15. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
 16. [Magit](https://github.com/magit/magit)

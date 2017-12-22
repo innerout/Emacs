@@ -206,7 +206,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (flycheck-title elpy magit markdown-mode markdown-mode+ git-gutter origami color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
+    (flycheck-title elpy magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
