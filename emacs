@@ -28,13 +28,20 @@
 
 (use-package elpy
   :ensure t
+  :defer t
   :config
-  (elpy-enable)
   (setq elpy-rpc-backend "jedi")
   (when (require 'flycheck nil t)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
     (add-hook 'elpy-mode 'flycheck-mode))
   )
+
+(add-hook 'find-file-hook 'prepython-hook)
+;;Enable elpy only in .py files
+(defun prepython-hook ()
+  (when (string= (file-name-extension buffer-file-name)"py")
+    (elpy-mode)
+    (elpy-enable)))
 
 (use-package linum
   :config
@@ -83,18 +90,6 @@
   :config (global-set-key [f8] 'neotree-toggle)
   )
 
-(use-package origami
-  :ensure t
-  :init (global-origami-mode)
-  :bind( ("C-c v o" . origami-open-node)
-	 ("C-c v c" . origami-close-node)
-	 ("C-c v n" . origami-next-fold)
-	 ("C-c v p" . origami-previous-fold)
-	 ("C-c v 0" . origami-close-all-nodes)
-	 ("C-c v 1" . origami-open-all-nodes)
-         )
-  )
-
 (use-package autopair
   :ensure t
   :config
@@ -116,9 +111,11 @@
   :ensure t
   :init(indent-guide-global-mode)
   )
-;; (ede-enable-generic-projects )
+
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 (semantic-mode 1)
 (global-semantic-highlight-func-mode t)
+;; (ede-enable-generic-projects )
 ;;(global-semantic-idle-scheduler-mode t)
 ;; (semantic-load-enable-code-helpers)
 
