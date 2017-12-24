@@ -36,18 +36,22 @@
     (add-hook 'elpy-mode 'flycheck-mode))
   )
 
-(add-hook 'find-file-hook 'prepython-hook)
 ;;Enable elpy only in .py files
+(add-hook 'find-file-hook 'prepython-hook)
 (defun prepython-hook ()
   (when (string= (file-name-extension buffer-file-name)"py")
     (elpy-mode)
     (elpy-enable)))
 
-(use-package linum
-  :config
-  (global-linum-mode t)
-  (setq linum-format "%d ")
-  )
+;;Until emacs 26 is official build it manually and use the new line system else fallback to linum
+(if ( >= emacs-major-version 26)
+    (global-display-line-numbers-mode)
+  (use-package linum
+    :config
+    (global-linum-mode t)
+    (setq linum-format "%d ")
+    ))
+
 
 (use-package color-identifiers-mode
   :ensure t
