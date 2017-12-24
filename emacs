@@ -1,6 +1,4 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(add-to-list 'load-path "~/.emacs.d/elpa/emacs-async")
-(add-to-list 'load-path "~/.emacs.d/elpa/helm")
 (column-number-mode t)
 (show-paren-mode 1)
 
@@ -75,12 +73,13 @@
 	 (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
 			     (thing-at-point 'line)))))
   )
-
 (use-package helm
+  :demand t
   :ensure t
+  :init (helm-mode 1)
   :bind(("C-x C-f" . helm-find-files)
-	("C-x b" . helm-buffers-list)
-	)
+  	("C-x b" . helm-buffers-list)
+  	)
   )
 
 (use-package cc-mode
