@@ -51,6 +51,10 @@ The plugins i have already installed support more languages and with a few addit
 19. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
 20. [elpy](https://github.com/jorgenschaefer/elpy)
 21. [Flycheck-Pos-Tip](https://github.com/flycheck/flycheck-pos-tip)
+22. [company](https://github.com/company-mode/company-mode)
+23. [irony](https://github.com/Sarcasm/irony-mode)
+24. [company-irony](https://github.com/Sarcasm/company-irony)
+25. [company-irony-c-headers](https://github.com/hotpxl/company-irony-c-headers)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

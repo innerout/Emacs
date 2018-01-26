@@ -1,7 +1,9 @@
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;;; package --- Summary
+;;; Top of my emacs config
+
 (column-number-mode t)
 (show-paren-mode 1)
-
+(setq show-paren-delay 0)
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
@@ -14,8 +16,14 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
+  (package-install 'el-get)
   (eval-when-compile (require 'use-package))
   )
+
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(require 'el-get)
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
 
 (require 'bind-key)
 
@@ -85,6 +93,7 @@
 (use-package cc-mode
   :config
   (setq c-default-style "linux")
+  (setq c-basic-offset 8)
   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
   )
 
@@ -116,8 +125,8 @@
   )
 
 (add-hook 'prog-mode-hook #'hs-minor-mode)
-(semantic-mode 1)
-(global-semantic-highlight-func-mode t)
+;; (semantic-mode 1)
+;; (global-semantic-highlight-func-mode t)
 ;; (ede-enable-generic-projects )
 ;;(global-semantic-idle-scheduler-mode t)
 ;; (semantic-load-enable-code-helpers)
@@ -128,24 +137,52 @@
   :init (yas-global-mode 1)
   )
 
-(use-package auto-complete
+(use-package company
+  :ensure t
+  :init(add-hook 'after-init-hook 'global-company-mode)
+  )
+
+(use-package irony
   :ensure t
   :init
-  (ac-config-default)
-  (ac-set-trigger-key "TAB")
-  :config
-  (defun ac-common-setup()
-    (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
-    )
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'objc-mode-hook 'irony-mode)
+
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  )
+
+(use-package company-irony
+  :ensure t
+  :init(eval-after-load 'company
+	 '(add-to-list 'company-backends 'company-irony))
+  )
+
+(use-package company-irony-c-headers
+  :ensure t
+  :init(eval-after-load 'company
+	 '(add-to-list
+	   'company-backends '(company-irony-c-headers company-irony)))
+  )
+
+(use-package auto-complete
+  :ensure t
+  ;; :init
+  ;; (ac-config-default)
+  ;; (ac-set-trigger-key "TAB")
+  ;; :config
+  ;; (defun ac-common-setup()
+  ;;   (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
+  ;;   )
   )
 
 (use-package ac-c-headers
   :ensure t
-  :config
-  (add-hook 'c-mode-hook
-	    (lambda ()
-	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t))
-	    )
+  ;;   :config
+  ;;   (add-hook 'c-mode-hook
+  ;; 	    (lambda ()
+  ;; 	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t))
+  ;; 	    )
   )
 
 ;;git-gutter
@@ -181,6 +218,12 @@
 
 (use-package flycheck-pos-tip
   :ensure t)
+
+(use-package dashboard
+  :ensure t
+  :diminish dashboard-mode
+  :config
+  (dashboard-setup-startup-hook))
 (async-bytecomp-package-mode 1)
 
 ;; (ede-cpp-root-project "kreon" :file "/home/hacker/HEutropia/kreon/btree/btree.c"
@@ -240,4 +283,4 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'erase-buffer 'disabled nil)
-;;;;
+;;; Commentary:
