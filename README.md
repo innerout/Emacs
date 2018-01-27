@@ -55,6 +55,7 @@ The plugins i have already installed support more languages and with a few addit
 23. [irony](https://github.com/Sarcasm/irony-mode)
 24. [company-irony](https://github.com/Sarcasm/company-irony)
 25. [company-irony-c-headers](https://github.com/hotpxl/company-irony-c-headers)
+26. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
