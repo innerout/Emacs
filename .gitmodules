@@ -1,0 +1,3 @@
+[submodule "compiledb-generator"]
+	path = compiledb-generator
+	url = https://github.com/nickdiego/compiledb-generator.git
