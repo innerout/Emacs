@@ -31,32 +31,31 @@ The plugins i have already installed support more languages and with a few addit
 
 ## Installed plugins
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
-2. [cedet](http://cedet.sourceforge.net/)
-3. [neotree](https://github.com/jaypei/emacs-neotree)
-4. [helm](https://github.com/emacs-helm/helm)
-5. [autopair](https://github.com/joaotavora/autopair)
-6. [xcscope](https://github.com/dkogan/xcscope.el)
-7. [indent-guide](https://github.com/zk-phi/indent-guide)
-8. [yasnippet](https://github.com/joaotavora/yasnippet)
-9. [autocomplete](https://github.com/auto-complete/auto-complete)
-10. [autocomplete-c-headers](https://github.com/mooz/auto-complete-c-headers)
-11. [The theme is spacemacs-theme](https://github.com/nashamri/spacemacs-theme)
-12. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
-13. [hs-minor-mode](https://www.emacswiki.org/emacs/HideShow)
-14. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
-15. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
-16. [Magit](https://github.com/magit/magit)
-17. [Flycheck](https://github.com/flycheck/flycheck)
-18. [use-package](https://github.com/jwiegley/use-package)
-19. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
-20. [elpy](https://github.com/jorgenschaefer/elpy)
-21. [Flycheck-Pos-Tip](https://github.com/flycheck/flycheck-pos-tip)
-22. [company](https://github.com/company-mode/company-mode)
-23. [irony](https://github.com/Sarcasm/irony-mode)
-24. [company-irony](https://github.com/Sarcasm/company-irony)
-25. [company-irony-c-headers](https://github.com/hotpxl/company-irony-c-headers)
-26. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
-27. [dashboard](https://github.com/rakanalh/emacs-dashboard)
+2. [neotree](https://github.com/jaypei/emacs-neotree)
+3. [helm](https://github.com/emacs-helm/helm)
+4. [autopair](https://github.com/joaotavora/autopair)
+5. [xcscope](https://github.com/dkogan/xcscope.el)
+6. [indent-guide](https://github.com/zk-phi/indent-guide)
+7. [yasnippet](https://github.com/joaotavora/yasnippet)
+8. [autocomplete](https://github.com/auto-complete/auto-complete)
+9. [autocomplete-c-headers](https://github.com/mooz/auto-complete-c-headers)
+10. [The theme is spacemacs-theme](https://github.com/nashamri/spacemacs-theme)
+11. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
+12. [hs-minor-mode](https://www.emacswiki.org/emacs/HideShow)
+13. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
+14. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
+15. [Magit](https://github.com/magit/magit)
+16. [Flycheck](https://github.com/flycheck/flycheck)
+17. [use-package](https://github.com/jwiegley/use-package)
+18. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
+19. [elpy](https://github.com/jorgenschaefer/elpy)
+20. [Flycheck-Pos-Tip](https://github.com/flycheck/flycheck-pos-tip)
+21. [company](https://github.com/company-mode/company-mode)
+22. [irony](https://github.com/Sarcasm/irony-mode)
+23. [company-irony](https://github.com/Sarcasm/company-irony)
+24. [company-irony-c-headers](https://github.com/hotpxl/company-irony-c-headers)
+25. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
+26. [dashboard](https://github.com/rakanalh/emacs-dashboard)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -64,3 +63,26 @@ That way you can change them to your liking.
 * Repo will be updated everytime i add a plugin to my configuration.
 * I am searching for a good refactoring tool (C/C++) for the setup to be complete
   after that i dont think any plugins will be needed.
+
+
+# HOWTO SETUP PLUGINS
+
+## IRONY
+
+__REQUIREMENTS__ = __sudo pacman -S cmake clang__
+
+Everytime irony or company-irony is updated you have to run M-x irony-install-server.
+
+## Cscope
+
+__REQUIREMENTS__ = __sudo pacman -S cscope__
+
+Set initial directory (root folder of project) C-c s a
+
+Create list of file to index C-c s L
+
+Create list and index C-c s I
+
+## Markdown-mode
+
+__REQUIREMENTS__ = __sudo pacman -S pandoc__
