@@ -73,6 +73,8 @@ __REQUIREMENTS__ = __sudo pacman -S cmake clang__
 
 Everytime irony or company-irony is updated you have to run M-x irony-install-server.
 
+make CC='cc_args.py gcc' -B
+
 ## Cscope
 
 __REQUIREMENTS__ = __sudo pacman -S cscope__
