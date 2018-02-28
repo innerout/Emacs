@@ -56,7 +56,7 @@ The plugins i have already installed support more languages and with a few addit
 24. [company-c-headers](https://github.com/randomphrase/company-c-headers)
 25. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
 26. [dashboard](https://github.com/rakanalh/emacs-dashboard)
-
+27. [org-mode](https://orgmode.org/)
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
 That way you can change them to your liking.
