@@ -1,6 +1,11 @@
 ;;; package --- Summary
 ;;; Top of my emacs config
 
+;;For faster startup
+(setq gc-cons-threshold 16777216
+      gc-cons-percentage 0.1)
+
+(add-to-list 'default-frame-alist '(font . "Source Code Pro"))
 (column-number-mode t)
 (show-paren-mode 1)
 (setq show-paren-delay 0)
@@ -9,9 +14,13 @@
   (add-to-list
    'package-archives
    '("melpa" . "http://melpa.org/packages/")
-   '("elpy" . "https://jorgenschaefer.github.io/packages/"))
+   '("elpy" . "https://jorgenschaefer.github.io/packages/")
+   )
   (package-initialize)
   )
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -142,6 +151,9 @@
   :init (yas-global-mode 1)
   )
 
+(use-package yasnippet-snippets
+  :ensure t)
+
 (use-package company
   :ensure t
   :init(add-hook 'after-init-hook 'global-company-mode)
@@ -167,14 +179,11 @@
 (use-package company-irony
   :ensure t
   :init(eval-after-load 'company
-	 '(add-to-list 'company-backends 'company-irony))
+	 '(add-to-list 'company-backends 'company-irony 'company-c-headers))
   )
 
-(use-package company-irony-c-headers
+(use-package company-c-headers
   :ensure t
-  :init(eval-after-load 'company
-	 '(add-to-list
-	   'company-backends '(company-irony-c-headers company-irony)))
   )
 
 (use-package auto-complete
@@ -205,8 +214,8 @@
   (global-git-gutter-mode +1)  ;; If you enable global minor mod
   :config
   ;; Jump to next/previous hunk
-  (global-set-key (kbd "C-x c p") 'git-gutter:previous-hunk)
-  (global-set-key (kbd "C-x c n") 'git-gutter:next-hunk)
+  ;; (global-set-key (kbd "C-x c p") 'git-gutter:previous-hunk)
+  ;; (global-set-key (kbd "C-x c n") 'git-gutter:next-hunk)
   )
 
 (use-package magit
@@ -238,6 +247,12 @@
   (dashboard-setup-startup-hook))
 (async-bytecomp-package-mode 1)
 
+(use-package org
+  :ensure t
+  :bind(("C-c a" . org-agenda)
+  	("C-x c" . org-capture)
+  	))
+
 ;; (ede-cpp-root-project "kreon" :file "/home/hacker/HEutropia/kreon/btree/btree.c"
 ;; 					 :include-path '( "../allocator" "../BdfsBlockServer" "../debug" "../filter_ulitilities" "../HadoopDriver" "../include" "../jbtree" "../red_black_tree" "../scanner" ) )
 (custom-set-variables
@@ -264,7 +279,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (rainbow-delimiters use-package flycheck-title elpy magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
+    (company-c-headers org org-plus-contrib rainbow-delimiters use-package flycheck-title elpy magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
@@ -296,4 +311,5 @@
  '(show-paren-match ((t (:background "red"))))
  '(show-paren-mismatch ((t (:background "blue")))))
 (put 'erase-buffer 'disabled nil)
+
 ;;; Commentary:

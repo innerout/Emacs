@@ -53,7 +53,7 @@ The plugins i have already installed support more languages and with a few addit
 21. [company](https://github.com/company-mode/company-mode)
 22. [irony](https://github.com/Sarcasm/irony-mode)
 23. [company-irony](https://github.com/Sarcasm/company-irony)
-24. [company-irony-c-headers](https://github.com/hotpxl/company-irony-c-headers)
+24. [company-c-headers](https://github.com/randomphrase/company-c-headers)
 25. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
 26. [dashboard](https://github.com/rakanalh/emacs-dashboard)
 
@@ -63,13 +63,13 @@ That way you can change them to your liking.
 * Repo will be updated everytime i add a plugin to my configuration.
 * I am searching for a good refactoring tool (C/C++) for the setup to be complete
   after that i dont think any plugins will be needed.
-
+* Font __adobe-source-code-pro__ sudo pacman -S adobe-source-code-pro-fonts
 
 # HOWTO SETUP PLUGINS
 
 ## IRONY
 
-__REQUIREMENTS__ = __sudo pacman -S cmake clang__
+__REQUIREMENTS__ = __sudo pacman -S cmake clang__ __sudo dnf install cmake clang clang-devel llvm clang-libs__
 
 Everytime irony or company-irony is updated you have to run M-x irony-install-server.
 
