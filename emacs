@@ -1,14 +1,40 @@
-;;; package --- Summary
-;;; Top of my emacs config
+;;Setting GC thresholds higher
+(setq gc-cons-threshold 20000000
+      gc-cons-percentage 0.3)
 
-;;For faster startup
-(setq gc-cons-threshold 16777216
-      gc-cons-percentage 0.1)
-
+;;Source Code Pro font
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
+
+;;Column Number in modeline
 (column-number-mode t)
+
+;;Show Matching Parenthesis without delay
 (show-paren-mode 1)
-(setq show-paren-delay 0)
+(setq show-paren-delay nil)
+
+;;Highlighting Text and typing deletes the text like other editors
+(delete-selection-mode t)
+
+;; Opens the File in the last position that you closed it.The setq-default optimizes this function for nfs.
+(save-place-mode 1)
+(setq-default save-place-forget-unreadable-files nil)
+
+;;Mouse scrolling in terminal
+(mouse-wheel-mode t)
+
+;;No blinking Cursor
+(blink-cursor-mode nil)
+
+;;Copy/Paste to clipboard with C-w/C-y
+(setq-default x-select-enable-clipboard t)
+(setq-default x-select-enable-primary t)
+
+;;Erases whole buffer
+(put 'erase-buffer 'disabled nil)
+;;Disable the ring bell
+(setq ring-bell-function 'ignore)
+
+;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
@@ -21,18 +47,18 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
 
-
+;;Install use-package for the first time that emacs starts on a new system.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
   (package-install 'el-get)
   (eval-when-compile (require 'use-package))
   )
-
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+;; Commented out because i use melpa, i should consider checking straight.el
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; (require 'el-get)
+;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;; (el-get 'sync)
 
 (require 'bind-key)
 
@@ -41,6 +67,7 @@
   :no-require t
   )
 
+;;Python mode for emacs with IDE like features
 (use-package elpy
   :ensure t
   :defer t
@@ -58,7 +85,7 @@
     (elpy-mode)
     (elpy-enable)))
 
-;;Until emacs 26 is official build it manually and use the new line system else fallback to linum
+;;Until emacs 26 is official, build it manually and use the new line system else fallback to linum
 (if ( >= emacs-major-version 26)
     (global-display-line-numbers-mode)
   (use-package linum
@@ -67,17 +94,19 @@
     (setq linum-format "%d ")
     ))
 
-
+;;Different Color for every variable
 (use-package color-identifiers-mode
   :ensure t
   :init (global-color-identifiers-mode)
   )
 
+;;Different Color for every matching {}()[]
 (use-package rainbow-delimiters
   :ensure t
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
   )
 
+;;Syntax checking for different languages
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
@@ -95,15 +124,22 @@
 	 (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
 			     (thing-at-point 'line)))))
   )
+
+;;An amazing plugin with infinite features to use.
 (use-package helm
   :demand t
   :ensure t
-  :init (helm-mode 1)
-  :bind(("C-x C-f" . helm-find-files)
+  :init
+  (helm-mode 1)
+  (helm-autoresize-mode t)
+  :bind(
+	("C-x C-f" . helm-find-files)
   	("C-x b" . helm-buffers-list)
+	("M-x" . helm-M-x)
   	)
   )
 
+;;
 (use-package cc-mode
   :config
   (setq c-default-style "linux")
@@ -111,11 +147,13 @@
   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
   )
 
+;;Open files with a tree like structure
 (use-package neotree
   :ensure t
   :config (global-set-key [f8] 'neotree-toggle)
   )
 
+;;Autoclosing (){}[] should consider smart-parens mode it has great features ex wrapping around highlighted variables
 (use-package autopair
   :ensure t
   :config
@@ -126,6 +164,7 @@
 
 (put 'upcase-region 'disabled nil)
 
+;;Ctags faster alternative
 (use-package xcscope
   :ensure t
   :config
@@ -133,11 +172,13 @@
   (setq cscope-option-use-inverted-index t)
   )
 
+;;Shows the indentation block you are inside
 (use-package indent-guide
   :ensure t
   :init(indent-guide-global-mode)
   )
 
+;;Folding mode built-in emacs, should search for a good folding plugin
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 ;; (semantic-mode 1)
 ;; (global-semantic-highlight-func-mode t)
@@ -154,6 +195,7 @@
 (use-package yasnippet-snippets
   :ensure t)
 
+;;autocomplete plugin that is pretty fast
 (use-package company
   :ensure t
   :init(add-hook 'after-init-hook 'global-company-mode)
@@ -161,6 +203,7 @@
   (setq company-minimum-prefix-length 1)
   )
 
+;;backend for C/C++ autocompletion
 (use-package irony
   :ensure t
   :init
@@ -186,27 +229,27 @@
   :ensure t
   )
 
-(use-package auto-complete
-  :ensure t
-  ;; :init
-  ;; (ac-config-default)
-  ;; (ac-set-trigger-key "TAB")
-  ;; :config
-  ;; (defun ac-common-setup()
-  ;;   (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
-  ;;   )
-  )
+;; (use-package auto-complete
+;;   :ensure t
+;;   :init
+;;   (ac-config-default)
+;;   (ac-set-trigger-key "TAB")
+;;   :config
+;;   (defun ac-common-setup()
+;;     (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
+;;     )
+;;   )
 
-(use-package ac-c-headers
-  :ensure t
-  ;;   :config
-  ;;   (add-hook 'c-mode-hook
-  ;; 	    (lambda ()
-  ;; 	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t))
-  ;; 	    )
-  )
+;; (use-package ac-c-headers
+;;   :ensure t
+;;   :config
+;;   (add-hook 'c-mode-hook
+;;   	    (lambda ()
+;;   	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t))
+;;   	    )
+;;   )
 
-;;git-gutter
+;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
   :ensure t
   :init
@@ -222,6 +265,7 @@
   :ensure t
   )
 
+;;Removes trailing whitespace and newline. I should check if emacs has a builtin mode(Probably has)
 (use-package ethan-wspace
   :ensure t
   :config
@@ -240,21 +284,25 @@
 (use-package flycheck-pos-tip
   :ensure t)
 
+;;Startup screen alternative plugin
 (use-package dashboard
   :ensure t
   :diminish dashboard-mode
   :config
-  (dashboard-setup-startup-hook))
-(async-bytecomp-package-mode 1)
+  (dashboard-setup-startup-hook)
+  )
 
+;;The famous org mode, i should learn it more.
 (use-package org
-  :ensure t
+  :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
   	("C-x c" . org-capture)
-  	))
+  	)
+  )
 
-;; (ede-cpp-root-project "kreon" :file "/home/hacker/HEutropia/kreon/btree/btree.c"
-;; 					 :include-path '( "../allocator" "../BdfsBlockServer" "../debug" "../filter_ulitilities" "../HadoopDriver" "../include" "../jbtree" "../red_black_tree" "../scanner" ) )
+(async-bytecomp-package-mode 1)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -310,6 +358,3 @@
  ;; If there is more than one, they won't work right.
  '(show-paren-match ((t (:background "red"))))
  '(show-paren-mismatch ((t (:background "blue")))))
-(put 'erase-buffer 'disabled nil)
-
-;;; Commentary:
