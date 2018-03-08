@@ -153,14 +153,47 @@
   :config (global-set-key [f8] 'neotree-toggle)
   )
 
-;;Autoclosing (){}[] should consider smart-parens mode it has great features ex wrapping around highlighted variables
-(use-package autopair
+;;Autoclosing (){}[]
+(use-package smartparens
   :ensure t
-  :config
-  (autopair-global-mode 1) ;; enable autopair in all buffers
-  (setq autopair-autowrap t)
-  )
+  :init
+  (require 'smartparens-config)
+  (smartparens-global-mode t)
+  :bind(
 
+	("C-M-f" . sp-forward-sexp)
+	("C-M-b" . sp-backward-sexp)
+
+	("C-M-n" . sp-next-sexp)
+	("C-M-p" . sp-previous-sexp)
+
+	("C-S-f" . sp-forward-symbol)
+	("C-S-b" . sp-backward-symbol)
+
+	("C-M-k" . sp-kill-sexp)
+	("C-k"   . sp-kill-hybrid-sexp)
+	("M-k"   . sp-backward-kill-sexp)
+	("C-M-w" . sp-copy-sexp)
+	("C-M-d" . delete-sexp)
+
+	("M-<backspace>" . backward-kill-word)
+	("C-<backspace>" . sp-backward-kill-word)
+	([remap sp-backward-kill-word] . backward-kill-word)
+
+	("M-[" . sp-backward-unwrap-sexp)
+	("M-]" . sp-unwrap-sexp)
+
+	("C-x C-t" . sp-transpose-hybrid-sexp)
+
+	("C-c ("  . wrap-with-parens)
+	("C-c ["  . wrap-with-brackets)
+	("C-c {"  . wrap-with-braces)
+	("C-c '"  . wrap-with-single-quotes)
+	("C-c \"" . wrap-with-double-quotes)
+	("C-c _"  . wrap-with-underscores)
+	("C-c `"  . wrap-with-back-quotes)
+	)
+  )
 
 (put 'upcase-region 'disabled nil)
 

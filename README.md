@@ -33,7 +33,7 @@ The plugins i have already installed support more languages and with a few addit
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
 2. [neotree](https://github.com/jaypei/emacs-neotree)
 3. [helm](https://github.com/emacs-helm/helm)
-4. [autopair](https://github.com/joaotavora/autopair)
+4. [smartparens](https://github.com/Fuco1/smartparens)
 5. [xcscope](https://github.com/dkogan/xcscope.el)
 6. [indent-guide](https://github.com/zk-phi/indent-guide)
 7. [yasnippet](https://github.com/joaotavora/yasnippet)
@@ -57,6 +57,7 @@ The plugins i have already installed support more languages and with a few addit
 25. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
 26. [dashboard](https://github.com/rakanalh/emacs-dashboard)
 27. [org-mode](https://orgmode.org/)
+
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
 That way you can change them to your liking.
