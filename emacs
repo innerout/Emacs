@@ -34,6 +34,9 @@
 ;;Disable the ring bell
 (setq ring-bell-function 'ignore)
 
+;;Folding mode built-in emacs, should search for a good folding plugin
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -211,15 +214,6 @@
   :init(indent-guide-global-mode)
   )
 
-;;Folding mode built-in emacs, should search for a good folding plugin
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-;; (semantic-mode 1)
-;; (global-semantic-highlight-func-mode t)
-;; (ede-enable-generic-projects )
-;;(global-semantic-idle-scheduler-mode t)
-;; (semantic-load-enable-code-helpers)
-
-
 (use-package yasnippet
   :ensure t
   :init (yas-global-mode 1)
@@ -236,51 +230,29 @@
   (setq company-minimum-prefix-length 1)
   )
 
-;;backend for C/C++ autocompletion
-(use-package irony
+
+(use-package lsp-mode
+  :ensure t
+  )
+
+(use-package cquery
   :ensure t
   :init
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
-  (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  (setq cquery-executable "/usr/bin/cquery")
+  (add-hook 'c-mode-common-hook #'cquery//enable)
+  :commands lsp-cquery-enable
   )
+(defun cquery//enable ()
+  (condition-case nil
+      (lsp-cquery-enable)
+    (user-error nil)))
 
-(use-package company-irony
+
+(use-package company-lsp
   :ensure t
-  :init(eval-after-load 'company
-	 '(add-to-list 'company-backends 'company-irony 'company-c-headers))
+  :config (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
+  (push 'company-lsp company-backends)
   )
-
-(use-package company-c-headers
-  :ensure t
-  )
-
-;; (use-package auto-complete
-;;   :ensure t
-;;   :init
-;;   (ac-config-default)
-;;   (ac-set-trigger-key "TAB")
-;;   :config
-;;   (defun ac-common-setup()
-;;     (setq ac-sources (append ac-sources '( ac-source-semantic ac-source-semantic-raw ac-source-c-headers ac-source-filename)))
-;;     )
-;;   )
-
-;; (use-package ac-c-headers
-;;   :ensure t
-;;   :config
-;;   (add-hook 'c-mode-hook
-;;   	    (lambda ()
-;;   	      (add-to-list 'ac-sources 'ac-source-c-header-symbols t))
-;;   	    )
-;;   )
 
 ;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
@@ -331,6 +303,17 @@
   :bind(("C-c a" . org-agenda)
   	("C-x c" . org-capture)
   	)
+  )
+(use-package org-bullets
+  :ensure t
+  :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1)))
+  )
+  (use-package beacon
+    :ensure t
+    :init (beacon-mode 1))
+
+(use-package academic-phrases
+  :ensure t
   )
 
 (async-bytecomp-package-mode 1)
