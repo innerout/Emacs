@@ -1,5 +1,5 @@
 # Requirements
-* [Emacs](https://www.archlinux.org/packages/extra/i686/emacs/) based on the version of Arch linux.
+* Emacs based on the version of Arch linux.
 
 ### Arch
 
