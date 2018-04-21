@@ -55,6 +55,11 @@ The plugins i have already installed support more languages and with a few addit
 23. [beacon](https://github.com/Malabarba/beacon)
 24. [academic-phrases](https://github.com/nashamri/academic-phrases)
 25. [org-bullets](https://github.com/sabof/org-bullets)
+26. [cquery-emacs](https://github.com/cquery-project/emacs-cquery)
+27. [company-lsp](https://github.com/tigersoldier/company-lsp)
+28. [lsp-ui](https://github.com/emacs-lsp/lsp-ui)
+29. [helm-themes](https://github.com/syohex/emacs-helm-themes)
+30. [lsp-python](https://github.com/emacs-lsp/lsp-python)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -68,13 +73,21 @@ That way you can change them to your liking.
 
 ## Cquery
 
-__REQUIREMENTS__ = __yaourt bear-git cquery-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
+__REQUIREMENTS__ = __yaourt bear-git cquery__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
 
 Run in the folder with the main Makefile that builds everything.
 
 bear make
 
+cd one directory up and run the command below
+
 compdb -p build/ list > compile_commands.json
+
+mv compile_commands.json inside the folder
+
+## lsp-python
+
+__REQUIREMENTS__ = __sudo pip install 'python-language-server[all]' pyls-mypy pyls-isort__
 
 ## Cscope
 

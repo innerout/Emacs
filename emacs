@@ -23,7 +23,7 @@
 (mouse-wheel-mode t)
 
 ;;No blinking Cursor
-(blink-cursor-mode nil)
+(blink-cursor-mode 0)
 
 ;;Copy/Paste to clipboard with C-w/C-y
 (setq-default x-select-enable-clipboard t)
@@ -70,24 +70,6 @@
   :no-require t
   )
 
-;;Python mode for emacs with IDE like features
-(use-package elpy
-  :ensure t
-  :defer t
-  :config
-  (setq elpy-rpc-backend "jedi")
-  (when (require 'flycheck nil t)
-    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-    (add-hook 'elpy-mode 'flycheck-mode))
-  )
-
-;;Enable elpy only in .py files
-(add-hook 'find-file-hook 'prepython-hook)
-(defun prepython-hook ()
-  (when (string= (file-name-extension buffer-file-name)"py")
-    (elpy-mode)
-    (elpy-enable)))
-
 ;;Until emacs 26 is official, build it manually and use the new line system else fallback to linum
 (if ( >= emacs-major-version 26)
     (global-display-line-numbers-mode)
@@ -100,7 +82,7 @@
 ;;Different Color for every variable
 (use-package color-identifiers-mode
   :ensure t
-  :init (global-color-identifiers-mode)
+  :init (add-hook 'after-init-hook 'global-color-identifiers-mode)
   )
 
 ;;Different Color for every matching {}()[]
@@ -228,8 +210,9 @@
   :init(add-hook 'after-init-hook 'global-company-mode)
   :config
   (setq company-minimum-prefix-length 1)
-  )
+  (push 'company-files company-backends)
 
+  )
 
 (use-package lsp-mode
   :ensure t
@@ -240,8 +223,8 @@
   :init
   (setq cquery-executable "/usr/bin/cquery")
   (add-hook 'c-mode-common-hook #'cquery//enable)
-  :commands lsp-cquery-enable
   )
+
 (defun cquery//enable ()
   (condition-case nil
       (lsp-cquery-enable)
@@ -252,6 +235,21 @@
   :ensure t
   :config (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
   (push 'company-lsp company-backends)
+  )
+
+(use-package lsp-ui
+  :ensure t
+  :init
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (add-hook 'c-mode-hook 'flycheck-mode)
+  :config
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  )
+
+(use-package lsp-python
+  :ensure t
+  :init (add-hook 'python-mode-hook #'lsp-python-enable)
   )
 
 ;;Shows the changes that have happened to the file based on the last git commit.
@@ -304,17 +302,22 @@
   	("C-x c" . org-capture)
   	)
   )
+
 (use-package org-bullets
   :ensure t
   :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1)))
   )
-  (use-package beacon
-    :ensure t
-    :init (beacon-mode 1))
+
+(use-package beacon
+  :ensure t
+  :init (beacon-mode 1))
 
 (use-package academic-phrases
   :ensure t
   )
+
+(use-package helm-themes
+  :ensure t)
 
 (async-bytecomp-package-mode 1)
 
@@ -343,7 +346,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (company-c-headers org org-plus-contrib rainbow-delimiters use-package flycheck-title elpy magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode neotree aggressive-indent yasnippet-snippets indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
+    (org-bullets company-c-headers org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode neotree aggressive-indent indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
