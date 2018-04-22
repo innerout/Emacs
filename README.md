@@ -64,8 +64,6 @@ The plugins i have already installed support more languages and with a few addit
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
 That way you can change them to your liking.
 * Repo will be updated everytime i add a plugin to my configuration.
-* I am searching for a good refactoring tool (C/C++) for the setup to be complete
-  after that i dont think any plugins will be needed.
 * Font __adobe-source-code-pro__ sudo pacman -S adobe-source-code-pro-fonts
 
 # HOWTO SETUP PLUGINS
