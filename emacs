@@ -132,10 +132,16 @@
   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
   )
 
+;;Remember to run after installation M-x all-the-icons-install-fonts
+(use-package all-the-icons
+  :ensure t)
+
 ;;Open files with a tree like structure
 (use-package neotree
   :ensure t
-  :config (global-set-key [f8] 'neotree-toggle)
+  :config
+  (global-set-key [f8] 'neotree-toggle)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   )
 
 ;;Autoclosing (){}[]
@@ -211,23 +217,25 @@
   :config
   (setq company-minimum-prefix-length 1)
   (push 'company-files company-backends)
-
   )
 
 (use-package lsp-mode
   :ensure t
   )
 
-(use-package cquery
+(use-package ccls
   :ensure t
+  :commands (lsp-ccls-enable)
   :init
-  (setq cquery-executable "/usr/bin/cquery")
-  (add-hook 'c-mode-common-hook #'cquery//enable)
+  (setq ccls-executable "/home/hacker/ccls/release/ccls")
+  ;; (setq cquery-executable "/home/hacker/gitfolders/cquery/build/release/bin/cquery")
+  ;; (setq cquery-extra-args '("--log-all-to-stderr" "--log-file" "/tmp/cquery.log"))
+  (add-hook 'c-mode-common-hook #'ccls//enable)
   )
 
-(defun cquery//enable ()
+(defun ccls//enable ()
   (condition-case nil
-      (lsp-cquery-enable)
+      (lsp-ccls-enable)
     (user-error nil)))
 
 
@@ -346,7 +354,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (org-bullets company-c-headers org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode neotree aggressive-indent indent-guide spacegray-theme xcscope bison-mode ac-c-headers list-packages-ext helm flycheck)))
+    (org-bullets org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode aggressive-indent indent-guide spacegray-theme xcscope list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map

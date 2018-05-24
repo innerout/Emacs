@@ -54,11 +54,12 @@ The plugins i have already installed support more languages and with a few addit
 22. [beacon](https://github.com/Malabarba/beacon)
 23. [academic-phrases](https://github.com/nashamri/academic-phrases)
 24. [org-bullets](https://github.com/sabof/org-bullets)
-25. [cquery-emacs](https://github.com/cquery-project/emacs-cquery)
+25. [ccls-emacs](https://github.com/MaskRay/emacs-ccls)
 26. [company-lsp](https://github.com/tigersoldier/company-lsp)
 27. [lsp-ui](https://github.com/emacs-lsp/lsp-ui)
 28. [helm-themes](https://github.com/syohex/emacs-helm-themes)
 29. [lsp-python](https://github.com/emacs-lsp/lsp-python)
+30. [all-the-icons](https://github.com/domtronn/all-the-icons.el)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -68,11 +69,11 @@ That way you can change them to your liking.
 
 # HOWTO SETUP PLUGINS
 
-## Cquery
+## Ccls
 
-__REQUIREMENTS__ = __yaourt bear-git cquery__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
+__REQUIREMENTS__ = __yaourt bear-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
 
-Run in the folder with the main Makefile that builds everything.
+Run the root Makefile with bear.
 
 bear make
 
@@ -99,3 +100,7 @@ Create list and index C-c s I
 ## Markdown-mode
 
 __REQUIREMENTS__ = __sudo pacman -S pandoc__
+
+## All-the-icons
+
+M-x all-the-icons-install-fonts
