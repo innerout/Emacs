@@ -37,67 +37,54 @@
 ;;Folding mode built-in emacs, should search for a good folding plugin
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
+;;Upcase disable
+(put 'upcase-region 'disabled nil)
+
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
    'package-archives
    '("melpa" . "http://melpa.org/packages/")
-   '("elpy" . "https://jorgenschaefer.github.io/packages/")
    )
-  (package-initialize)
-  )
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+  (package-initialize))
 
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives    '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;;Install use-package for the first time that emacs starts on a new system.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
   (package-install 'el-get)
-  (eval-when-compile (require 'use-package))
-  )
-;; Commented out because i use melpa, i should consider checking straight.el
-;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-;; (require 'el-get)
-;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-;; (el-get 'sync)
+  (eval-when-compile (require 'use-package)))
+;; I should consider checking straight.el
 
 (require 'bind-key)
 
 (use-package spacemacs-theme
   :ensure t
-  :no-require t
-  )
+  :no-require t)
 
 ;;Until emacs 26 is official, build it manually and use the new line system else fallback to linum
-(if ( >= emacs-major-version 26)
-    (global-display-line-numbers-mode)
-  (use-package linum
-    :config
-    (global-linum-mode t)
-    (setq linum-format "%d ")
-    ))
+(global-display-line-numbers-mode)
 
 ;;Different Color for every variable
 (use-package color-identifiers-mode
   :ensure t
-  :init (add-hook 'after-init-hook 'global-color-identifiers-mode)
-  )
+  :init (add-hook 'after-init-hook 'global-color-identifiers-mode))
 
 ;;Different Color for every matching {}()[]
 (use-package rainbow-delimiters
   :ensure t
-  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-  )
+  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;;Syntax checking for different languages
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
   (with-eval-after-load 'flycheck
-    (flycheck-pos-tip-mode))
-  )
+    (flycheck-pos-tip-mode)))
 
 (use-package aggressive-indent
   :ensure t
@@ -107,8 +94,7 @@
    'aggressive-indent-dont-indent-if
    '(and (derived-mode-p 'c++-mode 'c-mode)
 	 (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
-			     (thing-at-point 'line)))))
-  )
+			     (thing-at-point 'line))))))
 
 ;;An amazing plugin with infinite features to use.
 (use-package helm
@@ -116,21 +102,19 @@
   :ensure t
   :init
   (helm-mode 1)
+  (helm-adaptive-mode 1)
   (helm-autoresize-mode t)
   :bind(
 	("C-x C-f" . helm-find-files)
   	("C-x b" . helm-buffers-list)
 	("M-x" . helm-M-x)
-  	)
-  )
+  	))
 
-;;
 (use-package cc-mode
   :config
   (setq c-default-style "linux")
   (setq c-basic-offset 8)
-  (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
-  )
+  (define-key c-mode-base-map (kbd "RET") 'newline-and-indent))
 
 ;;Remember to run after installation M-x all-the-icons-install-fonts
 (use-package all-the-icons
@@ -141,8 +125,7 @@
   :ensure t
   :config
   (global-set-key [f8] 'neotree-toggle)
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  )
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 ;;Autoclosing (){}[]
 (use-package smartparens
@@ -183,29 +166,24 @@
 	("C-c \"" . wrap-with-double-quotes)
 	("C-c _"  . wrap-with-underscores)
 	("C-c `"  . wrap-with-back-quotes)
-	)
-  )
-
-(put 'upcase-region 'disabled nil)
+	))
 
 ;;Ctags faster alternative
 (use-package xcscope
   :ensure t
   :config
   (cscope-setup)
-  (setq cscope-option-use-inverted-index t)
-  )
+  (setq cscope-option-use-inverted-index t))
 
 ;;Shows the indentation block you are inside
-(use-package indent-guide
+(use-package highlight-indent-guides
   :ensure t
-  :init(indent-guide-global-mode)
-  )
+  :hook ((prog-mode . highlight-indent-guides-mode))
+  :config (setq highlight-indent-guides-method 'character))
 
 (use-package yasnippet
   :ensure t
-  :init (yas-global-mode 1)
-  )
+  :init (yas-global-mode 1))
 
 (use-package yasnippet-snippets
   :ensure t)
@@ -215,23 +193,20 @@
   :ensure t
   :init(add-hook 'after-init-hook 'global-company-mode)
   :config
-  (setq company-minimum-prefix-length 1)
-  (push 'company-files company-backends)
-  )
+  (setq company-minimum-prefix-length 2)
+  (push 'company-files company-backends))
 
 (use-package lsp-mode
-  :ensure t
-  )
+  :ensure t)
 
-(use-package ccls
+(use-package ccls;;cquery
   :ensure t
   :commands (lsp-ccls-enable)
   :init
   (setq ccls-executable "/home/hacker/ccls/release/ccls")
-  ;; (setq cquery-executable "/home/hacker/gitfolders/cquery/build/release/bin/cquery")
+  ;;(setq cquery-executable "/home/hacker/cquery/build/release/bin/cquery")
   ;; (setq cquery-extra-args '("--log-all-to-stderr" "--log-file" "/tmp/cquery.log"))
-  (add-hook 'c-mode-common-hook #'ccls//enable)
-  )
+  (add-hook 'c-mode-common-hook #'ccls//enable))
 
 (defun ccls//enable ()
   (condition-case nil
@@ -242,8 +217,7 @@
 (use-package company-lsp
   :ensure t
   :config (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
-  (push 'company-lsp company-backends)
-  )
+  (push 'company-lsp company-backends))
 
 (use-package lsp-ui
   :ensure t
@@ -252,45 +226,38 @@
   (add-hook 'c-mode-hook 'flycheck-mode)
   :config
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-  )
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
 (use-package lsp-python
   :ensure t
-  :init (add-hook 'python-mode-hook #'lsp-python-enable)
-  )
+  :init (add-hook 'python-mode-hook #'lsp-python-enable))
+
+(use-package ensime
+  :ensure t
+  :pin melpa-stable)
 
 ;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
   :ensure t
   :init
   (git-gutter:linum-setup)  ;; to use git-gutter.el and linum-mode
-  (global-git-gutter-mode +1)  ;; If you enable global minor mod
-  :config
-  ;; Jump to next/previous hunk
-  ;; (global-set-key (kbd "C-x c p") 'git-gutter:previous-hunk)
-  ;; (global-set-key (kbd "C-x c n") 'git-gutter:next-hunk)
-  )
+  (global-git-gutter-mode +1))  ;; If you enable global minor mode
 
 (use-package magit
-  :ensure t
-  )
+  :ensure t)
 
 ;;Removes trailing whitespace and newline. I should check if emacs has a builtin mode(Probably has)
 (use-package ethan-wspace
   :ensure t
   :config
   (global-ethan-wspace-mode 1)
-  (add-hook 'after-save-hook 'ethan-wspace-clean-all)
-  )
+  (add-hook 'after-save-hook 'ethan-wspace-clean-all))
 
 (use-package markdown-mode
-  :ensure t
-  )
+  :ensure t)
 
 (use-package markdown-mode+
-  :ensure t
-  )
+  :ensure t)
 
 (use-package flycheck-pos-tip
   :ensure t)
@@ -300,29 +267,25 @@
   :ensure t
   :diminish dashboard-mode
   :config
-  (dashboard-setup-startup-hook)
-  )
+  (dashboard-setup-startup-hook))
 
 ;;The famous org mode, i should learn it more.
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
   	("C-x c" . org-capture)
-  	)
-  )
+  	))
 
 (use-package org-bullets
   :ensure t
-  :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1)))
-  )
+  :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1))))
 
 (use-package beacon
   :ensure t
   :init (beacon-mode 1))
 
 (use-package academic-phrases
-  :ensure t
-  )
+  :ensure t)
 
 (use-package helm-themes
   :ensure t)

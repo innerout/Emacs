@@ -35,7 +35,7 @@ The plugins i have already installed support more languages and with a few addit
 3. [helm](https://github.com/emacs-helm/helm)
 4. [smartparens](https://github.com/Fuco1/smartparens)
 5. [xcscope](https://github.com/dkogan/xcscope.el)
-6. [indent-guide](https://github.com/zk-phi/indent-guide)
+6. [highlight-indent-guides](https://github.com/DarthFennec/highlight-indent-guides)
 7. [yasnippet](https://github.com/joaotavora/yasnippet)
 8. [The theme is spacemacs-theme](https://github.com/nashamri/spacemacs-theme)
 9. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
