@@ -60,6 +60,8 @@ The plugins i have already installed support more languages and with a few addit
 28. [helm-themes](https://github.com/syohex/emacs-helm-themes)
 29. [lsp-python](https://github.com/emacs-lsp/lsp-python)
 30. [all-the-icons](https://github.com/domtronn/all-the-icons.el)
+31. [which-key](https://github.com/justbur/emacs-which-key)
+32. [bug-hunter](https://github.com/Malabarba/elisp-bug-hunter)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

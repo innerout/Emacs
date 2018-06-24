@@ -1,5 +1,6 @@
-;;Setting GC thresholds higher
-(setq gc-cons-threshold 20000000
+
+  ;;Setting GC thresholds higher
+(setq gc-cons-threshold 20971520
       gc-cons-percentage 0.3)
 
 ;;Source Code Pro font
@@ -36,9 +37,18 @@
 
 ;;Folding mode built-in emacs, should search for a good folding plugin
 (add-hook 'prog-mode-hook #'hs-minor-mode)
-
+(global-hl-line-mode)
 ;;Upcase disable
 (put 'upcase-region 'disabled nil)
+
+
+;;Disable Scroll-bar
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode 0))
+;;Disable Menu
+;;(menu-bar-mode 0)
+;;Disable toolbar
+(tool-bar-mode 0)
 
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
@@ -50,13 +60,11 @@
   (package-initialize))
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(add-to-list 'package-archives    '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;;Install use-package for the first time that emacs starts on a new system.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
-  (package-install 'el-get)
   (eval-when-compile (require 'use-package)))
 ;; I should consider checking straight.el
 
@@ -66,7 +74,6 @@
   :ensure t
   :no-require t)
 
-;;Until emacs 26 is official, build it manually and use the new line system else fallback to linum
 (global-display-line-numbers-mode)
 
 ;;Different Color for every variable
@@ -85,6 +92,9 @@
   :init (global-flycheck-mode)
   (with-eval-after-load 'flycheck
     (flycheck-pos-tip-mode)))
+
+(use-package flycheck-pos-tip
+  :ensure t)
 
 (use-package aggressive-indent
   :ensure t
@@ -110,11 +120,22 @@
 	("M-x" . helm-M-x)
   	))
 
+(async-bytecomp-package-mode 1)
+
+(use-package helm-themes
+  :ensure t)
+
+;;C-h b
+(use-package helm-descbinds
+  :ensure t
+  :init (helm-descbinds-mode))
+
 (use-package cc-mode
   :config
   (setq c-default-style "linux")
-  (setq c-basic-offset 8)
-  (define-key c-mode-base-map (kbd "RET") 'newline-and-indent))
+  (setq c-basic-offset 8);;
+  (define-key c-mode-base-map (kbd "RET") 'newline-and-indent);; indent when pressing enter
+  (c-set-offset 'comment-intro 0));;indent comments according to the indentation style
 
 ;;Remember to run after installation M-x all-the-icons-install-fonts
 (use-package all-the-icons
@@ -191,10 +212,12 @@
 ;;autocomplete plugin that is pretty fast
 (use-package company
   :ensure t
-  :init(add-hook 'after-init-hook 'global-company-mode)
+  :bind("M-TAB" . company-complete)
+  :init (add-hook 'after-init-hook 'global-company-mode)
   :config
-  (setq company-minimum-prefix-length 2)
+  (setq company-idle-delay 0)
   (push 'company-files company-backends))
+
 
 (use-package lsp-mode
   :ensure t)
@@ -203,10 +226,11 @@
   :ensure t
   :commands (lsp-ccls-enable)
   :init
-  (setq ccls-executable "/home/hacker/ccls/release/ccls")
-  ;;(setq cquery-executable "/home/hacker/cquery/build/release/bin/cquery")
+  (setq ccls-executable "/home/hacker/gitfolders/ccls/release/ccls")
+  ;;(setq cquery-executable "/home/hacker/gitfolders/cquery/build/release/bin/cquery")
   ;; (setq cquery-extra-args '("--log-all-to-stderr" "--log-file" "/tmp/cquery.log"))
-  (add-hook 'c-mode-common-hook #'ccls//enable))
+  (add-hook 'c-mode-hook #'ccls//enable)
+  (add-hook 'c++-mode-hook #'ccls//enable))
 
 (defun ccls//enable ()
   (condition-case nil
@@ -221,9 +245,9 @@
 
 (use-package lsp-ui
   :ensure t
-  :init
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (add-hook 'c-mode-hook 'flycheck-mode)
+  :hook
+  (lsp-mode-hook . lsp-ui-mode)
+  (c-mode-hook . flycheck-mode)
   :config
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
@@ -231,10 +255,6 @@
 (use-package lsp-python
   :ensure t
   :init (add-hook 'python-mode-hook #'lsp-python-enable))
-
-(use-package ensime
-  :ensure t
-  :pin melpa-stable)
 
 ;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
@@ -250,16 +270,13 @@
 (use-package ethan-wspace
   :ensure t
   :config
-  (global-ethan-wspace-mode 1)
-  (add-hook 'after-save-hook 'ethan-wspace-clean-all))
+  (add-hook 'after-save-hook 'ethan-wspace-clean-all)
+  (global-ethan-wspace-mode 1))
 
 (use-package markdown-mode
   :ensure t)
 
 (use-package markdown-mode+
-  :ensure t)
-
-(use-package flycheck-pos-tip
   :ensure t)
 
 ;;Startup screen alternative plugin
@@ -287,11 +304,13 @@
 (use-package academic-phrases
   :ensure t)
 
-(use-package helm-themes
+(use-package which-key
+  :ensure t
+  :init (which-key-mode))
+
+;;M-x bug-hunter-init-file for debugging the .emacs
+(use-package bug-hunter
   :ensure t)
-
-(async-bytecomp-package-mode 1)
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -317,7 +336,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (org-bullets org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode aggressive-indent indent-guide spacegray-theme xcscope list-packages-ext helm flycheck)))
+    (bug-hunter org-bullets org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode aggressive-indent indent-guide spacegray-theme xcscope list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
@@ -341,6 +360,7 @@
      (340 . "#94BFF3")
      (360 . "#DC8CC3"))))
  '(vc-annotate-very-old-color "#DC8CC3"))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
