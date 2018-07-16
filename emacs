@@ -1,7 +1,13 @@
 
-  ;;Setting GC thresholds higher
+;;Setting GC thresholds higher
 (setq gc-cons-threshold 20971520
       gc-cons-percentage 0.3)
+
+;;Shows the path to the file that is opened in the current buffer on the frame title
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (buffer-file-name)
+		 "%b"))))
 
 ;;Source Code Pro font
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
@@ -178,25 +184,16 @@
 	("M-[" . sp-backward-unwrap-sexp)
 	("M-]" . sp-unwrap-sexp)
 
-	("C-x C-t" . sp-transpose-hybrid-sexp)
+	("C-x C-t" . sp-transpose-hybrid-sexp)))
 
-	("C-c ("  . wrap-with-parens)
-	("C-c ["  . wrap-with-brackets)
-	("C-c {"  . wrap-with-braces)
-	("C-c '"  . wrap-with-single-quotes)
-	("C-c \"" . wrap-with-double-quotes)
-	("C-c _"  . wrap-with-underscores)
-	("C-c `"  . wrap-with-back-quotes)
-	))
-
-;;Ctags faster alternative
+;;Cscope is an alternative for  Ctags but much faster in big codebases.
 (use-package xcscope
   :ensure t
   :config
   (cscope-setup)
   (setq cscope-option-use-inverted-index t))
 
-;;Shows the indentation block you are inside
+;;Shows every indentation block.
 (use-package highlight-indent-guides
   :ensure t
   :hook ((prog-mode . highlight-indent-guides-mode))
@@ -209,7 +206,7 @@
 (use-package yasnippet-snippets
   :ensure t)
 
-;;autocomplete plugin that is pretty fast
+;;autocomplete plugin that is pretty fast.
 (use-package company
   :ensure t
   :bind("M-TAB" . company-complete)
@@ -220,9 +217,10 @@
 
 
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
-(use-package ccls;;cquery
+(use-package ccls ;;cquery
   :ensure t
   :commands (lsp-ccls-enable)
   :init
@@ -237,6 +235,11 @@
       (lsp-ccls-enable)
     (user-error nil)))
 
+;; loads my mu4e config and afterwards calls mu4e
+(defun load-mu4e ()
+  (interactive)
+  (load-file "/home/hacker/Downloads/mu4e-config.el")
+  (mu4e))
 
 (use-package company-lsp
   :ensure t
@@ -245,12 +248,18 @@
 
 (use-package lsp-ui
   :ensure t
+  :bind
+  ( :map lsp-ui-mode-map
+	 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+	 ([remap xref-find-references] . lsp-ui-peek-find-references))
   :hook
-  (lsp-mode-hook . lsp-ui-mode)
   (c-mode-hook . flycheck-mode)
+  (lsp-mode-hook . lsp-ui-mode)
   :config
-  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+  (setq lsp-ui-sideline-enable nil
+        lsp-ui-doc-enable nil
+        lsp-ui-flycheck-enable t
+        lsp-ui-imenu-enable t))
 
 (use-package lsp-python
   :ensure t
@@ -260,8 +269,7 @@
 (use-package git-gutter
   :ensure t
   :init
-  (git-gutter:linum-setup)  ;; to use git-gutter.el and linum-mode
-  (global-git-gutter-mode +1))  ;; If you enable global minor mode
+  (global-git-gutter-mode +1))
 
 (use-package magit
   :ensure t)
@@ -284,18 +292,29 @@
   :ensure t
   :diminish dashboard-mode
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  )
 
 ;;The famous org mode, i should learn it more.
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
-  	("C-x c" . org-capture)
-  	))
+  	("C-x c" . org-capture)))
 
 (use-package org-bullets
   :ensure t
   :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1))))
+
+(use-package mu4e-conversation
+  :ensure t
+  :init
+  (with-eval-after-load 'mu4e (require 'mu4e-conversation))
+  (with-eval-after-load 'mu4e (global-mu4e-conversation-mode)));; Pressing V when having  a thread of emails gets nice with this plugin
+
+(use-package mu4e-alert
+  :ensure t
+  :init
+  (mu4e-alert-set-default-style 'libnotify))
 
 (use-package beacon
   :ensure t
@@ -333,11 +352,13 @@
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(org-agenda-files (quote ("~/TODO.org")))
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (bug-hunter org-bullets org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode aggressive-indent indent-guide spacegray-theme xcscope list-packages-ext helm flycheck)))
+    (cquery bug-hunter org-bullets org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode aggressive-indent indent-guide spacegray-theme xcscope list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
    (quote

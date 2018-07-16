@@ -62,6 +62,8 @@ The plugins i have already installed support more languages and with a few addit
 30. [all-the-icons](https://github.com/domtronn/all-the-icons.el)
 31. [which-key](https://github.com/justbur/emacs-which-key)
 32. [bug-hunter](https://github.com/Malabarba/elisp-bug-hunter)
+33. [mu4e-alert](https://github.com/iqbalansari/mu4e-alert)
+34. [mu4e-conversation](https://gitlab.com/ambrevar/mu4e-conversation)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
