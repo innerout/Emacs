@@ -1,7 +1,31 @@
-
-;;Setting GC thresholds higher
 (setq gc-cons-threshold 20971520
-      gc-cons-percentage 0.3)
+      gc-cons-percentage 0.3     ;; Setting GC thresholds higher
+      column-number-mode t       ;; Column Number in modeline
+      )
+
+(setq ring-bell-function 'ignore) ;; Disable the ring bell
+;;run in home directory find . -name "*~" -delete
+(setq backup-by-copying t        ;;Backup setup
+      backup-directory-alist '(("." . "~/.emacsbackups"))
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+
+(show-paren-mode 1)
+(setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
+
+(save-place-mode 1) ;; Opens the File in the last position that it was closed.
+(setq-default save-place-forget-unreadable-files nil) ;; Optimization for nfs.
+
+(mouse-wheel-mode t) ;; Mouse scrolling in terminal
+(blink-cursor-mode 0) ;; No blinking Cursor
+(tool-bar-mode 0) ;; Disable toolbar
+(delete-selection-mode t) ;; Highlighting Text and typing deletes the text like other editors
+(global-display-line-numbers-mode)
+
+(setq-default x-select-enable-clipboard t ;; Copy/Paste to clipboard with C-w/C-y
+	      x-select-enable-primary t)
 
 ;;Shows the path to the file that is opened in the current buffer on the frame title
 (setq frame-title-format
@@ -12,49 +36,18 @@
 ;;Source Code Pro font
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
 
-;;Column Number in modeline
-(column-number-mode t)
-
-;;Show Matching Parenthesis without delay
-(show-paren-mode 1)
-(setq show-paren-delay nil)
-
-;;Highlighting Text and typing deletes the text like other editors
-(delete-selection-mode t)
-
-;; Opens the File in the last position that you closed it.The setq-default optimizes this function for nfs.
-(save-place-mode 1)
-(setq-default save-place-forget-unreadable-files nil)
-
-;;Mouse scrolling in terminal
-(mouse-wheel-mode t)
-
-;;No blinking Cursor
-(blink-cursor-mode 0)
-
-;;Copy/Paste to clipboard with C-w/C-y
-(setq-default x-select-enable-clipboard t)
-(setq-default x-select-enable-primary t)
-
-;;Erases whole buffer
-(put 'erase-buffer 'disabled nil)
-;;Disable the ring bell
-(setq ring-bell-function 'ignore)
+(put 'erase-buffer 'disabled nil);; Erases whole buffer
+(put 'upcase-region 'disabled nil) ;; Upcase disable
 
 ;;Folding mode built-in emacs, should search for a good folding plugin
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-hl-line-mode)
-;;Upcase disable
-(put 'upcase-region 'disabled nil)
-
 
 ;;Disable Scroll-bar
 (if (fboundp 'scroll-bar-mode)
     (scroll-bar-mode 0))
 ;;Disable Menu
 ;;(menu-bar-mode 0)
-;;Disable toolbar
-(tool-bar-mode 0)
 
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
@@ -80,7 +73,9 @@
   :ensure t
   :no-require t)
 
-(global-display-line-numbers-mode)
+(use-package async
+  :ensure t
+  :init(async-bytecomp-package-mode 1))
 
 ;;Different Color for every variable
 (use-package color-identifiers-mode
@@ -92,15 +87,15 @@
   :ensure t
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package flycheck-pos-tip
+  :ensure t)
+
 ;;Syntax checking for different languages
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
   (with-eval-after-load 'flycheck
     (flycheck-pos-tip-mode)))
-
-(use-package flycheck-pos-tip
-  :ensure t)
 
 (use-package aggressive-indent
   :ensure t
@@ -116,17 +111,15 @@
 (use-package helm
   :demand t
   :ensure t
-  :init
-  (helm-mode 1)
-  (helm-adaptive-mode 1)
-  (helm-autoresize-mode t)
-  :bind(
-	("C-x C-f" . helm-find-files)
-  	("C-x b" . helm-buffers-list)
-	("M-x" . helm-M-x)
-  	))
-
-(async-bytecomp-package-mode 1)
+  ;; :init
+  ;; (helm-mode 1)
+  ;; (helm-adaptive-mode 1)
+  ;; (helm-autoresize-mode t)
+  ;; :bind(
+  ;; 	("C-x C-f" . helm-find-files)
+  ;; 	("C-x b" . helm-buffers-list)
+  ;; 	("M-x" . helm-M-x))
+  )
 
 (use-package helm-themes
   :ensure t)
@@ -135,6 +128,64 @@
 (use-package helm-descbinds
   :ensure t
   :init (helm-descbinds-mode))
+
+(use-package ivy
+  :ensure t
+  :bind
+  ("C-s" . swiper)
+  ("C-c C-r" . ivy-resume)
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("<f1> f" . counsel-describe-function)
+  ("<f1> v" . counsel-describe-variable)
+  ("<f1> l" . counsel-find-library)
+  ("<f2> i" . counsel-info-lookup-symbol)
+  ("<f2> u" . counsel-unicode-char)
+  ("C-c g" . counsel-git)
+  ("C-c j" . counsel-git-grep)
+  ("C-c k" . counsel-ag)
+  ("C-x l" . counsel-locate)
+  ("C-x p" . counsel-mark-ring)
+  :init
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-re-builders-alist
+  	'((t . ivy--regex-fuzzy)))
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
+  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done))
+
+(use-package counsel
+  :ensure t)
+
+(use-package swiper
+  :ensure t)
+
+(use-package ivy-rich
+  :ensure t
+  :init
+  (ivy-rich-mode 1)
+  (setq ivy-virtual-abbreviate 'full
+	ivy-rich-switch-buffer-align-virtual-buffer t)
+  (setq ivy-rich-path-style 'abbrev))
+
+(use-package ivy-prescient
+  :ensure t
+  :init(ivy-prescient-mode t))
+
+(use-package prescient
+  :ensure t
+  :init(prescient-persist-mode t))
+
+(use-package ivy-xref
+  :ensure t
+  :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+(use-package all-the-icons-ivy
+  :ensure t
+  :config
+  (all-the-icons-ivy-setup))
 
 (use-package cc-mode
   :config
@@ -249,12 +300,14 @@
 (use-package lsp-ui
   :ensure t
   :bind
-  ( :map lsp-ui-mode-map
-	 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-	 ([remap xref-find-references] . lsp-ui-peek-find-references))
+  (:map lsp-ui-mode-map
+	([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+	([remap xref-find-references] . lsp-ui-peek-find-references))
   :hook
   (c-mode-hook . flycheck-mode)
-  (lsp-mode-hook . lsp-ui-mode)
+  (python-mode-hook . flycheck-mode)
+  :init
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable nil
         lsp-ui-doc-enable nil
@@ -281,6 +334,12 @@
   (add-hook 'after-save-hook 'ethan-wspace-clean-all)
   (global-ethan-wspace-mode 1))
 
+(use-package whitespace
+  :init
+  (setq whitespace-line-column 120)
+  (setq whitespace-style '(face empty tabls lines-tail trailing))
+  (global-whitespace-mode))
+
 (use-package markdown-mode
   :ensure t)
 
@@ -292,8 +351,7 @@
   :ensure t
   :diminish dashboard-mode
   :config
-  (dashboard-setup-startup-hook)
-  )
+  (dashboard-setup-startup-hook))
 
 ;;The famous org mode, i should learn it more.
 (use-package org
@@ -305,11 +363,12 @@
   :ensure t
   :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1))))
 
+;; Pressing V when having  a thread of emails pretifies with this plugin
 (use-package mu4e-conversation
   :ensure t
   :init
   (with-eval-after-load 'mu4e (require 'mu4e-conversation))
-  (with-eval-after-load 'mu4e (global-mu4e-conversation-mode)));; Pressing V when having  a thread of emails gets nice with this plugin
+  (with-eval-after-load 'mu4e (global-mu4e-conversation-mode)))
 
 (use-package mu4e-alert
   :ensure t

@@ -64,6 +64,7 @@ The plugins i have already installed support more languages and with a few addit
 32. [bug-hunter](https://github.com/Malabarba/elisp-bug-hunter)
 33. [mu4e-alert](https://github.com/iqbalansari/mu4e-alert)
 34. [mu4e-conversation](https://gitlab.com/ambrevar/mu4e-conversation)
+35. [ivy](https://github.com/abo-abo/swiper)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -75,7 +76,7 @@ That way you can change them to your liking.
 
 ## Ccls
 
-__REQUIREMENTS__ = __yaourt bear-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
+__REQUIREMENTS__ = __trizen bear-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
 
 Run the root Makefile with bear.
 
