@@ -1,4 +1,4 @@
-mv emacs ~/emacs
+mv init.el ~/emacs
 cd ~/
 
 if ( [  -d ~/.emacs.d ] && [  -f ~/.emacs ] ) then
