@@ -65,6 +65,7 @@ The plugins i have already installed support more languages and with a few addit
 33. [mu4e-alert](https://github.com/iqbalansari/mu4e-alert)
 34. [mu4e-conversation](https://gitlab.com/ambrevar/mu4e-conversation)
 35. [ivy](https://github.com/abo-abo/swiper)
+36. [pdf-tools](https://github.com/politza/pdf-tools)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

@@ -154,7 +154,10 @@
   	'((t . ivy--regex-fuzzy)))
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
-  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done))
+  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-display-style 'fancy))
 
 (use-package counsel
   :ensure t)
@@ -386,6 +389,18 @@
   :ensure t
   :init (which-key-mode))
 
+(use-package pdf-tools
+  :ensure t
+  :init
+  (add-hook 'TeX-after-compilation-finished-functions
+	    #'TeX-revert-document-buffer)
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t)
+  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+  (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward))
+
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
   :ensure t)
@@ -406,6 +421,8 @@
  '(ethan-wspace-face-customized nil)
  '(fci-rule-color "#383838")
  '(inhibit-startup-screen nil)
+ '(ivy-count-format "(%d/%d) ")
+ '(ivy-display-style (quote fancy))
  '(markdown-command "pandoc")
  '(mode-require-final-newline nil)
  '(nrepl-message-colors
