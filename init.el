@@ -1,9 +1,11 @@
-(setq gc-cons-threshold 20971520
-      gc-cons-percentage 0.3     ;; Setting GC thresholds higher
-      column-number-mode t       ;; Column Number in modeline
-      )
+(setq gc-cons-threshold 64000000) ;; Setting GC thresholds higher for faster startup
+(add-hook 'after-init-hook #'(lambda()
+			       ;;restore after startup
+			       (setq gc-cons-threshold 800000)))
 
 (setq ring-bell-function 'ignore) ;; Disable the ring bell
+(setq inhibit-startup-screen t)   ;; Disable Startup screen
+
 ;;run in home directory find . -name "*~" -delete
 (setq backup-by-copying t        ;;Backup setup
       backup-directory-alist '(("." . "~/.emacsbackups"))
@@ -23,6 +25,7 @@
 (tool-bar-mode 0) ;; Disable toolbar
 (delete-selection-mode t) ;; Highlighting Text and typing deletes the text like other editors
 (global-display-line-numbers-mode)
+(column-number-mode t)       ;; Column Number in modeline
 
 (setq-default x-select-enable-clipboard t ;; Copy/Paste to clipboard with C-w/C-y
 	      x-select-enable-primary t)
@@ -36,9 +39,10 @@
 ;;Source Code Pro font
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
 
-(put 'erase-buffer 'disabled nil);; Erases whole buffer
+(put 'erase-buffer 'disabled nil)  ;; Erases whole buffer
 (put 'upcase-region 'disabled nil) ;; Upcase disable
-
+(put 'set-goal-column 'disabled nil);;Doesnt reset cursor's column when changing line
+(setq auto-window-vscroll nil) ;; Improves general performance when scrolling fast
 ;;Folding mode built-in emacs, should search for a good folding plugin
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-hl-line-mode)
@@ -99,7 +103,9 @@
 
 (use-package aggressive-indent
   :ensure t
-  :init (global-aggressive-indent-mode 1)
+  :hook
+  (c-mode-hook . aggressive-indent-mode)
+  (c++-mode-hook . aggressive-indent-mode)
   :config
   (add-to-list
    'aggressive-indent-dont-indent-if
@@ -214,31 +220,7 @@
   :init
   (require 'smartparens-config)
   (smartparens-global-mode t)
-  :bind(
-
-	("C-M-f" . sp-forward-sexp)
-	("C-M-b" . sp-backward-sexp)
-
-	("C-M-n" . sp-next-sexp)
-	("C-M-p" . sp-previous-sexp)
-
-	("C-S-f" . sp-forward-symbol)
-	("C-S-b" . sp-backward-symbol)
-
-	("C-M-k" . sp-kill-sexp)
-	("C-k"   . sp-kill-hybrid-sexp)
-	("M-k"   . sp-backward-kill-sexp)
-	("C-M-w" . sp-copy-sexp)
-	("C-M-d" . delete-sexp)
-
-	("M-<backspace>" . backward-kill-word)
-	("C-<backspace>" . sp-backward-kill-word)
-	([remap sp-backward-kill-word] . backward-kill-word)
-
-	("M-[" . sp-backward-unwrap-sexp)
-	("M-]" . sp-unwrap-sexp)
-
-	("C-x C-t" . sp-transpose-hybrid-sexp)))
+  :bind(("M-]" . sp-unwrap-sexp)))
 
 ;;Cscope is an alternative for  Ctags but much faster in big codebases.
 (use-package xcscope
@@ -274,26 +256,24 @@
   :ensure t
   :defer t)
 
+(defvar home-dir (getenv "HOME"))
+
 (use-package ccls ;;cquery
   :ensure t
   :commands (lsp-ccls-enable)
   :init
-  (setq ccls-executable "/home/hacker/gitfolders/ccls/release/ccls")
-  ;;(setq cquery-executable "/home/hacker/gitfolders/cquery/build/release/bin/cquery")
+  (setq ccls-executable (concat home-dir "/gitfolders/ccls/release/ccls"))
+  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t)))
+  ;;(setq cquery-executable (concat home-dir "/gitfolders/cquery/build/release/bin/cquery"))
   ;; (setq cquery-extra-args '("--log-all-to-stderr" "--log-file" "/tmp/cquery.log"))
   (add-hook 'c-mode-hook #'ccls//enable)
   (add-hook 'c++-mode-hook #'ccls//enable))
 
 (defun ccls//enable ()
+  "Call C language server in every C/C++ file."
   (condition-case nil
       (lsp-ccls-enable)
     (user-error nil)))
-
-;; loads my mu4e config and afterwards calls mu4e
-(defun load-mu4e ()
-  (interactive)
-  (load-file "/home/hacker/Downloads/mu4e-config.el")
-  (mu4e))
 
 (use-package company-lsp
   :ensure t
@@ -327,6 +307,8 @@
   :init
   (global-git-gutter-mode +1))
 
+;;magit-log-trace-definition to check the changes
+;;that happened on this function in older commits
 (use-package magit
   :ensure t)
 
@@ -352,7 +334,6 @@
 ;;Startup screen alternative plugin
 (use-package dashboard
   :ensure t
-  :diminish dashboard-mode
   :config
   (dashboard-setup-startup-hook))
 
@@ -366,7 +347,13 @@
   :ensure t
   :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1))))
 
-;; Pressing V when having  a thread of emails pretifies with this plugin
+(defun load-mu4e ()
+  "Load my mu4e config and afterwards call mu4e."
+  (interactive)
+  (load-file (concat home-dir "/Downloads/mu4e-config.el"))
+  (mu4e))
+
+;; Pressing V when having a thread of emails pretifies with this plugin
 (use-package mu4e-conversation
   :ensure t
   :init
@@ -420,7 +407,6 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "67a0265e2497207f5f9116c4d2bfbbab4423055e3ab1fa46ea6bd56f7e322f6a" default)))
  '(ethan-wspace-face-customized nil)
  '(fci-rule-color "#383838")
- '(inhibit-startup-screen nil)
  '(ivy-count-format "(%d/%d) ")
  '(ivy-display-style (quote fancy))
  '(markdown-command "pandoc")
