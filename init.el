@@ -16,16 +16,24 @@
 
 (show-paren-mode 1)
 (setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
+(setq x-stretch-cursor t)   ;; Make cursor the width of the character it is under
+
+(defun bjm/kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
+
+(global-set-key (kbd "C-x k") 'bjm/kill-this-buffer) ;; kill the current buffer without prompting
 
 (save-place-mode 1) ;; Opens the File in the last position that it was closed.
 (setq-default save-place-forget-unreadable-files nil) ;; Optimization for nfs.
 
-(mouse-wheel-mode t) ;; Mouse scrolling in terminal
+(mouse-wheel-mode t)  ;; Mouse scrolling in terminal
 (blink-cursor-mode 0) ;; No blinking Cursor
-(tool-bar-mode 0) ;; Disable toolbar
+(tool-bar-mode 0)     ;; Disable toolbar
 (delete-selection-mode t) ;; Highlighting Text and typing deletes the text like other editors
 (global-display-line-numbers-mode)
-(column-number-mode t)       ;; Column Number in modeline
+(column-number-mode t)    ;; Column Number in modeline
 
 (setq-default x-select-enable-clipboard t ;; Copy/Paste to clipboard with C-w/C-y
 	      x-select-enable-primary t)
@@ -39,11 +47,11 @@
 ;;Source Code Pro font
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
 
-(put 'erase-buffer 'disabled nil)  ;; Erases whole buffer
-(put 'upcase-region 'disabled nil) ;; Upcase disable
+(put 'erase-buffer 'disabled nil)  ;; Erases whole buffer.
+(put 'upcase-region 'disabled nil) ;; Upper case disable.
 (put 'set-goal-column 'disabled nil);;Doesnt reset cursor's column when changing line
 (setq auto-window-vscroll nil) ;; Improves general performance when scrolling fast
-;;Folding mode built-in emacs, should search for a good folding plugin
+;;Folding mode built-in emacs, i should search for a good folding plugin though
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-hl-line-mode)
 
@@ -52,6 +60,7 @@
     (scroll-bar-mode 0))
 ;;Disable Menu
 ;;(menu-bar-mode 0)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
@@ -97,9 +106,11 @@
 ;;Syntax checking for different languages
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode)
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode)
   (with-eval-after-load 'flycheck
-    (flycheck-pos-tip-mode)))
+    (flycheck-pos-tip-mode))
+  (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
 (use-package aggressive-indent
   :ensure t
@@ -263,7 +274,7 @@
   :commands (lsp-ccls-enable)
   :init
   (setq ccls-executable (concat home-dir "/gitfolders/ccls/release/ccls"))
-  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t)))
+  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1)))
   ;;(setq cquery-executable (concat home-dir "/gitfolders/cquery/build/release/bin/cquery"))
   ;; (setq cquery-extra-args '("--log-all-to-stderr" "--log-file" "/tmp/cquery.log"))
   (add-hook 'c-mode-hook #'ccls//enable)
@@ -277,7 +288,8 @@
 
 (use-package company-lsp
   :ensure t
-  :config (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
+  :config (setq company-transformers nil company-lsp-async t
+		company-lsp-cache-candidates nil company-lsp-enable-recompletion t)
   (push 'company-lsp company-backends))
 
 (use-package lsp-ui
@@ -388,6 +400,48 @@
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward))
 
+(defun langtool-autoshow-detail-popup (overlays)
+  (when (require 'popup nil t)
+    ;; Do not interrupt current popup
+    (unless (or popup-instances
+                ;; suppress popup after type `C-g` .
+                (memq last-command '(keyboard-quit)))
+      (let ((msg (langtool-details-error-message overlays)))
+        (popup-tip msg)))))
+
+;; M-x langtool-check
+(use-package langtool
+  :ensure t
+  :defer t
+  :init
+  (setq langtool-language-tool-jar (concat home-dir "/LanguageTool-4.2/languagetool-commandline.jar"))
+  (setq langtool-language-tool-server-jar (concat home-dir "/LanguageTool-4.2/languagetool-server.jar"))
+  (setq langtool-autoshow-message-function 'langtool-autoshow-detail-popup)
+  (setq langtool-default-language "en-US"))
+
+(use-package multiple-cursors
+  :ensure t
+  :init
+  (global-unset-key (kbd "M-<down-mouse-1>"))
+  :bind
+  ("C-S-c C-S-c" . mc/edit-lines)
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-<" . mc/mark-all-like-this)
+  ("M-<down-mouse-1>" . mc/add-cursor-on-click))
+
+(defun elfeed-start()
+  "Update elfeed feeds and start it."
+  (interactive)
+  (elfeed-update)
+  (elfeed)
+  )
+(use-package elfeed
+  :ensure t
+  :bind ("C-x w" . elfeed-start)
+  :init (setq elfeed-feeds
+	      '("https://github.com/languagetool-org/languagetool/releases.atom"
+	       "https://www.reddit.com/r/emacs/.rss")))
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
   :ensure t)

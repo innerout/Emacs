@@ -66,6 +66,9 @@ The plugins i have already installed support more languages and with a few addit
 34. [mu4e-conversation](https://gitlab.com/ambrevar/mu4e-conversation)
 35. [ivy](https://github.com/abo-abo/swiper)
 36. [pdf-tools](https://github.com/politza/pdf-tools)
+37. [langtool](https://github.com/mhayashi1120/Emacs-langtool)
+38. [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
+39. [elfeed](https://github.com/skeeto/elfeed)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
