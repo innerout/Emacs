@@ -69,6 +69,7 @@ The plugins i have already installed support more languages and with a few addit
 37. [langtool](https://github.com/mhayashi1120/Emacs-langtool)
 38. [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
 39. [elfeed](https://github.com/skeeto/elfeed)
+40. [undo-tree](http://www.dr-qubit.org/undo-tree.html)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

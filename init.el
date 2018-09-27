@@ -6,6 +6,11 @@
 (setq ring-bell-function 'ignore) ;; Disable the ring bell
 (setq inhibit-startup-screen t)   ;; Disable Startup screen
 
+(global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-S-<down>") 'shrink-window)
+(global-set-key (kbd "C-S-<up>") 'enlarge-window)
+
 ;;run in home directory find . -name "*~" -delete
 (setq backup-by-copying t        ;;Backup setup
       backup-directory-alist '(("." . "~/.emacsbackups"))
@@ -32,8 +37,9 @@
 (blink-cursor-mode 0) ;; No blinking Cursor
 (tool-bar-mode 0)     ;; Disable toolbar
 (delete-selection-mode t) ;; Highlighting Text and typing deletes the text like other editors
-(global-display-line-numbers-mode)
+
 (column-number-mode t)    ;; Column Number in modeline
+(global-visual-line-mode 1)
 
 (setq-default x-select-enable-clipboard t ;; Copy/Paste to clipboard with C-w/C-y
 	      x-select-enable-primary t)
@@ -53,6 +59,9 @@
 (setq auto-window-vscroll nil) ;; Improves general performance when scrolling fast
 ;;Folding mode built-in emacs, i should search for a good folding plugin though
 (add-hook 'prog-mode-hook #'hs-minor-mode)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'prog-mode-hook (lambda () (flyspell-prog-mode))) ;; flyspell for comments and strings
+
 (global-hl-line-mode)
 
 ;;Disable Scroll-bar
@@ -110,7 +119,15 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (with-eval-after-load 'flycheck
     (flycheck-pos-tip-mode))
-  (setq flycheck-check-syntax-automatically '(mode-enabled save)))
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
+  ;;Raises the limit of flycheck errors that can be displayed in a single buffer, useful when using clang-analyzer.
+  (setq flycheck-checker-error-threshold 5000))
+
+(use-package flycheck-clang-analyzer
+  :ensure t
+  ;; :after flycheck
+  ;; :config (flycheck-clang-analyzer-setup)
+  )
 
 (use-package aggressive-indent
   :ensure t
@@ -253,7 +270,6 @@
 (use-package yasnippet-snippets
   :ensure t)
 
-;;autocomplete plugin that is pretty fast.
 (use-package company
   :ensure t
   :bind("M-TAB" . company-complete)
@@ -268,6 +284,7 @@
   :defer t)
 
 (defvar home-dir (getenv "HOME"))
+(defvar emacs-email (getenv "MU4E"))
 
 (use-package ccls ;;cquery
   :ensure t
@@ -333,7 +350,7 @@
 
 (use-package whitespace
   :init
-  (setq whitespace-line-column 120)
+  (setq whitespace-line-column 80)
   (setq whitespace-style '(face empty tabls lines-tail trailing))
   (global-whitespace-mode))
 
@@ -434,14 +451,18 @@
   "Update elfeed feeds and start it."
   (interactive)
   (elfeed-update)
-  (elfeed)
-  )
+  (elfeed))
+
 (use-package elfeed
   :ensure t
   :bind ("C-x w" . elfeed-start)
   :init (setq elfeed-feeds
 	      '("https://github.com/languagetool-org/languagetool/releases.atom"
-	       "https://www.reddit.com/r/emacs/.rss")))
+		"https://www.reddit.com/r/emacs/.rss"
+		"https://www.reddit.com/r/archlinux/.rss"
+		"https://www.reddit.com/r/cpp/.rss"
+		"https://www.reddit.com/r/C_Programming/.rss")))
+
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
   :ensure t)
@@ -472,7 +493,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (cquery bug-hunter org-bullets org org-plus-contrib rainbow-delimiters use-package flycheck-title magit markdown-mode markdown-mode+ git-gutter color-identifiers-mode aggressive-indent indent-guide spacegray-theme xcscope list-packages-ext helm flycheck)))
+    (ag cquery bug-hunter org org-plus-contrib flycheck-title magit markdown-mode indent-guide spacegray-theme list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background "#2B2B2B")
@@ -505,3 +526,6 @@
  ;; If there is more than one, they won't work right.
  '(show-paren-match ((t (:background "red"))))
  '(show-paren-mismatch ((t (:background "blue")))))
+
+(if (string= "1" emacs-email)
+    (load-mu4e))
