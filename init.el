@@ -339,12 +339,12 @@
 (use-package ccls
   :ensure t
   :defer t
+  :hook ((c-mode c++-mode objc-mode) .
+         (lambda () (require 'ccls) (lsp)))
   :commands (lsp-ccls-enable)
   :init
-  (setq ccls-executable (concat home-dir "/gitfolders/ccls/release/ccls"))
+  (setq ccls-executable (concat home-dir "/gitfolders/ccls/Release/ccls"))
   (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1))))
-
-(add-hook 'c-mode-hook (lambda () (require 'ccls) (lsp)))
 
 (use-package company-lsp
   :commands company-lsp
