@@ -69,7 +69,10 @@ The plugins i have already installed support more languages and with a few addit
 37. [langtool](https://github.com/mhayashi1120/Emacs-langtool)
 38. [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
 39. [elfeed](https://github.com/skeeto/elfeed)
-40. [undo-tree](http://www.dr-qubit.org/undo-tree.html)
+40. [sublimity](https://github.com/zk-phi/sublimity)
+41. [rmsbolt](https://gitlab.com/jgkamat/rmsbolt)
+42. [doom-modeline](https://github.com/seagle0128/doom-modeline)
+43. [ivy-explorer](https://github.com/clemera/ivy-explorer)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -83,13 +86,27 @@ That way you can change them to your liking.
 
 __REQUIREMENTS__ = __trizen bear-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
 
+### To build ccls
+
+git clone https://github.com/MaskRay/ccls --depth=1
+
+git submodule update --init
+
+cmake -H. -BRelease -DUSE_SHARED_LLVM=on -DLLVM_ENABLE_RTTI=on
+
+cmake --build Release
+
+### To use in a project
+
 Run the root Makefile with bear.
 
 bear make
 
-cd one directory up and run the command below
+#cd one directory up and run the command below
 
 compdb -p build/ list > compile_commands.json
+
+touch .ccls-root #in the root folder
 
 mv compile_commands.json inside the folder
 

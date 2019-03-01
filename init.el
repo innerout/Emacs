@@ -6,11 +6,6 @@
 (setq ring-bell-function 'ignore) ;; Disable the ring bell
 (setq inhibit-startup-screen t)   ;; Disable Startup screen
 
-(global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-S-<down>") 'shrink-window)
-(global-set-key (kbd "C-S-<up>") 'enlarge-window)
-
 ;;run in home directory find . -name "*~" -delete
 (setq backup-by-copying t        ;;Backup setup
       backup-directory-alist '(("." . "~/.emacsbackups"))
@@ -121,7 +116,44 @@
     (flycheck-pos-tip-mode))
   (setq flycheck-check-syntax-automatically '(mode-enabled save))
   ;;Raises the limit of flycheck errors that can be displayed in a single buffer, useful when using clang-analyzer.
-  (setq flycheck-checker-error-threshold 5000))
+  (setq flycheck-checker-error-threshold 5000)
+  (progn
+    (define-fringe-bitmap 'my-flycheck-fringe-indicator
+      (vector #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00011100
+              #b00111110
+              #b00111110
+              #b00111110
+              #b00011100
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000))
+
+    (flycheck-define-error-level 'error
+      :severity 2
+      :overlay-category 'flycheck-error-overlay
+      :fringe-bitmap 'my-flycheck-fringe-indicator
+      :fringe-face 'flycheck-fringe-error)
+
+    (flycheck-define-error-level 'warning
+      :severity 1
+      :overlay-category 'flycheck-warning-overlay
+      :fringe-bitmap 'my-flycheck-fringe-indicator
+      :fringe-face 'flycheck-fringe-warning)
+
+    (flycheck-define-error-level 'info
+      :severity 0
+      :overlay-category 'flycheck-info-overlay
+      :fringe-bitmap 'my-flycheck-fringe-indicator
+      :fringe-face 'flycheck-fringe-info)))
 
 (use-package flycheck-clang-analyzer
   :ensure t
@@ -165,11 +197,12 @@
 
 (use-package ivy
   :ensure t
+  :after counsel
   :bind
   ("C-s" . swiper)
   ("C-c C-r" . ivy-resume)
   ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
+  ;; ("C-x C-f" . counsel-find-file)
   ("<f1> f" . counsel-describe-function)
   ("<f1> v" . counsel-describe-variable)
   ("<f1> l" . counsel-find-library)
@@ -181,6 +214,7 @@
   ("C-x l" . counsel-locate)
   ("C-x p" . counsel-mark-ring)
   :init
+  (define-key counsel-mode-map (kbd "C-x C-f") 'counsel-explorer)
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
@@ -194,7 +228,14 @@
   (ivy-display-style 'fancy))
 
 (use-package counsel
-  :ensure t)
+  :ensure t
+  :init
+  (setq counsel-find-file-ignore-regexp
+        (concat
+         ;; File names beginning with # or .
+         "\\(?:\\`[#.]\\)"
+         ;; File names ending with # or ~
+         "\\|\\(?:\\`.+?[#~]\\'\\)"))  )
 
 (use-package swiper
   :ensure t)
@@ -204,7 +245,8 @@
   :init
   (ivy-rich-mode 1)
   (setq ivy-virtual-abbreviate 'full
-	ivy-rich-switch-buffer-align-virtual-buffer t)
+	;;ivy-rich-switch-buffer-align-virtual-buffer t ;;temporarily disabled
+	)
   (setq ivy-rich-path-style 'abbrev))
 
 (use-package ivy-prescient
@@ -218,6 +260,11 @@
 (use-package ivy-xref
   :ensure t
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+(use-package ivy-explorer
+  :ensure t
+  :init
+  (ivy-explorer-mode 1))
 
 (use-package all-the-icons-ivy
   :ensure t
@@ -248,10 +295,12 @@
   :init
   (require 'smartparens-config)
   (smartparens-global-mode t)
+  (setq sp-escape-quotes-after-insert nil)
   :bind(("M-]" . sp-unwrap-sexp)))
 
 ;;Cscope is an alternative for  Ctags but much faster in big codebases.
 (use-package xcscope
+  :disabled
   :ensure t
   :config
   (cscope-setup)
@@ -276,60 +325,48 @@
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config
   (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
   (push 'company-files company-backends))
 
 
 (use-package lsp-mode
-  :ensure t
-  :defer t)
+  :commands lsp
+  :ensure t)
 
 (defvar home-dir (getenv "HOME"))
 (defvar emacs-email (getenv "MU4E"))
 
-(use-package ccls ;;cquery
+(use-package ccls
   :ensure t
+  :defer t
   :commands (lsp-ccls-enable)
   :init
   (setq ccls-executable (concat home-dir "/gitfolders/ccls/release/ccls"))
-  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1)))
-  ;;(setq cquery-executable (concat home-dir "/gitfolders/cquery/build/release/bin/cquery"))
-  ;; (setq cquery-extra-args '("--log-all-to-stderr" "--log-file" "/tmp/cquery.log"))
-  (add-hook 'c-mode-hook #'ccls//enable)
-  (add-hook 'c++-mode-hook #'ccls//enable))
+  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1))))
 
-(defun ccls//enable ()
-  "Call C language server in every C/C++ file."
-  (condition-case nil
-      (lsp-ccls-enable)
-    (user-error nil)))
+(add-hook 'c-mode-hook (lambda () (require 'ccls) (lsp)))
 
 (use-package company-lsp
+  :commands company-lsp
   :ensure t
   :config (setq company-transformers nil company-lsp-async t
 		company-lsp-cache-candidates nil company-lsp-enable-recompletion t)
   (push 'company-lsp company-backends))
 
 (use-package lsp-ui
+  :commands lsp-ui-mode
   :ensure t
   :bind
   (:map lsp-ui-mode-map
 	([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
 	([remap xref-find-references] . lsp-ui-peek-find-references))
-  :hook
-  (c-mode-hook . flycheck-mode)
-  (python-mode-hook . flycheck-mode)
-  :init
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable nil
         lsp-ui-doc-enable nil
         lsp-ui-flycheck-enable t
         lsp-ui-imenu-enable t))
 
-(use-package lsp-python
-  :ensure t
-  :init (add-hook 'python-mode-hook #'lsp-python-enable))
-
+(add-hook 'python-mode-hook 'lsp)
 ;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
   :ensure t
@@ -431,8 +468,8 @@
   :ensure t
   :defer t
   :init
-  (setq langtool-language-tool-jar (concat home-dir "/LanguageTool-4.2/languagetool-commandline.jar"))
-  (setq langtool-language-tool-server-jar (concat home-dir "/LanguageTool-4.2/languagetool-server.jar"))
+  (setq langtool-language-tool-jar (concat home-dir "languagetool/languagetool-standalone/target/LanguageTool-4.4-SNAPSHOT/LanguageTool-4.4-SNAPSHOT/languagetool-commandline.jar"))
+  (setq langtool-language-tool-server-jar (concat home-dir "/languagetool/languagetool-standalone/target/LanguageTool-4.4-SNAPSHOT/LanguageTool-4.4-SNAPSHOT/languagetool-server.jar"))
   (setq langtool-autoshow-message-function 'langtool-autoshow-detail-popup)
   (setq langtool-default-language "en-US"))
 
@@ -463,9 +500,124 @@
 		"https://www.reddit.com/r/cpp/.rss"
 		"https://www.reddit.com/r/C_Programming/.rss")))
 
+(use-package rmsbolt
+  :ensure t)
+
+;;https://projectile.readthedocs.io/en/latest/usage/
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-project-search-path '("~/gitfolders/HEutropia"))
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-indexing-method 'turbo-alien)
+  (setq projectile-generic-command '("fd . -0"))
+  (setq projectile-globally-ignored-directories
+      (append '(
+        ".git"
+        ".svn"
+	"*.cquery_cached_index"
+	"*.ccls_cache"
+        )
+          projectile-globally-ignored-directories))
+
+  (projectile-mode +1))
+
+(use-package counsel-projectile
+  :ensure t)
+
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
   :ensure t)
+
+(use-package sublimity
+  :ensure t
+  :init
+  (require 'sublimity-scroll)
+  (require 'sublimity-attractive)
+  (setq sublimity-attractive-centering-width nil)
+  (sublimity-mode 1))
+
+(defun bind-resize-frame()
+  "Set keybinds to resize frames."
+  (interactive)
+  (global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
+  (global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
+  (global-set-key (kbd "C-S-<down>") 'shrink-window)
+  (global-set-key (kbd "C-S-<up>") 'enlarge-window))
+
+(defun unbind-resize-frame()
+  "Unset keybinds to resize frames."
+  (interactive)
+  (global-unset-key (kbd "C-S-<left>"))
+  (global-unset-key (kbd "C-S-<right>"))
+  (global-unset-key (kbd "C-S-<down>"))
+  (global-unset-key (kbd "C-S-<up>")))
+
+(use-package doom-modeline
+      :ensure t
+      :defer t
+      :hook (after-init . doom-modeline-init)
+      :init
+      (setq doom-modeline-height 25)
+      (setq doom-modeline-bar-width 3)
+      (setq doom-modeline-buffer-file-name-style 'buffer-name)
+      (setq doom-modeline-python-executable "python")
+      (setq doom-modeline-icon t)
+      (setq doom-modeline-major-mode-icon t)
+      (setq doom-modeline-minor-modes nil)
+      (setq doom-modeline-major-mode-color-icon t)
+      (setq doom-modeline-minor-modes nil)
+      (setq doom-modeline-lsp t))
+
+;; (require 'tex-site)
+;; (use-package tex-site
+;;   :ensure auctex
+;;   :init
+;;   (setq TeX-auto-save t)
+;;   (setq TeX-parse-self t)
+;;   (setq-default TeX-master nil)
+;;   (setq TeX-global-PDF-mode t))
+
+(use-package tex                        ; TeX editing
+  :ensure auctex
+  :mode ("\\.tex\\'" . TeX-latex-mode)
+  :config (setq TeX-auto-save t
+                TeX-electric-math '("\\(" . "\\)")
+                TeX-electric-sub-and-superscript t
+                TeX-parse-self t
+                TeX-quote-after-quote t
+                TeX-source-correlate-method 'synctex
+                TeX-source-correlate-mode t
+		TeX-source-correlate-start-server 'ask
+                TeX-clean-confirm nil)
+  (setq latex-run-command "pdflatex")
+  (setq-default TeX-engine'luatex
+		TeX-master t)
+  (add-hook 'tex-mode-hook
+            (lambda () (setq ispell-parser 'tex)))
+  (setq TeX-source-correlate-start-server t
+	TeX-view-program-selection '((output-pdf "PDF Tools"))))
+ (add-hook 'TeX-after-compilation-finished-functions
+           #'TeX-revert-document-buffer)
+
+(use-package tex-buf                    ; External commands for AUCTeX
+  :ensure auctex
+  :defer t
+  ;; Don't ask for confirmation when saving before processing
+  :config (setq TeX-save-query nil))
+
+(use-package tex-style           ; Customizable variables for AUCTeX style files
+  :ensure auctex
+  :defer t
+  :config (setq LaTeX-csquotes-close-quote "}"
+                LaTeX-csquotes-open-quote "\\enquote{"))
+
+(use-package company-auctex
+  :ensure t
+  :init (company-auctex-init))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -493,7 +645,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (ag cquery bug-hunter org org-plus-contrib flycheck-title magit markdown-mode indent-guide spacegray-theme list-packages-ext helm flycheck)))
+    (objed auctex rmsbolt ag bug-hunter org org-plus-contrib flycheck-title magit markdown-mode indent-guide spacegray-theme list-packages-ext helm flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background "#2B2B2B")
