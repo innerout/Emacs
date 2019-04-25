@@ -17,6 +17,7 @@
 (show-paren-mode 1)
 (setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
 (setq x-stretch-cursor t)   ;; Make cursor the width of the character it is under
+(setq load-prefer-newer t)
 
 (defun bjm/kill-this-buffer ()
   "Kill the current buffer."
@@ -63,7 +64,7 @@
 (if (fboundp 'scroll-bar-mode)
     (scroll-bar-mode 0))
 ;;Disable Menu
-;;(menu-bar-mode 0)
+(menu-bar-mode 0)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
@@ -77,12 +78,25 @@
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
+(setq-default use-package-always-ensure t ; Auto-download package if not exists
+              use-package-verbose nil ; Don't report loading details
+              use-package-expand-minimally t  ; make the expanded code as minimal as possible
+              use-package-enable-imenu-support t) ; Let imenu finds use-package definitions
+
 ;;Install use-package for the first time that emacs starts on a new system.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
   (eval-when-compile (require 'use-package)))
 ;; I should consider checking straight.el
+
+(use-package auto-package-update
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-prompt-before-update t)
+  (setq auto-package-update-interval 2)
+  (auto-package-update-maybe))
 
 (require 'bind-key)
 
@@ -93,6 +107,22 @@
 (use-package async
   :ensure t
   :init(async-bytecomp-package-mode 1))
+
+(use-package auto-compile
+  :ensure t
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
+
+(use-package undohist
+  :ensure t
+  :config
+  (undohist-initialize))
+
+;; (use-package redo+
+;;   :ensure t
+;;   :config
+;;   (setq undo-no-redo t))
 
 ;;Different Color for every variable
 (use-package color-identifiers-mode
@@ -175,25 +205,38 @@
 
 ;;An amazing plugin with infinite features to use.
 (use-package helm
+  :disabled
   :demand t
   :ensure t
-  ;; :init
-  ;; (helm-mode 1)
-  ;; (helm-adaptive-mode 1)
-  ;; (helm-autoresize-mode t)
-  ;; :bind(
-  ;; 	("C-x C-f" . helm-find-files)
-  ;; 	("C-x b" . helm-buffers-list)
-  ;; 	("M-x" . helm-M-x))
+  :init
+  (helm-mode 1)
+  (helm-adaptive-mode 1)
+  (helm-autoresize-mode t)
+  :bind(
+  	("C-x C-f" . helm-find-files)
+  	("C-x b" . helm-buffers-list)
+  	("M-x" . helm-M-x))
   )
 
 (use-package helm-themes
+  :disabled
   :ensure t)
 
 ;;C-h b
 (use-package helm-descbinds
+  :disabled
   :ensure t
   :init (helm-descbinds-mode))
+
+;;Remember to run after installation M-x all-the-icons-install-fonts
+(use-package all-the-icons
+  :ensure t)
+
+(use-package all-the-icons-dired
+  :ensure t
+  :init
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
 
 (use-package ivy
   :ensure t
@@ -218,6 +261,7 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)
   (setq ivy-re-builders-alist
   	'((t . ivy--regex-fuzzy)))
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
@@ -278,10 +322,6 @@
   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent);; indent when pressing enter
   (c-set-offset 'comment-intro 0));;indent comments according to the indentation style
 
-;;Remember to run after installation M-x all-the-icons-install-fonts
-(use-package all-the-icons
-  :ensure t)
-
 ;;Open files with a tree like structure
 (use-package neotree
   :ensure t
@@ -295,6 +335,7 @@
   :init
   (require 'smartparens-config)
   (smartparens-global-mode t)
+  (smartparens-global-strict-mode t)
   (setq sp-escape-quotes-after-insert nil)
   :bind(("M-]" . sp-unwrap-sexp)))
 
@@ -331,7 +372,14 @@
 
 (use-package lsp-mode
   :commands lsp
+  :init
+  (setq lsp-prefer-flymake nil)
   :ensure t)
+
+(use-package focus
+  :ensure t)
+
+(add-to-list 'focus-mode-to-thing '(c-mode . lsp-folding-range))
 
 (defvar home-dir (getenv "HOME"))
 (defvar emacs-email (getenv "MU4E"))
@@ -343,8 +391,8 @@
          (lambda () (require 'ccls) (lsp)))
   :commands (lsp-ccls-enable)
   :init
-  (setq ccls-executable (concat home-dir "/gitfolders/ccls/Release/ccls"))
-  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1))))
+  (setq ccls-executable  "/bin/ccls")
+  (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1))))
 
 (use-package company-lsp
   :commands company-lsp
@@ -362,11 +410,20 @@
 	([remap xref-find-references] . lsp-ui-peek-find-references))
   :config
   (setq lsp-ui-sideline-enable nil
-        lsp-ui-doc-enable nil
-        lsp-ui-flycheck-enable t
+	lsp-ui-doc-use-webkit t
+        lsp-ui-doc-enable t
+	lsp-prefer-flymake nil
         lsp-ui-imenu-enable t))
 
-(add-hook 'python-mode-hook 'lsp)
+(load-file "~/.emacs.d/elpa/lsp-python-ms/lsp-python-ms.el")
+;; trizen microsoft-python-language-server
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . lsp)
+  :config
+  (setq lsp-python-ms-executable "~/gitfolders/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer"))
+
+;; (add-hook 'python-mode-hook 'lsp)
 ;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
   :ensure t
@@ -509,10 +566,9 @@
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-project-search-path '("~/gitfolders/HEutropia"))
+  (setq projectile-project-search-path '("~/gitfolders/"))
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'ivy)
-  (setq projectile-indexing-method 'turbo-alien)
   (setq projectile-generic-command '("fd . -0"))
   (setq projectile-globally-ignored-directories
       (append '(
@@ -558,8 +614,7 @@
 
 (use-package doom-modeline
       :ensure t
-      :defer t
-      :hook (after-init . doom-modeline-init)
+      :hook (after-init . doom-modeline-mode)
       :init
       (setq doom-modeline-height 25)
       (setq doom-modeline-bar-width 3)
@@ -569,7 +624,6 @@
       (setq doom-modeline-major-mode-icon t)
       (setq doom-modeline-minor-modes nil)
       (setq doom-modeline-major-mode-color-icon t)
-      (setq doom-modeline-minor-modes nil)
       (setq doom-modeline-lsp t))
 
 ;; (require 'tex-site)
