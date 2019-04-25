@@ -362,7 +362,7 @@
 
 (use-package company
   :ensure t
-  :bind("M-TAB" . company-complete)
+  :bind("TAB" . company-indent-or-complete-common)
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config
   (setq company-idle-delay 0)
