@@ -1,7 +1,8 @@
-(setq gc-cons-threshold 64000000) ;; Setting GC thresholds higher for faster startup
-(add-hook 'after-init-hook #'(lambda()
-			       ;;restore after startup
-			       (setq gc-cons-threshold 800000)))
+;;; -*- lexical-binding: t; -*-
+;; (setq gc-cons-threshold 64000000) ;; Setting GC thresholds higher for faster startup
+;; (add-hook 'after-init-hook #'(lambda()
+;; 			       ;;restore after startup
+;; 			       (setq gc-cons-threshold 800000)))
 
 (setq ring-bell-function 'ignore) ;; Disable the ring bell
 (setq inhibit-startup-screen t)   ;; Disable Startup screen
@@ -13,9 +14,63 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)
+(global-auto-revert-mode t)
 
 (show-paren-mode 1)
+(setq show-paren-highlight-openparen t)
+(setq show-paren-when-point-in-periphery t)
 (setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
+
+
+(setq blink-matching-paren 'show)
+(remove-hook 'post-self-insert-hook
+             #'blink-paren-post-self-insert-function)
+
+(let ((ov nil)) ; keep track of the overlay
+  (advice-add
+   #'show-paren-function
+   :after
+    (defun show-paren--off-screen+ (&rest _args)
+      "Display matching line for off-screen paren."
+      (when (overlayp ov)
+        (delete-overlay ov))
+      ;; check if it's appropriate to show match info,
+      ;; see `blink-paren-post-self-insert-function'
+      (when (and (overlay-buffer show-paren--overlay)
+                 (not (or cursor-in-echo-area
+                          executing-kbd-macro
+                          noninteractive
+                          (minibufferp)
+                          this-command))
+                 (and (not (bobp))
+                      (memq (char-syntax (char-before)) '(?\) ?\$)))
+                 (= 1 (logand 1 (- (point)
+                                   (save-excursion
+                                     (forward-char -1)
+                                     (skip-syntax-backward "/\\")
+                                     (point))))))
+        ;; rebind `minibuffer-message' called by
+        ;; `blink-matching-open' to handle the overlay display
+        (cl-letf (((symbol-function #'minibuffer-message)
+                   (lambda (msg &rest args)
+                     (let ((msg (apply #'format-message msg args)))
+                       (setq ov (display-line-overlay+
+                                 (window-start) msg ))))))
+          (blink-matching-open))))))
+
+(defun display-line-overlay+ (pos str &optional face)
+  "Display line at POS as STR with FACE.
+
+FACE defaults to inheriting from default and highlight."
+  (let ((ol (save-excursion
+              (goto-char pos)
+              (make-overlay (line-beginning-position)
+                            (line-end-position)))))
+    (overlay-put ol 'display str)
+    (overlay-put ol 'face
+                 (or face '(:inherit default :inherit highlight)))
+    ol))
+
 (setq x-stretch-cursor t)   ;; Make cursor the width of the character it is under
 (setq load-prefer-newer t)
 
@@ -26,6 +81,7 @@
 
 (global-set-key (kbd "C-x k") 'bjm/kill-this-buffer) ;; kill the current buffer without prompting
 
+(desktop-save-mode 1) ;; Save sessions between Emacs sessions
 (save-place-mode 1) ;; Opens the File in the last position that it was closed.
 (setq-default save-place-forget-unreadable-files nil) ;; Optimization for nfs.
 
@@ -67,6 +123,9 @@
 (menu-bar-mode 0)
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(when (>= emacs-major-version 27)
+  (global-so-long)
+  )
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -104,6 +163,11 @@
   :ensure t
   :no-require t)
 
+(use-package gcmh
+  :ensure t
+  :config
+  (gcmh-mode 1))
+
 (use-package async
   :ensure t
   :init(async-bytecomp-package-mode 1))
@@ -118,11 +182,6 @@
   :ensure t
   :config
   (undohist-initialize))
-
-;; (use-package redo+
-;;   :ensure t
-;;   :config
-;;   (setq undo-no-redo t))
 
 ;;Different Color for every variable
 (use-package color-identifiers-mode
@@ -186,16 +245,18 @@
       :fringe-face 'flycheck-fringe-info)))
 
 (use-package flycheck-clang-analyzer
+  :disabled
   :ensure t
   ;; :after flycheck
   ;; :config (flycheck-clang-analyzer-setup)
   )
 
 (use-package aggressive-indent
+  :disabled
   :ensure t
-  :hook
-  (c-mode-hook . aggressive-indent-mode)
-  (c++-mode-hook . aggressive-indent-mode)
+  ;; :init
+  ;; (add-hook 'c-mode-hook 'aggressive-indent-mode)
+  ;; (add-hook 'c++-mode-hook 'aggressive-indent-mode)
   :config
   (add-to-list
    'aggressive-indent-dont-indent-if
@@ -215,8 +276,7 @@
   :bind(
   	("C-x C-f" . helm-find-files)
   	("C-x b" . helm-buffers-list)
-  	("M-x" . helm-M-x))
-  )
+  	("M-x" . helm-M-x)))
 
 (use-package helm-themes
   :disabled
@@ -279,7 +339,7 @@
          ;; File names beginning with # or .
          "\\(?:\\`[#.]\\)"
          ;; File names ending with # or ~
-         "\\|\\(?:\\`.+?[#~]\\'\\)"))  )
+         "\\|\\(?:\\`.+?[#~]\\'\\)")))
 
 (use-package swiper
   :ensure t)
@@ -362,13 +422,13 @@
 
 (use-package company
   :ensure t
+  ;;Special Case in python to shift to the left use C-C <
   :bind("TAB" . company-indent-or-complete-common)
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1)
   (push 'company-files company-backends))
-
 
 (use-package lsp-mode
   :commands lsp
@@ -392,7 +452,10 @@
   :commands (lsp-ccls-enable)
   :init
   (setq ccls-executable  "/bin/ccls")
-  (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t) :index (:reparseForDependency 1))))
+  (setq ccls-initialization-options '(:index (:comments 2)
+					     :index (:reparseForDependency 1)
+					     :completion (:detailedLabel t))))
+
 
 (use-package company-lsp
   :commands company-lsp
@@ -415,15 +478,12 @@
 	lsp-prefer-flymake nil
         lsp-ui-imenu-enable t))
 
-(load-file "~/.emacs.d/elpa/lsp-python-ms/lsp-python-ms.el")
-;; trizen microsoft-python-language-server
 (use-package lsp-python-ms
   :ensure t
-  :hook (python-mode . lsp)
-  :config
-  (setq lsp-python-ms-executable "~/gitfolders/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer"))
+  :hook (python-mode . (lambda ()
+			 (require 'lsp-python-ms)
+			 (lsp))))
 
-;; (add-hook 'python-mode-hook 'lsp)
 ;;Shows the changes that have happened to the file based on the last git commit.
 (use-package git-gutter
   :ensure t
@@ -439,12 +499,13 @@
 (use-package ethan-wspace
   :ensure t
   :config
+  (setq mode-require-final-newline 'nil)
   (add-hook 'after-save-hook 'ethan-wspace-clean-all)
   (global-ethan-wspace-mode 1))
 
 (use-package whitespace
   :init
-  (setq whitespace-line-column 80)
+  (setq whitespace-line-column 120)
   (setq whitespace-style '(face empty tabls lines-tail trailing))
   (global-whitespace-mode))
 

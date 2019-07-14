@@ -73,6 +73,8 @@ The plugins i have already installed support more languages and with a few addit
 41. [rmsbolt](https://gitlab.com/jgkamat/rmsbolt)
 42. [doom-modeline](https://github.com/seagle0128/doom-modeline)
 43. [ivy-explorer](https://github.com/clemera/ivy-explorer)
+44. [gcmh](https://gitlab.com/koral/gcmh)
+45. []
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -86,15 +88,9 @@ That way you can change them to your liking.
 
 __REQUIREMENTS__ = __trizen bear-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
 
-### To build ccls
+### To install ccls use archlinuxcn repo
 
-git clone https://github.com/MaskRay/ccls --depth=1
-
-git submodule update --init
-
-cmake -H. -BRelease -DUSE_SHARED_LLVM=on -DLLVM_ENABLE_RTTI=on
-
-cmake --build Release
+sudo pacman -S ccls-git
 
 ### To use in a project
 
@@ -109,10 +105,6 @@ compdb -p build/ list > compile_commands.json
 touch .ccls-root #in the root folder
 
 mv compile_commands.json inside the folder
-
-## lsp-python
-
-__REQUIREMENTS__ = __sudo pip install 'python-language-server[all]' pyls-mypy pyls-isort__
 
 ## Cscope
 
