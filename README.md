@@ -74,7 +74,6 @@ The plugins i have already installed support more languages and with a few addit
 42. [doom-modeline](https://github.com/seagle0128/doom-modeline)
 43. [ivy-explorer](https://github.com/clemera/ivy-explorer)
 44. [gcmh](https://gitlab.com/koral/gcmh)
-45. []
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
