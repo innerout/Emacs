@@ -124,8 +124,8 @@ FACE defaults to inheriting from default and highlight."
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (when (>= emacs-major-version 27)
-  (global-so-long)
-  )
+  (global-so-long-mode))
+
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
   (require 'package)
