@@ -21,13 +21,7 @@ If you have reached here you got emacs installed by now.The only thing you have 
 
 1. git clone https://github.com/innerout/Emacs.git
 2. cd Emacs
-3. ./install.sh
-
-install.sh is backing up your .emacs and .emacs.d directory if any of them exists in a tar file in your home directory called **oldemacs.tar.gz** and is copying emacs to ~/.emacs.
-
-After that you will have a fully working emacs IDE for C/C++/Python projects.
-
-The plugins i have already installed support more languages and with a few additions you could have great support for other languages too.
+3. cp init.el ~/.emacs.d/init.el
 
 ## Installed plugins
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
