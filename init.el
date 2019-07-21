@@ -30,33 +30,33 @@
   (advice-add
    #'show-paren-function
    :after
-    (defun show-paren--off-screen+ (&rest _args)
-      "Display matching line for off-screen paren."
-      (when (overlayp ov)
-        (delete-overlay ov))
-      ;; check if it's appropriate to show match info,
-      ;; see `blink-paren-post-self-insert-function'
-      (when (and (overlay-buffer show-paren--overlay)
-                 (not (or cursor-in-echo-area
-                          executing-kbd-macro
-                          noninteractive
-                          (minibufferp)
-                          this-command))
-                 (and (not (bobp))
-                      (memq (char-syntax (char-before)) '(?\) ?\$)))
-                 (= 1 (logand 1 (- (point)
-                                   (save-excursion
-                                     (forward-char -1)
-                                     (skip-syntax-backward "/\\")
-                                     (point))))))
-        ;; rebind `minibuffer-message' called by
-        ;; `blink-matching-open' to handle the overlay display
-        (cl-letf (((symbol-function #'minibuffer-message)
-                   (lambda (msg &rest args)
-                     (let ((msg (apply #'format-message msg args)))
-                       (setq ov (display-line-overlay+
-                                 (window-start) msg ))))))
-          (blink-matching-open))))))
+   (defun show-paren--off-screen+ (&rest _args)
+     "Display matching line for off-screen paren."
+     (when (overlayp ov)
+       (delete-overlay ov))
+     ;; check if it's appropriate to show match info,
+     ;; see `blink-paren-post-self-insert-function'
+     (when (and (overlay-buffer show-paren--overlay)
+		(not (or cursor-in-echo-area
+			 executing-kbd-macro
+			 noninteractive
+			 (minibufferp)
+			 this-command))
+		(and (not (bobp))
+		     (memq (char-syntax (char-before)) '(?\) ?\$)))
+		(= 1 (logand 1 (- (point)
+				  (save-excursion
+				    (forward-char -1)
+				    (skip-syntax-backward "/\\")
+				    (point))))))
+       ;; rebind `minibuffer-message' called by
+       ;; `blink-matching-open' to handle the overlay display
+       (cl-letf (((symbol-function #'minibuffer-message)
+		  (lambda (msg &rest args)
+		    (let ((msg (apply #'format-message msg args)))
+		      (setq ov (display-line-overlay+
+				(window-start) msg ))))))
+	 (blink-matching-open))))))
 
 (defun display-line-overlay+ (pos str &optional face)
   "Display line at POS as STR with FACE.
@@ -113,7 +113,6 @@ FACE defaults to inheriting from default and highlight."
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'prog-mode-hook (lambda () (flyspell-prog-mode))) ;; flyspell for comments and strings
-
 (global-hl-line-mode)
 
 ;;Disable Scroll-bar
@@ -254,9 +253,9 @@ FACE defaults to inheriting from default and highlight."
 (use-package aggressive-indent
   :disabled
   :ensure t
-  ;; :init
-  ;; (add-hook 'c-mode-hook 'aggressive-indent-mode)
-  ;; (add-hook 'c++-mode-hook 'aggressive-indent-mode)
+  :init
+  (add-hook 'c-mode-hook 'aggressive-indent-mode)
+  (add-hook 'c++-mode-hook 'aggressive-indent-mode)
   :config
   (add-to-list
    'aggressive-indent-dont-indent-if
@@ -302,7 +301,7 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :after counsel
   :bind
-  ("C-s" . swiper)
+  ("C-s" . swiper-isearch)
   ("C-c C-r" . ivy-resume)
   ("M-x" . counsel-M-x)
   ;; ("C-x C-f" . counsel-find-file)
@@ -375,14 +374,25 @@ FACE defaults to inheriting from default and highlight."
   :config
   (all-the-icons-ivy-setup))
 
-(use-package cc-mode
-  :config
-  (setq c-default-style "linux")
-  (setq c-basic-offset 8);;
-  (define-key c-mode-base-map (kbd "RET") 'newline-and-indent);; indent when pressing enter
-  (c-set-offset 'comment-intro 0));;indent comments according to the indentation style
+;; (use-package cc-mode
+;;   :config
+;;   (setq c-default-style "linux")
+;;   (setq c-basic-offset 8)
+;;   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent);; indent when pressing enter
+;;   (c-set-offset 'comment-intro 0));;indent comments according to the indentation style
+(use-package cc-mode)
 
-;;Open files with a tree like structure
+(defun my-indent-style()
+  (setq c-default-style "linux")
+  (setq c-basic-offset 8)
+  (define-key c-mode-base-map (kbd "RET") 'newline-and-indent);; indent when pressing enter
+  (c-set-offset 'comment-intro 0);;indent comments according to the indentation style
+  )
+
+(add-hook 'c-mode-hook 'my-indent-style)
+(add-hook 'c++-mode-hook 'my-indent-style)
+
+;;open files with a tree like structure
 (use-package neotree
   :ensure t
   :config
@@ -392,12 +402,12 @@ FACE defaults to inheriting from default and highlight."
 ;;Autoclosing (){}[]
 (use-package smartparens
   :ensure t
+  :bind(("M-]" . sp-unwrap-sexp))
   :init
   (require 'smartparens-config)
   (smartparens-global-mode t)
   (smartparens-global-strict-mode t)
-  (setq sp-escape-quotes-after-insert nil)
-  :bind(("M-]" . sp-unwrap-sexp)))
+  (setq sp-escape-quotes-after-insert nil))
 
 ;;Cscope is an alternative for  Ctags but much faster in big codebases.
 (use-package xcscope
@@ -434,6 +444,8 @@ FACE defaults to inheriting from default and highlight."
   :commands lsp
   :init
   (setq lsp-prefer-flymake nil)
+  (setq lsp-enable-indentation nil)
+  (setq lsp-enable-on-type-formatting nil)
   :ensure t)
 
 (use-package focus
@@ -562,15 +574,26 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package pdf-tools
   :ensure t
-  :init
-  (add-hook 'TeX-after-compilation-finished-functions
-	    #'TeX-revert-document-buffer)
   :config
   (pdf-tools-install)
   (setq-default pdf-view-display-size 'fit-page)
   (setq pdf-annot-activate-created-annotations t)
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-  (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward))
+  (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward)
+  (add-hook 'pdf-view-mode-hook (lambda ()
+				  (bms/pdf-midnite-amber))) ; automatically turns on midnight-mode for pdfs
+  )
+
+(defun bms/pdf-no-filter ()
+  "View pdf without colour filter."
+  (interactive)
+  (pdf-view-midnight-minor-mode -1))
+
+(defun bms/pdf-midnite-amber ()
+  "Set pdf-view-midnight-colors to amber on dark slate blue."
+  (interactive)
+  (setq pdf-view-midnight-colors '("#ff9900" . "#0a0a12" )) ; amber
+  (pdf-view-midnight-minor-mode))
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
@@ -632,13 +655,13 @@ FACE defaults to inheriting from default and highlight."
   (setq projectile-completion-system 'ivy)
   (setq projectile-generic-command '("fd . -0"))
   (setq projectile-globally-ignored-directories
-      (append '(
-        ".git"
-        ".svn"
-	"*.cquery_cached_index"
-	"*.ccls_cache"
-        )
-          projectile-globally-ignored-directories))
+	(append '(
+		  ".git"
+		  ".svn"
+		  "*.cquery_cached_index"
+		  "*.ccls_cache"
+		  )
+		projectile-globally-ignored-directories))
 
   (projectile-mode +1))
 
@@ -662,8 +685,8 @@ FACE defaults to inheriting from default and highlight."
   (interactive)
   (global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
   (global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
-  (global-set-key (kbd "C-S-<down>") 'shrink-window)
-  (global-set-key (kbd "C-S-<up>") 'enlarge-window))
+  (global-set-key (kbd "C-S-<down>") 'enlarge-window)
+  (global-set-key (kbd "C-S-<up>") 'shrink-window))
 
 (defun unbind-resize-frame()
   "Unset keybinds to resize frames."
@@ -674,65 +697,60 @@ FACE defaults to inheriting from default and highlight."
   (global-unset-key (kbd "C-S-<up>")))
 
 (use-package doom-modeline
-      :ensure t
-      :hook (after-init . doom-modeline-mode)
-      :init
-      (setq doom-modeline-height 25)
-      (setq doom-modeline-bar-width 3)
-      (setq doom-modeline-buffer-file-name-style 'buffer-name)
-      (setq doom-modeline-python-executable "python")
-      (setq doom-modeline-icon t)
-      (setq doom-modeline-major-mode-icon t)
-      (setq doom-modeline-minor-modes nil)
-      (setq doom-modeline-major-mode-color-icon t)
-      (setq doom-modeline-lsp t))
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :init
+  (setq doom-modeline-height 25)
+  (setq doom-modeline-bar-width 3)
+  (setq doom-modeline-buffer-file-name-style 'buffer-name)
+  (setq doom-modeline-python-executable "python")
+  (setq doom-modeline-icon t)
+  (setq doom-modeline-major-mode-icon t)
+  (setq doom-modeline-minor-modes nil)
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-lsp t))
 
-;; (require 'tex-site)
-;; (use-package tex-site
-;;   :ensure auctex
-;;   :init
-;;   (setq TeX-auto-save t)
-;;   (setq TeX-parse-self t)
-;;   (setq-default TeX-master nil)
-;;   (setq TeX-global-PDF-mode t))
+(use-package auctex-latexmk
+  :ensure t
+  :config
+  (auctex-latexmk-setup)
+  (setq auctex-latexmk-inherit-TeX-PDF-mode t))
 
-(use-package tex                        ; TeX editing
-  :ensure auctex
-  :mode ("\\.tex\\'" . TeX-latex-mode)
-  :config (setq TeX-auto-save t
-                TeX-electric-math '("\\(" . "\\)")
-                TeX-electric-sub-and-superscript t
-                TeX-parse-self t
-                TeX-quote-after-quote t
-                TeX-source-correlate-method 'synctex
-                TeX-source-correlate-mode t
-		TeX-source-correlate-start-server 'ask
-                TeX-clean-confirm nil)
-  (setq latex-run-command "pdflatex")
-  (setq-default TeX-engine'luatex
-		TeX-master t)
-  (add-hook 'tex-mode-hook
-            (lambda () (setq ispell-parser 'tex)))
-  (setq TeX-source-correlate-start-server t
-	TeX-view-program-selection '((output-pdf "PDF Tools"))))
- (add-hook 'TeX-after-compilation-finished-functions
-           #'TeX-revert-document-buffer)
-
-(use-package tex-buf                    ; External commands for AUCTeX
-  :ensure auctex
+(use-package reftex
+  :ensure t
   :defer t
-  ;; Don't ask for confirmation when saving before processing
-  :config (setq TeX-save-query nil))
+  :config
+  (setq reftex-cite-prompt-optional-args t)) ;; Prompt for empty optional arguments in cite
 
-(use-package tex-style           ; Customizable variables for AUCTeX style files
-  :ensure auctex
-  :defer t
-  :config (setq LaTeX-csquotes-close-quote "}"
-                LaTeX-csquotes-open-quote "\\enquote{"))
+(use-package auto-dictionary
+  :ensure t
+  :init(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1))))
 
 (use-package company-auctex
   :ensure t
   :init (company-auctex-init))
+
+(use-package tex
+  :ensure auctex
+  :mode ("\\.tex\\'" . latex-mode)
+  :config (progn
+	    (setq TeX-source-correlate-mode t)
+	    (setq TeX-source-correlate-method 'synctex)
+	    (setq TeX-auto-save t)
+	    (setq TeX-parse-self t)
+	    (setq-default TeX-master "paper.tex")
+	    (setq reftex-plug-into-AUCTeX t)
+	    (pdf-tools-install)
+	    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+		  TeX-source-correlate-start-server t)
+	    ;; Update PDF buffers after successful LaTeX runs
+	    (add-hook 'TeX-after-compilation-finished-functions
+		      #'TeX-revert-document-buffer)
+	    (add-hook 'LaTeX-mode-hook
+		      (lambda ()
+			(reftex-mode t)
+			(flyspell-mode t)))
+	    ))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -760,7 +778,7 @@ FACE defaults to inheriting from default and highlight."
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (objed auctex rmsbolt ag bug-hunter org org-plus-contrib flycheck-title magit markdown-mode indent-guide spacegray-theme list-packages-ext helm flycheck)))
+    (auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool ivy-xref ivy-rich ivy-prescient ivy-explorer highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard counsel-projectile company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-ivy all-the-icons-dired aggressive-indent ag academic-phrases)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background "#2B2B2B")
