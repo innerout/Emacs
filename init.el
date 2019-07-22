@@ -406,7 +406,7 @@ FACE defaults to inheriting from default and highlight."
   :init
   (require 'smartparens-config)
   (smartparens-global-mode t)
-  (smartparens-global-strict-mode t)
+  (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
   (setq sp-escape-quotes-after-insert nil))
 
 ;;Cscope is an alternative for  Ctags but much faster in big codebases.
