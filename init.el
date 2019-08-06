@@ -21,6 +21,15 @@
 (setq show-paren-when-point-in-periphery t)
 (setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
 
+(defun greek-keyboard()
+  "Change keyboard language to Greek."
+  (interactive)
+  (set-input-method "greek"))
+
+(defun english-keyboard()
+  "Change keyboard language to English."
+  (interactive)
+  (set-input-method nil))
 
 (setq blink-matching-paren 'show)
 (remove-hook 'post-self-insert-hook
@@ -251,7 +260,6 @@ FACE defaults to inheriting from default and highlight."
   )
 
 (use-package aggressive-indent
-  :disabled
   :ensure t
   :init
   (add-hook 'c-mode-hook 'aggressive-indent-mode)
@@ -265,25 +273,31 @@ FACE defaults to inheriting from default and highlight."
 
 ;;An amazing plugin with infinite features to use.
 (use-package helm
-  :disabled
   :demand t
   :ensure t
   :init
+  (require 'helm-config)
   (helm-mode 1)
   (helm-adaptive-mode 1)
   (helm-autoresize-mode t)
+  (setq helm-ff-skip-boring-files t)
+  (setq helm-quick-update t)
+  (setq helm-ff-file-name-history-use-recentf t)
   :bind(
   	("C-x C-f" . helm-find-files)
   	("C-x b" . helm-buffers-list)
-  	("M-x" . helm-M-x)))
+  	("M-x" . helm-M-x)
+	("C-s" . helm-occur)
+	))
+
+(use-package wgrep-helm
+  :ensure t)
 
 (use-package helm-themes
-  :disabled
   :ensure t)
 
 ;;C-h b
 (use-package helm-descbinds
-  :disabled
   :ensure t
   :init (helm-descbinds-mode))
 
@@ -297,82 +311,6 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 
-(use-package ivy
-  :ensure t
-  :after counsel
-  :bind
-  ("C-s" . swiper-isearch)
-  ("C-c C-r" . ivy-resume)
-  ("M-x" . counsel-M-x)
-  ;; ("C-x C-f" . counsel-find-file)
-  ("<f1> f" . counsel-describe-function)
-  ("<f1> v" . counsel-describe-variable)
-  ("<f1> l" . counsel-find-library)
-  ("<f2> i" . counsel-info-lookup-symbol)
-  ("<f2> u" . counsel-unicode-char)
-  ("C-c g" . counsel-git)
-  ("C-c j" . counsel-git-grep)
-  ("C-c k" . counsel-ag)
-  ("C-x l" . counsel-locate)
-  ("C-x p" . counsel-mark-ring)
-  :init
-  (define-key counsel-mode-map (kbd "C-x C-f") 'counsel-explorer)
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (setq ivy-use-selectable-prompt t)
-  (setq ivy-re-builders-alist
-  	'((t . ivy--regex-fuzzy)))
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-  (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
-  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-  :custom
-  (ivy-count-format "(%d/%d) ")
-  (ivy-display-style 'fancy))
-
-(use-package counsel
-  :ensure t
-  :init
-  (setq counsel-find-file-ignore-regexp
-        (concat
-         ;; File names beginning with # or .
-         "\\(?:\\`[#.]\\)"
-         ;; File names ending with # or ~
-         "\\|\\(?:\\`.+?[#~]\\'\\)")))
-
-(use-package swiper
-  :ensure t)
-
-(use-package ivy-rich
-  :ensure t
-  :init
-  (ivy-rich-mode 1)
-  (setq ivy-virtual-abbreviate 'full
-	;;ivy-rich-switch-buffer-align-virtual-buffer t ;;temporarily disabled
-	)
-  (setq ivy-rich-path-style 'abbrev))
-
-(use-package ivy-prescient
-  :ensure t
-  :init(ivy-prescient-mode t))
-
-(use-package prescient
-  :ensure t
-  :init(prescient-persist-mode t))
-
-(use-package ivy-xref
-  :ensure t
-  :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
-(use-package ivy-explorer
-  :ensure t
-  :init
-  (ivy-explorer-mode 1))
-
-(use-package all-the-icons-ivy
-  :ensure t
-  :config
-  (all-the-icons-ivy-setup))
 
 ;; (use-package cc-mode
 ;;   :config
@@ -505,7 +443,8 @@ FACE defaults to inheriting from default and highlight."
 ;;magit-log-trace-definition to check the changes
 ;;that happened on this function in older commits
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind ("C-x g" . magit-status))
 
 ;;Removes trailing whitespace and newline. I should check if emacs has a builtin mode(Probably has)
 (use-package ethan-wspace
@@ -544,12 +483,12 @@ FACE defaults to inheriting from default and highlight."
   :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1))))
 
 (defun load-mu4e ()
-  "Load my mu4e config and afterwards call mu4e."
+  "Load my mu4e configuration and afterwards call mu4e."
   (interactive)
   (load-file (concat home-dir "/Downloads/mu4e-config.el"))
   (mu4e))
 
-;; Pressing V when having a thread of emails pretifies with this plugin
+;; Pressing V when having a thread of emails prettifies with this plugin
 (use-package mu4e-conversation
   :ensure t
   :init
@@ -652,7 +591,6 @@ FACE defaults to inheriting from default and highlight."
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-project-search-path '("~/gitfolders/"))
   (setq projectile-enable-caching t)
-  (setq projectile-completion-system 'ivy)
   (setq projectile-generic-command '("fd . -0"))
   (setq projectile-globally-ignored-directories
 	(append '(
@@ -665,8 +603,10 @@ FACE defaults to inheriting from default and highlight."
 
   (projectile-mode +1))
 
-(use-package counsel-projectile
-  :ensure t)
+(use-package helm-projectile
+  :ensure t
+  :init
+  (helm-projectile-on))
 
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
@@ -767,8 +707,6 @@ FACE defaults to inheriting from default and highlight."
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "67a0265e2497207f5f9116c4d2bfbbab4423055e3ab1fa46ea6bd56f7e322f6a" default)))
  '(ethan-wspace-face-customized nil)
  '(fci-rule-color "#383838")
- '(ivy-count-format "(%d/%d) ")
- '(ivy-display-style (quote fancy))
  '(markdown-command "pandoc")
  '(mode-require-final-newline nil)
  '(nrepl-message-colors
@@ -778,7 +716,7 @@ FACE defaults to inheriting from default and highlight."
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool ivy-xref ivy-rich ivy-prescient ivy-explorer highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard counsel-projectile company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-ivy all-the-icons-dired aggressive-indent ag academic-phrases)))
+    (auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background "#2B2B2B")
