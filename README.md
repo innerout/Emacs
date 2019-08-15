@@ -66,6 +66,7 @@ If you have reached here you got emacs installed by now.The only thing you have 
 40. [rmsbolt](https://gitlab.com/jgkamat/rmsbolt)
 41. [doom-modeline](https://github.com/seagle0128/doom-modeline)
 42. [gcmh](https://gitlab.com/koral/gcmh)
+43. [winum](https://github.com/deb0ch/emacs-winum)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

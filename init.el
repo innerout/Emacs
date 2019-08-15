@@ -692,6 +692,11 @@ FACE defaults to inheriting from default and highlight."
 			(flyspell-mode t)))
 	    ))
 
+(use-package winum
+  :ensure t
+  :init
+  (winum-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -716,7 +721,7 @@ FACE defaults to inheriting from default and highlight."
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases)))
+    (winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background "#2B2B2B")
