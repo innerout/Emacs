@@ -1,5 +1,5 @@
 # Requirements
-* Emacs based on the version of Arch linux.
+* Emacs config tested on the version available on Arch linux.
 
 ### Arch
 
@@ -24,6 +24,7 @@ If you have reached here you got emacs installed by now.The only thing you have 
 3. cp init.el ~/.emacs.d/init.el
 
 ## Installed plugins
+
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
 2. [neotree](https://github.com/jaypei/emacs-neotree)
 3. [helm](https://github.com/emacs-helm/helm)
@@ -35,38 +36,42 @@ If you have reached here you got emacs installed by now.The only thing you have 
 9. [Color-identifiers-Mode](https://github.com/ankurdave/color-identifiers-mode)
 10. [hs-minor-mode](https://www.emacswiki.org/emacs/HideShow)
 11. [Git-Gutter](https://github.com/syohex/emacs-git-gutter)
-12. [Markdown-mode](https://jblevins.org/projects/markdown-mode/)(Requires pandoc to run)
-13. [Magit](https://github.com/magit/magit)
-14. [Flycheck](https://github.com/flycheck/flycheck)
-15. [use-package](https://github.com/jwiegley/use-package)
-16. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
-17. [Flycheck-Pos-Tip](https://github.com/flycheck/flycheck-pos-tip)
-18. [company](https://github.com/company-mode/company-mode)
-19. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
-20. [dashboard](https://github.com/rakanalh/emacs-dashboard)
-21. [org-mode](https://orgmode.org/)
-22. [beacon](https://github.com/Malabarba/beacon)
-23. [academic-phrases](https://github.com/nashamri/academic-phrases)
-24. [org-bullets](https://github.com/sabof/org-bullets)
-25. [ccls-emacs](https://github.com/MaskRay/emacs-ccls)
-26. [company-lsp](https://github.com/tigersoldier/company-lsp)
-27. [lsp-ui](https://github.com/emacs-lsp/lsp-ui)
-28. [helm-themes](https://github.com/syohex/emacs-helm-themes)
-29. [lsp-python](https://github.com/emacs-lsp/lsp-python)
-30. [all-the-icons](https://github.com/domtronn/all-the-icons.el)
-31. [which-key](https://github.com/justbur/emacs-which-key)
-32. [bug-hunter](https://github.com/Malabarba/elisp-bug-hunter)
-33. [mu4e-alert](https://github.com/iqbalansari/mu4e-alert)
-34. [mu4e-conversation](https://gitlab.com/ambrevar/mu4e-conversation)
-35. [pdf-tools](https://github.com/politza/pdf-tools)
-36. [langtool](https://github.com/mhayashi1120/Emacs-langtool)
-37. [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
-38. [elfeed](https://github.com/skeeto/elfeed)
-39. [sublimity](https://github.com/zk-phi/sublimity)
-40. [rmsbolt](https://gitlab.com/jgkamat/rmsbolt)
-41. [doom-modeline](https://github.com/seagle0128/doom-modeline)
-42. [gcmh](https://gitlab.com/koral/gcmh)
-43. [winum](https://github.com/deb0ch/emacs-winum)
+12. [Magit](https://github.com/magit/magit)
+13. [Flycheck](https://github.com/flycheck/flycheck)
+14. [use-package](https://github.com/jwiegley/use-package)
+15. [ethan-wspace](https://github.com/glasserc/ethan-wspace)
+16. [Flycheck-Pos-Tip](https://github.com/flycheck/flycheck-pos-tip)
+17. [company](https://github.com/company-mode/company-mode)
+18. [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
+19. [dashboard](https://github.com/rakanalh/emacs-dashboard)
+20. [org-mode](https://orgmode.org/)
+21. [beacon](https://github.com/Malabarba/beacon)
+22. [academic-phrases](https://github.com/nashamri/academic-phrases)
+23. [org-bullets](https://github.com/sabof/org-bullets)
+24. [ccls-emacs](https://github.com/MaskRay/emacs-ccls)
+25. [company-lsp](https://github.com/tigersoldier/company-lsp)
+26. [lsp-ui](https://github.com/emacs-lsp/lsp-ui)
+27. [helm-themes](https://github.com/syohex/emacs-helm-themes)
+28. [lsp-python](https://github.com/emacs-lsp/lsp-python)
+29. [all-the-icons](https://github.com/domtronn/all-the-icons.el)
+30. [which-key](https://github.com/justbur/emacs-which-key)
+31. [bug-hunter](https://github.com/Malabarba/elisp-bug-hunter)
+32. [mu4e-alert](https://github.com/iqbalansari/mu4e-alert)
+33. [mu4e-conversation](https://gitlab.com/ambrevar/mu4e-conversation)
+34. [pdf-tools](https://github.com/politza/pdf-tools)
+35. [langtool](https://github.com/mhayashi1120/Emacs-langtool)
+36. [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
+37. [elfeed](https://github.com/skeeto/elfeed)
+38. [sublimity](https://github.com/zk-phi/sublimity)
+39. [rmsbolt](https://gitlab.com/jgkamat/rmsbolt)
+40. [doom-modeline](https://github.com/seagle0128/doom-modeline)
+41. [gcmh](https://gitlab.com/koral/gcmh)
+42. [winum](https://github.com/deb0ch/emacs-winum)
+43. [org-fancy-priorities](https://github.com/harrybournis/org-fancy-priorities)
+44. [grip](https://github.com/seagle0128/grip-mode)
+45. [messages-are-flowing](https://github.com/legoscia/messages-are-flowing)
+46. [writegood-mode](https://github.com/bnbeckwith/writegood-mode/tree/master)
+
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
@@ -86,18 +91,16 @@ sudo pacman -S ccls-git
 
 ### To use in a project
 
-Run the root Makefile with bear.
+```bash
 
+cd MakefileDirectory
+touch .ccls-root
 bear make
+cd ..
+compdb -p MakefileDirectory/ list > compile_commands.json
+mv compile_commands.json  MakefileDirectory/
 
-#cd one directory up and run the command below
-
-compdb -p build/ list > compile_commands.json
-
-touch .ccls-root #in the root folder
-
-mv compile_commands.json inside the folder
-
+```
 ## Cscope
 
 __REQUIREMENTS__ = __sudo pacman -S cscope__

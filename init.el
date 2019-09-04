@@ -482,6 +482,23 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :config (add-hook 'org-mode-hook(lambda()(org-bullets-mode 1))))
 
+
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '((?A . "❗")
+                                  (?B . "⬆")
+                                  (?C . "⬇"))))
+(use-package grip-mode
+  :ensure t
+  :hook ((markdown-mode) . grip-mode)
+  ;;Because this config file is public, i don't want sensitive data
+  ;;to be available on a public repo so i am loading the login info
+  ;;of my github account from sensitive.el
+  :init(load-file "~/.emacs.d/sensitive.el"))
+
 (defun load-mu4e ()
   "Load my mu4e configuration and afterwards call mu4e."
   (interactive)
@@ -499,6 +516,11 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :init
   (mu4e-alert-set-default-style 'libnotify))
+
+(use-package messages-are-flowing
+  :ensure t
+  :init
+  (add-hook 'message-mode-hook 'messages-are-flowing-use-and-mark-hard-newlines))
 
 (use-package beacon
   :ensure t
@@ -522,6 +544,12 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'pdf-view-mode-hook (lambda ()
 				  (bms/pdf-midnite-amber))) ; automatically turns on midnight-mode for pdfs
   )
+
+(use-package writegood-mode
+  :ensure t
+  :init
+  (global-set-key "\C-c\C-gg" 'writegood-grade-level)
+  (global-set-key "\C-c\C-ge" 'writegood-reading-ease))
 
 (defun bms/pdf-no-filter ()
   "View pdf without colour filter."
