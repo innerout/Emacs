@@ -21,15 +21,23 @@
 (setq show-paren-when-point-in-periphery t)
 (setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
 
+(defvar change-lang 1)
 (defun greek-keyboard()
   "Change keyboard language to Greek."
-  (interactive)
+  (setq change-lang 1)
   (set-input-method "greek"))
 
 (defun english-keyboard()
   "Change keyboard language to English."
-  (interactive)
+  (setq change-lang 0)
   (set-input-method nil))
+
+(defun change-language()
+  "Change keyboard language."
+  (interactive)
+  (cond
+   ((equal change-lang 1) (english-keyboard))
+   ((equal change-lang 0) (greek-keyboard))))
 
 (setq blink-matching-paren 'show)
 (remove-hook 'post-self-insert-hook
@@ -288,7 +296,9 @@ FACE defaults to inheriting from default and highlight."
   	("C-x b" . helm-buffers-list)
   	("M-x" . helm-M-x)
 	("C-s" . helm-occur)
-	))
+	)
+    :init
+    (define-key helm-find-files-map (kbd "<C-backspace>") 'backward-kill-word))
 
 (use-package wgrep-helm
   :ensure t)
@@ -457,7 +467,8 @@ FACE defaults to inheriting from default and highlight."
 (use-package whitespace
   :init
   (setq whitespace-line-column 120)
-  (setq whitespace-style '(face empty tabls lines-tail trailing))
+  (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation
+				empty space-after-tab space-mark tab-mark))
   (global-whitespace-mode))
 
 (use-package markdown-mode
@@ -476,7 +487,8 @@ FACE defaults to inheriting from default and highlight."
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
-  	("C-x c" . org-capture)))
+  	("C-x c" . org-capture))
+  :init  (setq org-modules (quote (org-habit))))
 
 (use-package org-bullets
   :ensure t
