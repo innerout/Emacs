@@ -41,6 +41,7 @@
   (global-unset-key (kbd "C-S-<down>"))
   (global-unset-key (kbd "C-S-<up>")))
 
+(global-set-key (kbd "<prior>") 'change-language)
 (defvar change-lang 0)
 (defun greek-keyboard()
   "Change keyboard language to Greek."
