@@ -71,7 +71,8 @@ If you have reached here you got emacs installed by now.The only thing you have 
 44. [grip](https://github.com/seagle0128/grip-mode)
 45. [messages-are-flowing](https://github.com/legoscia/messages-are-flowing)
 46. [writegood-mode](https://github.com/bnbeckwith/writegood-mode/tree/master)
-
+47. [persistent-scratch](https://github.com/Fanael/persistent-scratch/tree/master)
+48. [drag-stuff](https://github.com/rejeep/drag-stuff.el/tree/master)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

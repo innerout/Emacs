@@ -21,7 +21,27 @@
 (setq show-paren-when-point-in-periphery t)
 (setq show-paren-delay nil) ;; Show Matching Parenthesis without delay
 
-(defvar change-lang 1)
+;;Leaving this line of code here in case i need to make a special bind
+;;(global-set-key [(meta up)] 'move-line-up)
+
+
+(defun bind-resize-frame()
+  "Set keybinds to resize frames."
+  (interactive)
+  (global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
+  (global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
+  (global-set-key (kbd "C-S-<down>") 'enlarge-window)
+  (global-set-key (kbd "C-S-<up>") 'shrink-window))
+
+(defun unbind-resize-frame()
+  "Unset keybinds to resize frames."
+  (interactive)
+  (global-unset-key (kbd "C-S-<left>"))
+  (global-unset-key (kbd "C-S-<right>"))
+  (global-unset-key (kbd "C-S-<down>"))
+  (global-unset-key (kbd "C-S-<up>")))
+
+(defvar change-lang 0)
 (defun greek-keyboard()
   "Change keyboard language to Greek."
   (setq change-lang 1)
@@ -391,7 +411,7 @@ FACE defaults to inheriting from default and highlight."
 (use-package lsp-mode
   :commands lsp
   :init
-  (setq lsp-prefer-flymake nil)
+  (setq lsp-prefer-flymake :none)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
   :ensure t)
@@ -660,22 +680,6 @@ FACE defaults to inheriting from default and highlight."
   (setq sublimity-attractive-centering-width nil)
   (sublimity-mode 1))
 
-(defun bind-resize-frame()
-  "Set keybinds to resize frames."
-  (interactive)
-  (global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
-  (global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
-  (global-set-key (kbd "C-S-<down>") 'enlarge-window)
-  (global-set-key (kbd "C-S-<up>") 'shrink-window))
-
-(defun unbind-resize-frame()
-  "Unset keybinds to resize frames."
-  (interactive)
-  (global-unset-key (kbd "C-S-<left>"))
-  (global-unset-key (kbd "C-S-<right>"))
-  (global-unset-key (kbd "C-S-<down>"))
-  (global-unset-key (kbd "C-S-<up>")))
-
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode)
@@ -689,6 +693,23 @@ FACE defaults to inheriting from default and highlight."
   (setq doom-modeline-minor-modes nil)
   (setq doom-modeline-major-mode-color-icon t)
   (setq doom-modeline-lsp t))
+
+(use-package winum
+  :ensure t
+  :init
+  (winum-mode))
+
+(use-package persistent-scratch
+  :ensure t
+  :init
+  (persistent-scratch-setup-default)
+  (persistent-scratch-autosave-mode 1))
+
+(use-package drag-stuff
+  :ensure t
+  :init
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
 
 (use-package auctex-latexmk
   :ensure t
@@ -718,7 +739,7 @@ FACE defaults to inheriting from default and highlight."
 	    (setq TeX-source-correlate-method 'synctex)
 	    (setq TeX-auto-save t)
 	    (setq TeX-parse-self t)
-	    (setq-default TeX-master "paper.tex")
+	    ;; (setq-default TeX-master "paper.tex")
 	    (setq reftex-plug-into-AUCTeX t)
 	    (pdf-tools-install)
 	    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
@@ -731,11 +752,6 @@ FACE defaults to inheriting from default and highlight."
 			(reftex-mode t)
 			(flyspell-mode t)))
 	    ))
-
-(use-package winum
-  :ensure t
-  :init
-  (winum-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -757,7 +773,7 @@ FACE defaults to inheriting from default and highlight."
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(org-agenda-files (quote ("~/TODO.org")))
+ '(org-agenda-files (quote ("~/gitfolders/schedule-life/TODO.org")))
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
