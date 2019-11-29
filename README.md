@@ -73,6 +73,7 @@ If you have reached here you got emacs installed by now.The only thing you have 
 46. [writegood-mode](https://github.com/bnbeckwith/writegood-mode/tree/master)
 47. [persistent-scratch](https://github.com/Fanael/persistent-scratch/tree/master)
 48. [drag-stuff](https://github.com/rejeep/drag-stuff.el/tree/master)
+49. [toc-org](https://github.com/snosov1/toc-org)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.

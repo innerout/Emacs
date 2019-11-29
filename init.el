@@ -411,11 +411,13 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package lsp-mode
   :commands lsp
+  :hook (LaTeX-mode . lsp)
   :init
   (setq lsp-prefer-flymake :none)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
   :ensure t)
+
 
 (use-package focus
   :ensure t)
@@ -443,7 +445,8 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :config (setq company-transformers nil company-lsp-async t
 		company-lsp-cache-candidates nil company-lsp-enable-recompletion t)
-  (push 'company-lsp company-backends))
+  (push 'company-lsp company-backends)
+  (add-to-list 'company-lsp-filter-candidates '(digestif . nil)))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -453,7 +456,7 @@ FACE defaults to inheriting from default and highlight."
 	([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
 	([remap xref-find-references] . lsp-ui-peek-find-references))
   :config
-  (setq lsp-ui-sideline-enable nil
+  (setq lsp-ui-sideline-enable t
 	lsp-ui-doc-use-webkit t
         lsp-ui-doc-enable t
 	lsp-prefer-flymake nil
@@ -504,12 +507,26 @@ FACE defaults to inheriting from default and highlight."
   :config
   (dashboard-setup-startup-hook))
 
+(load-file "~/.emacs.d/notinmelpa/org-pretty-table.el")
 ;;The famous org mode, i should learn it more.
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
   	("C-x c" . org-capture))
-  :init  (setq org-modules (quote (org-habit))))
+  :init
+  (setq org-modules (quote (org-habit)))
+  (global-org-pretty-table-mode))
+
+(use-package toc-org
+  :ensure t)
+
+(if (require 'toc-org nil t)
+    (add-hook 'org-mode-hook 'toc-org-mode)
+
+    ;; enable in markdown, too
+    (add-hook 'markdown-mode-hook 'toc-org-mode)
+    (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
+
 
 (use-package org-bullets
   :ensure t
@@ -728,10 +745,6 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :init(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1))))
 
-(use-package company-auctex
-  :ensure t
-  :init (company-auctex-init))
-
 (use-package tex
   :ensure auctex
   :mode ("\\.tex\\'" . latex-mode)
@@ -774,7 +787,7 @@ FACE defaults to inheriting from default and highlight."
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(org-agenda-files (quote ("~/gitfolders/schedule-life/TODO.org")))
+ '(org-agenda-files nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
