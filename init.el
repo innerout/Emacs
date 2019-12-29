@@ -322,7 +322,10 @@ FACE defaults to inheriting from default and highlight."
 	("C-s" . helm-occur)
 	)
     :init
-    (define-key helm-find-files-map (kbd "<C-backspace>") 'backward-kill-word))
+    (define-key helm-find-files-map (kbd "<C-backspace>") 'backward-kill-word)
+    (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+    (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+    (define-key helm-map (kbd "C-z") #'helm-select-action))
 
 (use-package wgrep-helm
   :ensure t)
