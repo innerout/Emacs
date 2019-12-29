@@ -198,7 +198,10 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package spacemacs-theme
   :ensure t
-  :no-require t)
+  :no-require t
+  :init
+  (custom-set-faces
+   '(mu4e-unread-face ((t (:inherit font-lock-keyword-face :foreground "white"))))))
 
 (use-package gcmh
   :ensure t
@@ -314,7 +317,7 @@ FACE defaults to inheriting from default and highlight."
   (setq helm-ff-file-name-history-use-recentf t)
   :bind(
   	("C-x C-f" . helm-find-files)
-  	("C-x b" . helm-buffers-list)
+  	("C-x b" . helm-buffers-list) ;; Pressing C-c a shows "boring buffers"
   	("M-x" . helm-M-x)
 	("C-s" . helm-occur)
 	)
@@ -426,6 +429,7 @@ FACE defaults to inheriting from default and highlight."
 
 (defvar home-dir (getenv "HOME"))
 (defvar emacs-email (getenv "MU4E"))
+(defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
 
 (use-package ccls
   :ensure t
@@ -512,6 +516,8 @@ FACE defaults to inheriting from default and highlight."
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
+	("C-C l" . org-store-link)
+  	("C-C l" . org-store-link)
   	("C-x c" . org-capture))
   :init
   (setq org-modules (quote (org-habit)))
@@ -552,11 +558,12 @@ FACE defaults to inheriting from default and highlight."
 (defun load-mu4e ()
   "Load my mu4e configuration and afterwards call mu4e."
   (interactive)
-  (load-file (concat home-dir "/Downloads/mu4e-config.el"))
+  (load-file mu4e-config)
   (mu4e))
 
 ;; Pressing V when having a thread of emails prettifies with this plugin
 (use-package mu4e-conversation
+  :disabled t
   :ensure t
   :init
   (with-eval-after-load 'mu4e (require 'mu4e-conversation))
@@ -766,6 +773,10 @@ FACE defaults to inheriting from default and highlight."
 			(reftex-mode t)
 			(flyspell-mode t)))
 	    ))
+
+(use-package tramp
+  :init
+  (setq tramp-default-method "sshx"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
