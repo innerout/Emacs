@@ -5,24 +5,16 @@
 
 #### ```sudo pacman -S emacs```
 
-### Ubuntu/Debian
-
-#### ```sudo add-apt-repository ppa:kelleyk/emacs```
-#### ```sudo apt-get update```
-#### ```sudo apt-get install emacs26```
-
-### Fedora
-
-#### ```sudo dnf install emacs```
-
 ## Installation
 
-If you have reached here you got emacs installed by now.The only thing you have to do is to run these 3 commands and you will have the whole configuration running.
+If you have reached here you got emacs installed by now.The only thing you have to do is to run these 4 commands and you will have the whole configuration running.
 
+``` bash
 1. git clone https://github.com/innerout/Emacs.git
 2. cd Emacs
 3. cp init.el ~/.emacs.d/init.el
-
+4. cp -r notinmelpa ~/.emacs.d/
+```
 ## Installed plugins
 
 1. [aggressive-indent](https://github.com/Malabarba/aggressive-indent-mode)
@@ -74,12 +66,12 @@ If you have reached here you got emacs installed by now.The only thing you have 
 47. [persistent-scratch](https://github.com/Fanael/persistent-scratch/tree/master)
 48. [drag-stuff](https://github.com/rejeep/drag-stuff.el/tree/master)
 49. [toc-org](https://github.com/snosov1/toc-org)
+50. [emacs-emojify](https://github.com/iqbalansari/emacs-emojify)
 
 ## Notes
-* I am not adding my custom macros because it is easier to understand if you open emacs config and see them alone.
+* I am not adding my custom macros because it is easier to understand if you open init.el and see them yourself.
 That way you can change them to your liking.
-* Repo will be updated everytime i add a plugin to my configuration.
-* Font __adobe-source-code-pro__ sudo pacman -S adobe-source-code-pro-fonts
+* Font __Adobe Source Code Pro__ to install run __sudo pacman -S adobe-source-code-pro-fonts__
 
 # HOWTO SETUP PLUGINS
 

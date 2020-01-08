@@ -519,7 +519,6 @@ FACE defaults to inheriting from default and highlight."
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
-	("C-C l" . org-store-link)
   	("C-C l" . org-store-link)
   	("C-x c" . org-capture))
   :init
@@ -563,6 +562,12 @@ FACE defaults to inheriting from default and highlight."
   (interactive)
   (load-file mu4e-config)
   (mu4e))
+
+(use-package emojify
+  :ensure t
+  :init(add-hook 'after-init-hook #'global-emojify-mode)
+  (with-eval-after-load "emojify"
+  (delete 'mu4e-headers-mode emojify-inhibit-major-modes)))
 
 ;; Pressing V when having a thread of emails prettifies with this plugin
 (use-package mu4e-conversation
@@ -790,28 +795,24 @@ FACE defaults to inheriting from default and highlight."
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
- '(custom-enabled-themes (quote (spacemacs-dark)))
+ '(custom-enabled-themes '(spacemacs-dark))
  '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "67a0265e2497207f5f9116c4d2bfbbab4423055e3ab1fa46ea6bd56f7e322f6a" default)))
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "67a0265e2497207f5f9116c4d2bfbbab4423055e3ab1fa46ea6bd56f7e322f6a" default))
  '(ethan-wspace-face-customized nil)
  '(fci-rule-color "#383838")
  '(markdown-command "pandoc")
  '(mode-require-final-newline nil)
  '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(org-agenda-files nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   (quote
-    (winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases)))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(send-mail-function (quote smtpmail-send-it))
+   '(winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
+ '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
+ '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
-   (quote
-    ((20 . "#BC8383")
+   '((20 . "#BC8383")
      (40 . "#CC9393")
      (60 . "#DFAF8F")
      (80 . "#D0BF8F")
@@ -828,7 +829,7 @@ FACE defaults to inheriting from default and highlight."
      (300 . "#7CB8BB")
      (320 . "#8CD0D3")
      (340 . "#94BFF3")
-     (360 . "#DC8CC3"))))
+     (360 . "#DC8CC3")))
  '(vc-annotate-very-old-color "#DC8CC3"))
 
 (custom-set-faces
@@ -836,6 +837,7 @@ FACE defaults to inheriting from default and highlight."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(mu4e-unread-face ((t (:inherit font-lock-keyword-face :foreground "white"))))
  '(show-paren-match ((t (:background "red"))))
  '(show-paren-mismatch ((t (:background "blue")))))
 
