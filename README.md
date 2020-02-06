@@ -67,6 +67,9 @@ If you have reached here you got emacs installed by now.The only thing you have 
 48. [drag-stuff](https://github.com/rejeep/drag-stuff.el/tree/master)
 49. [toc-org](https://github.com/snosov1/toc-org)
 50. [emacs-emojify](https://github.com/iqbalansari/emacs-emojify)
+51. [clang-format](https://github.com/emacsmirror/clang-format/tree/master)
+52. [helm-ag](https://github.com/syohex/emacs-helm-ag/tree/master)
+53. [wgrep](https://github.com/mhayashi1120/Emacs-wgrep/tree/master)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open init.el and see them yourself.

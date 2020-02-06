@@ -284,6 +284,11 @@ FACE defaults to inheriting from default and highlight."
       :fringe-bitmap 'my-flycheck-fringe-indicator
       :fringe-face 'flycheck-fringe-info)))
 
+(use-package clang-format
+  :ensure t
+  :config
+  (global-set-key [C-M-tab] 'clang-format-region))
+
 (use-package flycheck-clang-analyzer
   :disabled
   :ensure t
@@ -497,9 +502,8 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package whitespace
   :init
-  (setq whitespace-line-column 120)
-  (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation
-				empty space-after-tab space-mark tab-mark))
+  (setq whitespace-line-column 110)
+  (setq whitespace-style '(trailing))
   (global-whitespace-mode))
 
 (use-package markdown-mode
@@ -514,16 +518,18 @@ FACE defaults to inheriting from default and highlight."
   :config
   (dashboard-setup-startup-hook))
 
-(load-file "~/.emacs.d/notinmelpa/org-pretty-table.el")
-;;The famous org mode, i should learn it more.
+;;The famous org mode, i should learn more about it.
 (use-package org
   :ensure org-plus-contrib
   :bind(("C-c a" . org-agenda)
   	("C-C l" . org-store-link)
   	("C-x c" . org-capture))
   :init
-  (setq org-modules (quote (org-habit)))
-  (global-org-pretty-table-mode))
+  (setq org-modules (quote (org-habit))))
+
+;;https://randomgeekery.org/2020/02/04/goto-address-mode-opens-links-in-emacs/
+(add-hook 'text-mode-hook (lambda ()
+                            (goto-address-mode)))
 
 (use-package toc-org
   :ensure t)
@@ -556,6 +562,8 @@ FACE defaults to inheriting from default and highlight."
   ;;to be available on a public repo so i am loading the login info
   ;;of my github account from sensitive.el
   :init(load-file "~/.emacs.d/sensitive.el"))
+
+(setq browse-url-generic-program "google-chrome-stable")
 
 (defun load-mu4e ()
   "Load my mu4e configuration and afterwards call mu4e."
@@ -693,13 +701,21 @@ FACE defaults to inheriting from default and highlight."
 		  "*.ccls_cache"
 		  )
 		projectile-globally-ignored-directories))
-
   (projectile-mode +1))
 
 (use-package helm-projectile
   :ensure t
   :init
   (helm-projectile-on))
+
+(use-package helm-ag
+  :ensure t)
+
+(use-package wgrep
+  :ensure t
+  :config
+  (setq wgrep-auto-save-buffer t)
+  (add-hook 'ag-mode-hook 'wgrep-ag-setup))
 
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
