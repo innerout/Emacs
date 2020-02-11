@@ -721,14 +721,6 @@ FACE defaults to inheriting from default and highlight."
 (use-package bug-hunter
   :ensure t)
 
-(use-package sublimity
-  :ensure t
-  :init
-  (require 'sublimity-scroll)
-  (require 'sublimity-attractive)
-  (setq sublimity-attractive-centering-width nil)
-  (sublimity-mode 1))
-
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode)
