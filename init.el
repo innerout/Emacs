@@ -6,7 +6,6 @@
 
 (setq ring-bell-function 'ignore) ;; Disable the ring bell
 (setq inhibit-startup-screen t)   ;; Disable Startup screen
-
 ;;run in home directory find . -name "*~" -delete
 (setq backup-by-copying t        ;;Backup setup
       backup-directory-alist '(("." . "~/.emacsbackups"))
@@ -122,6 +121,7 @@ FACE defaults to inheriting from default and highlight."
 (desktop-save-mode 1) ;; Save sessions between Emacs sessions
 (save-place-mode 1) ;; Opens the File in the last position that it was closed.
 (setq-default save-place-forget-unreadable-files nil) ;; Optimization for nfs.
+(setq require-final-newline nil)
 
 (mouse-wheel-mode t)  ;; Mouse scrolling in terminal
 (blink-cursor-mode 0) ;; No blinking Cursor
@@ -389,14 +389,6 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
   (setq sp-escape-quotes-after-insert nil))
 
-;;Cscope is an alternative for  Ctags but much faster in big codebases.
-(use-package xcscope
-  :disabled
-  :ensure t
-  :config
-  (cscope-setup)
-  (setq cscope-option-use-inverted-index t))
-
 ;;Shows every indentation block.
 (use-package highlight-indent-guides
   :ensure t
@@ -571,19 +563,16 @@ FACE defaults to inheriting from default and highlight."
   (load-file mu4e-config)
   (mu4e))
 
+(use-package mu4e-maildirs-extension
+  :ensure t
+  :init(mu4e-maildirs-extension)
+  )
+
 (use-package emojify
   :ensure t
   :init(add-hook 'after-init-hook #'global-emojify-mode)
   (with-eval-after-load "emojify"
   (delete 'mu4e-headers-mode emojify-inhibit-major-modes)))
-
-;; Pressing V when having a thread of emails prettifies with this plugin
-(use-package mu4e-conversation
-  :disabled t
-  :ensure t
-  :init
-  (with-eval-after-load 'mu4e (require 'mu4e-conversation))
-  (with-eval-after-load 'mu4e (global-mu4e-conversation-mode)))
 
 (use-package mu4e-alert
   :ensure t
