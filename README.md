@@ -7,8 +7,6 @@
 
 ## Installation
 
-If you have reached here you got emacs installed by now.The only thing you have to do is to run these 4 commands and you will have the whole configuration running.
-
 ``` bash
 1. git clone https://github.com/innerout/Emacs.git
 2. cd Emacs
@@ -74,15 +72,14 @@ If you have reached here you got emacs installed by now.The only thing you have 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open init.el and see them yourself.
 That way you can change them to your liking.
-* Font __Adobe Source Code Pro__ to install run __sudo pacman -S adobe-source-code-pro-fonts__
+* Font [Adobe Source Code Pro](https://www.archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/)
 
 # HOWTO SETUP PLUGINS
 
 ## Ccls
 
-__REQUIREMENTS__ = __trizen bear-git__ __pip install git+https://github.com/Sarcasm/compdb.git#egg=compdb__
-
-### To install ccls use archlinuxcn repo
+__Dependencies__ :  [bear](https://github.com/rizsotto/Bear) [compdb](https://github.com/Sarcasm/compdb)
+### To install ccls use [archlinuxcn](https://github.com/archlinuxcn/repo) repo
 
 sudo pacman -S ccls-git
 
@@ -101,7 +98,7 @@ mv compile_commands.json  MakefileDirectory/
 
 ## Markdown-mode
 
-__REQUIREMENTS__ = __sudo pacman -S pandoc__
+__Dependencies__ : [pandoc](https://pandoc.org/)
 
 ## All-the-icons
 
