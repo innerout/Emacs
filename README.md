@@ -68,6 +68,8 @@
 52. [cmake-mode](https://melpa.org/packages/cmake-mode-20190710.1319.el)
 53. [cmake-font-lock](https://github.com/Lindydancer/cmake-font-lock/tree/master)
 54. [eldoc-cmake](https://github.com/ikirill/eldoc-cmake/tree/master)
+55. [fira-code](https://github.com/jming422/fira-code-mode)
+56. [vterm](https://github.com/akermu/emacs-libvterm)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open init.el and see them yourself.

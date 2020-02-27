@@ -803,12 +803,24 @@ FACE defaults to inheriting from default and highlight."
 	    (add-hook 'LaTeX-mode-hook
 		      (lambda ()
 			(reftex-mode t)
-			(flyspell-mode t)))
-	    ))
+			(flyspell-mode t)))))
 
 (use-package tramp
   :init
   (setq tramp-default-method "sshx"))
+
+(use-package fira-code-mode
+  :load-path "~/.emacs.d/fira-code-mode"
+  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
+  :hook prog-mode) ;; Enables fira-code-mode automatically for programming major modes
+
+(use-package vterm
+  :ensure vterm-toggle
+  :init
+  (global-set-key [f2] 'vterm-toggle)
+  (global-set-key [C-f2] 'vterm-toggle-cd)
+  (setq vterm-toggle-cd-auto-create-buffer nil))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
