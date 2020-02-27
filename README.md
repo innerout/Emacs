@@ -67,6 +67,9 @@ If you have reached here you got emacs installed by now.The only thing you have 
 49. [helm-ag](https://github.com/syohex/emacs-helm-ag/tree/master)
 50. [wgrep](https://github.com/mhayashi1120/Emacs-wgrep/tree/master)
 51. [mu4e-maildirs](https://github.com/agpchil/mu4e-maildirs-extension)
+52. [cmake-mode](https://melpa.org/packages/cmake-mode-20190710.1319.el)
+53. [cmake-font-lock](https://github.com/Lindydancer/cmake-font-lock/tree/master)
+54. [eldoc-cmake](https://github.com/ikirill/eldoc-cmake/tree/master)
 
 ## Notes
 * I am not adding my custom macros because it is easier to understand if you open init.el and see them yourself.

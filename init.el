@@ -1,9 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
-;; (setq gc-cons-threshold 64000000) ;; Setting GC thresholds higher for faster startup
-;; (add-hook 'after-init-hook #'(lambda()
-;; 			       ;;restore after startup
-;; 			       (setq gc-cons-threshold 800000)))
-
+(setq gc-cons-threshold 100000000) ;; Setting GC thresholds higher for faster startup
 (setq ring-bell-function 'ignore) ;; Disable the ring bell
 (setq inhibit-startup-screen t)   ;; Disable Startup screen
 ;;run in home directory find . -name "*~" -delete
@@ -366,8 +362,7 @@ FACE defaults to inheriting from default and highlight."
   (setq c-default-style "linux")
   (setq c-basic-offset 8)
   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent);; indent when pressing enter
-  (c-set-offset 'comment-intro 0);;indent comments according to the indentation style
-  )
+  (c-set-offset 'comment-intro 0));;indent comments according to the indentation style
 
 (add-hook 'c-mode-hook 'my-indent-style)
 (add-hook 'c++-mode-hook 'my-indent-style)
@@ -412,15 +407,37 @@ FACE defaults to inheriting from default and highlight."
   (setq company-minimum-prefix-length 1)
   (push 'company-files company-backends))
 
+(use-package scala-mode
+  :ensure t
+  :mode "\\.s\\(cala\\|bt\\)$")
+
+(use-package sbt-mode
+  :ensure t
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+   (setq sbt:program-options '("-Dsbt.supershell=false")))
+
 (use-package lsp-mode
   :commands lsp
-  :hook (LaTeX-mode . lsp)
+  :hook
+  (scala-mode . lsp)
+  (LaTeX-mode . lsp)
   :init
   (setq lsp-prefer-flymake :none)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
-  :ensure t)
-
+  :ensure t
+  :init
+  (setq read-process-output-max (*(* 1024 1024) 3))
+  (with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
 (use-package focus
   :ensure t)
@@ -443,6 +460,16 @@ FACE defaults to inheriting from default and highlight."
 					     :index (:reparseForDependency 1)
 					     :completion (:detailedLabel t))))
 
+(use-package cmake-mode
+  :ensure t)
+
+(use-package cmake-font-lock
+  :ensure t
+  :hook(cmake-mode . cmake-font-lock-activate))
+
+(use-package eldoc-cmake
+  :ensure t
+  :hook (cmake-mode . eldoc-cmake-enable))
 
 (use-package company-lsp
   :commands company-lsp
@@ -553,7 +580,9 @@ FACE defaults to inheriting from default and highlight."
   ;;Because this config file is public, i don't want sensitive data
   ;;to be available on a public repo so i am loading the login info
   ;;of my github account from sensitive.el
-  :init(load-file "~/.emacs.d/sensitive.el"))
+  :init
+  (setq grip-update-after-change nil)
+  (load-file "~/.emacs.d/sensitive.el"))
 
 (setq browse-url-generic-program "google-chrome-stable")
 
@@ -563,10 +592,9 @@ FACE defaults to inheriting from default and highlight."
   (load-file mu4e-config)
   (mu4e))
 
-(use-package mu4e-maildirs-extension
-  :ensure t
-  :init(mu4e-maildirs-extension)
-  )
+;; (use-package mu4e-maildirs-extension
+;;   :ensure t
+;;   :init(mu4e-maildirs-extension))
 
 (use-package emojify
   :ensure t
@@ -604,8 +632,7 @@ FACE defaults to inheriting from default and highlight."
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward)
   (add-hook 'pdf-view-mode-hook (lambda ()
-				  (bms/pdf-midnite-amber))) ; automatically turns on midnight-mode for pdfs
-  )
+				  (bms/pdf-midnite-amber)))); automatically turns on midnight-mode for pdfs
 
 (use-package writegood-mode
   :ensure t
@@ -638,8 +665,8 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :defer t
   :init
-  (setq langtool-language-tool-jar (concat home-dir "languagetool/languagetool-standalone/target/LanguageTool-4.4-SNAPSHOT/LanguageTool-4.4-SNAPSHOT/languagetool-commandline.jar"))
-  (setq langtool-language-tool-server-jar (concat home-dir "/languagetool/languagetool-standalone/target/LanguageTool-4.4-SNAPSHOT/LanguageTool-4.4-SNAPSHOT/languagetool-server.jar"))
+  (setq langtool-language-tool-jar (concat home-dir "/gitfolders/languagetool/languagetool-standalone/target/LanguageTool-4.9-SNAPSHOT/LanguageTool-4.9-SNAPSHOT/languagetool-commandline.jar"))
+  (setq langtool-language-tool-server-jar (concat home-dir "/gitfolders/languagetool/languagetool-standalone/target/LanguageTool-4.9-SNAPSHOT/LanguageTool-4.9-SNAPSHOT/languagetool-server.jar"))
   (setq langtool-autoshow-message-function 'langtool-autoshow-detail-popup)
   (setq langtool-default-language "en-US"))
 
@@ -804,7 +831,7 @@ FACE defaults to inheriting from default and highlight."
  '(org-agenda-files nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
+   '(eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background "#2B2B2B")
