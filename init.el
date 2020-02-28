@@ -430,9 +430,12 @@ FACE defaults to inheriting from default and highlight."
   (scala-mode . lsp)
   (LaTeX-mode . lsp)
   :init
-  (setq lsp-prefer-flymake :none)
+  (setq lsp-diagnostic-package :flycheck)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-enable-snippet t)
+  (setq lsp-report-if-no-buffer t)
+  (setq lsp-signature-auto-activate t)
   :ensure t
   :init
   (setq read-process-output-max (*(* 1024 1024) 3))
