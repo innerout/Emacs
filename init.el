@@ -106,7 +106,7 @@ FACE defaults to inheriting from default and highlight."
 
 (setq x-stretch-cursor t)   ;; Make cursor the width of the character it is under
 (setq load-prefer-newer t)
-
+(setq sentence-end-double-space nil)
 (defun bjm/kill-this-buffer ()
   "Kill the current buffer."
   (interactive)
@@ -146,7 +146,6 @@ FACE defaults to inheriting from default and highlight."
 ;;Folding mode built-in emacs, i should search for a good folding plugin though
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(add-hook 'prog-mode-hook (lambda () (flyspell-prog-mode))) ;; flyspell for comments and strings
 (global-hl-line-mode)
 
 ;;Disable Scroll-bar
@@ -156,8 +155,8 @@ FACE defaults to inheriting from default and highlight."
 (menu-bar-mode 0)
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(when (>= emacs-major-version 27)
-  (global-so-long-mode))
+;;(when (>= emacs-major-version 27)
+;;  (global-so-long-mode))
 
 ;;Package.el is available after version 24 of Emacs, check for older systems like CentOS
 (when (>= emacs-major-version 24)
@@ -280,11 +279,6 @@ FACE defaults to inheriting from default and highlight."
       :fringe-bitmap 'my-flycheck-fringe-indicator
       :fringe-face 'flycheck-fringe-info)))
 
-(use-package clang-format
-  :ensure t
-  :config
-  (global-set-key [C-M-tab] 'clang-format-region))
-
 (use-package flycheck-clang-analyzer
   :disabled
   :ensure t
@@ -328,11 +322,27 @@ FACE defaults to inheriting from default and highlight."
     (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
     (define-key helm-map (kbd "C-z") #'helm-select-action))
 
-(use-package wgrep-helm
-  :ensure t)
+(use-package helm-ext
+  :ensure t
+  :init
+  (helm-ext-ff-enable-skipping-dots t)
+  (helm-ext-ff-enable-auto-path-expansion t))
+
+(use-package helm-posframe
+  :disabled
+  :ensure t
+  :init
+  (helm-posframe-enable)
+  (setq helm-posframe-parameters
+      '((left-fringe . 10)
+        (right-fringe . 10))))
 
 (use-package helm-themes
   :ensure t)
+
+(use-package spell-fu
+  :ensure t
+  :init (global-spell-fu-mode))
 
 ;;C-h b
 (use-package helm-descbinds
@@ -347,8 +357,6 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :init
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-
-
 
 ;; (use-package cc-mode
 ;;   :config
@@ -367,13 +375,6 @@ FACE defaults to inheriting from default and highlight."
 (add-hook 'c-mode-hook 'my-indent-style)
 (add-hook 'c++-mode-hook 'my-indent-style)
 
-;;open files with a tree like structure
-(use-package neotree
-  :ensure t
-  :config
-  (global-set-key [f8] 'neotree-toggle)
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-
 ;;Autoclosing (){}[]
 (use-package smartparens
   :ensure t
@@ -388,7 +389,7 @@ FACE defaults to inheriting from default and highlight."
 (use-package highlight-indent-guides
   :ensure t
   :hook ((prog-mode . highlight-indent-guides-mode))
-  :config (setq highlight-indent-guides-method 'character))
+  :init (setq highlight-indent-guides-method 'character))
 
 (use-package yasnippet
   :ensure t
@@ -425,10 +426,13 @@ FACE defaults to inheriting from default and highlight."
    (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 (use-package lsp-mode
+  :ensure t
   :commands lsp
   :hook
   (scala-mode . lsp)
   (LaTeX-mode . lsp)
+  (sh-mode . lsp)
+  (cmake-mode . lsp)
   :init
   (setq lsp-diagnostic-package :flycheck)
   (setq lsp-enable-indentation nil)
@@ -436,19 +440,16 @@ FACE defaults to inheriting from default and highlight."
   (setq lsp-enable-snippet t)
   (setq lsp-report-if-no-buffer t)
   (setq lsp-signature-auto-activate t)
-  :ensure t
-  :init
-  (setq read-process-output-max (*(* 1024 1024) 3))
+  (setq read-process-output-max (* 1024 1024 3))
   (with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+  (setq lsp-prefer-capf t)
 
-(use-package focus
-  :ensure t)
+  ;; (setq lsp-keymap-prefix (""))
+  )
 
-(add-to-list 'focus-mode-to-thing '(c-mode . lsp-folding-range))
 
 (defvar home-dir (getenv "HOME"))
-(defvar emacs-email (getenv "MU4E"))
 (defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
 
 (use-package ccls
@@ -463,6 +464,9 @@ FACE defaults to inheriting from default and highlight."
 					     :index (:reparseForDependency 1)
 					     :completion (:detailedLabel t))))
 
+(with-eval-after-load 'lsp-mode
+ (flycheck-add-next-checker 'lsp 'c/c++-clang))
+
 (use-package cmake-mode
   :ensure t)
 
@@ -474,14 +478,6 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :hook (cmake-mode . eldoc-cmake-enable))
 
-(use-package company-lsp
-  :commands company-lsp
-  :ensure t
-  :config (setq company-transformers nil company-lsp-async t
-		company-lsp-cache-candidates nil company-lsp-enable-recompletion t)
-  (push 'company-lsp company-backends)
-  (add-to-list 'company-lsp-filter-candidates '(digestif . nil)))
-
 (use-package lsp-ui
   :commands lsp-ui-mode
   :ensure t
@@ -489,12 +485,15 @@ FACE defaults to inheriting from default and highlight."
   (:map lsp-ui-mode-map
 	([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
 	([remap xref-find-references] . lsp-ui-peek-find-references))
-  :config
+  :init
   (setq lsp-ui-sideline-enable t
 	lsp-ui-doc-use-webkit t
         lsp-ui-doc-enable t
-	lsp-prefer-flymake nil
+	lsp-prefer-flymake :none
         lsp-ui-imenu-enable t))
+
+(with-eval-after-load 'lsp-ui-mode
+   (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
 
 (use-package lsp-python-ms
   :ensure t
@@ -547,7 +546,9 @@ FACE defaults to inheriting from default and highlight."
   	("C-C l" . org-store-link)
   	("C-x c" . org-capture))
   :init
-  (setq org-modules (quote (org-habit))))
+  (setq org-modules (quote (org-habit)))
+  (org-babel-do-load-languages 'org-babel-load-languages'((shell . t)))
+  (setq org-src-tab-acts-natively t))
 
 ;;https://randomgeekery.org/2020/02/04/goto-address-mode-opens-links-in-emacs/
 (add-hook 'text-mode-hook (lambda ()
@@ -585,19 +586,21 @@ FACE defaults to inheriting from default and highlight."
   ;;of my github account from sensitive.el
   :init
   (setq grip-update-after-change nil)
-  (load-file "~/.emacs.d/sensitive.el"))
+  (if (file-exists-p "~/.emacs.d/sensitive.el")
+      (load-file "~/.emacs.d/sensitive.el")
+    (message "Sensitive.el does not exist")))
 
 (setq browse-url-generic-program "google-chrome-stable")
+(when (file-directory-p (concat home-dir "/gitfolders/mu4e_setup/"))
+  (defun load-mu4e ()
+    "Load my mu4e configuration and afterwards call mu4e."
+    (interactive)
+    (load-file mu4e-config)
+    (mu4e)))
 
-(defun load-mu4e ()
-  "Load my mu4e configuration and afterwards call mu4e."
-  (interactive)
-  (load-file mu4e-config)
-  (mu4e))
-
-;; (use-package mu4e-maildirs-extension
-;;   :ensure t
-;;   :init(mu4e-maildirs-extension))
+(use-package mu4e-maildirs-extension
+  :ensure t
+  :init(mu4e-maildirs-extension))
 
 (use-package emojify
   :ensure t
@@ -634,8 +637,7 @@ FACE defaults to inheriting from default and highlight."
   (setq pdf-annot-activate-created-annotations t)
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward)
-  (add-hook 'pdf-view-mode-hook (lambda ()
-				  (bms/pdf-midnite-amber)))); automatically turns on midnight-mode for pdfs
+  (add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))); automatically turns on midnight-mode for pdfs
 
 (use-package writegood-mode
   :ensure t
@@ -730,12 +732,6 @@ FACE defaults to inheriting from default and highlight."
 (use-package helm-ag
   :ensure t)
 
-(use-package wgrep
-  :ensure t
-  :config
-  (setq wgrep-auto-save-buffer t)
-  (add-hook 'ag-mode-hook 'wgrep-ag-setup))
-
 ;;M-x bug-hunter-init-file for debugging the .emacs
 (use-package bug-hunter
   :ensure t)
@@ -754,11 +750,6 @@ FACE defaults to inheriting from default and highlight."
   (setq doom-modeline-major-mode-color-icon t)
   (setq doom-modeline-lsp t))
 
-(use-package winum
-  :ensure t
-  :init
-  (winum-mode))
-
 (use-package persistent-scratch
   :ensure t
   :init
@@ -766,9 +757,9 @@ FACE defaults to inheriting from default and highlight."
   (persistent-scratch-autosave-mode 1))
 
 (use-package drag-stuff
+  :hook (prog-mode . drag-stuff-mode)
   :ensure t
-  :init
-  (drag-stuff-global-mode 1)
+  :config
   (drag-stuff-define-keys))
 
 (use-package auctex-latexmk
@@ -783,12 +774,9 @@ FACE defaults to inheriting from default and highlight."
   :config
   (setq reftex-cite-prompt-optional-args t)) ;; Prompt for empty optional arguments in cite
 
-(use-package auto-dictionary
-  :ensure t
-  :init(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1))))
-
 (use-package tex
   :ensure auctex
+  :hook (LaTex-mode . variable-pitch-mode)
   :mode ("\\.tex\\'" . latex-mode)
   :config (progn
 	    (setq TeX-source-correlate-mode t)
@@ -811,11 +799,6 @@ FACE defaults to inheriting from default and highlight."
 (use-package tramp
   :init
   (setq tramp-default-method "sshx"))
-
-(use-package fira-code-mode
-  :load-path "~/.emacs.d/fira-code-mode"
-  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
-  :hook prog-mode) ;; Enables fira-code-mode automatically for programming major modes
 
 (use-package vterm
   :ensure vterm-toggle
@@ -846,7 +829,7 @@ FACE defaults to inheriting from default and highlight."
  '(org-agenda-files nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed neotree multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
+   '(eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background "#2B2B2B")
@@ -879,6 +862,3 @@ FACE defaults to inheriting from default and highlight."
  '(mu4e-unread-face ((t (:inherit font-lock-keyword-face :foreground "white"))))
  '(show-paren-match ((t (:background "red"))))
  '(show-paren-mismatch ((t (:background "blue")))))
-
-(if (string= "1" emacs-email)
-    (load-mu4e))
