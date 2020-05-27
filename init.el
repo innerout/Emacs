@@ -115,6 +115,7 @@ FACE defaults to inheriting from default and highlight."
 (global-set-key (kbd "C-x k") 'bjm/kill-this-buffer) ;; kill the current buffer without prompting
 
 (desktop-save-mode 1) ;; Save sessions between Emacs sessions
+(setq desktop-restore-eager 3)
 (save-place-mode 1) ;; Opens the File in the last position that it was closed.
 (setq-default save-place-forget-unreadable-files nil) ;; Optimization for nfs.
 (setq require-final-newline nil)
@@ -123,7 +124,7 @@ FACE defaults to inheriting from default and highlight."
 (blink-cursor-mode 0) ;; No blinking Cursor
 (tool-bar-mode 0)     ;; Disable toolbar
 (delete-selection-mode t) ;; Highlighting Text and typing deletes the text like other editors
-
+(xterm-mouse-mode t)
 (column-number-mode t)    ;; Column Number in modeline
 (global-visual-line-mode 1)
 
@@ -137,7 +138,7 @@ FACE defaults to inheriting from default and highlight."
 		 "%b"))))
 
 ;;Source Code Pro font
-(add-to-list 'default-frame-alist '(font . "Source Code Pro"))
+(add-to-list 'default-frame-alist '(font . "Monaco"))
 
 (put 'erase-buffer 'disabled nil)  ;; Erases whole buffer.
 (put 'upcase-region 'disabled nil) ;; Upper case disable.
@@ -205,7 +206,8 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package async
   :ensure t
-  :init(async-bytecomp-package-mode 1))
+  ;;: init(async-bytecomp-package-mode 1)
+  )
 
 (use-package auto-compile
   :ensure t
@@ -213,10 +215,17 @@ FACE defaults to inheriting from default and highlight."
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
 
-(use-package undohist
+(use-package undo-fu-session
+  :ensure t
+  :init
+  (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'"))
+  (global-undo-fu-session-mode))
+
+(use-package undo-fu
   :ensure t
   :config
-  (undohist-initialize))
+  (global-set-key (kbd "C-/") 'undo-fu-only-undo)
+  (global-set-key (kbd "C-M-/") 'undo-fu-only-redo))
 
 ;;Different Color for every variable
 (use-package color-identifiers-mode
@@ -279,13 +288,6 @@ FACE defaults to inheriting from default and highlight."
       :fringe-bitmap 'my-flycheck-fringe-indicator
       :fringe-face 'flycheck-fringe-info)))
 
-(use-package flycheck-clang-analyzer
-  :disabled
-  :ensure t
-  ;; :after flycheck
-  ;; :config (flycheck-clang-analyzer-setup)
-  )
-
 (use-package aggressive-indent
   :ensure t
   :init
@@ -314,7 +316,7 @@ FACE defaults to inheriting from default and highlight."
   	("C-x C-f" . helm-find-files)
   	("C-x b" . helm-buffers-list) ;; Pressing C-c a shows "boring buffers"
   	("M-x" . helm-M-x)
-	("C-s" . helm-occur)
+	("C-s" . helm-swoop)
 	)
     :init
     (define-key helm-find-files-map (kbd "<C-backspace>") 'backward-kill-word)
@@ -322,20 +324,16 @@ FACE defaults to inheriting from default and highlight."
     (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
     (define-key helm-map (kbd "C-z") #'helm-select-action))
 
+(use-package helm-swoop
+  :ensure t
+  :init
+  (setq helm-swoop-speed-or-color t))
+
 (use-package helm-ext
   :ensure t
   :init
   (helm-ext-ff-enable-skipping-dots t)
   (helm-ext-ff-enable-auto-path-expansion t))
-
-(use-package helm-posframe
-  :disabled
-  :ensure t
-  :init
-  (helm-posframe-enable)
-  (setq helm-posframe-parameters
-      '((left-fringe . 10)
-        (right-fringe . 10))))
 
 (use-package helm-themes
   :ensure t)
@@ -443,11 +441,7 @@ FACE defaults to inheriting from default and highlight."
   (setq read-process-output-max (* 1024 1024 3))
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
-  (setq lsp-prefer-capf t)
-
-  ;; (setq lsp-keymap-prefix (""))
-  )
-
+  (setq lsp-prefer-capf t))
 
 (defvar home-dir (getenv "HOME"))
 (defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
@@ -463,6 +457,12 @@ FACE defaults to inheriting from default and highlight."
   (setq ccls-initialization-options '(:index (:comments 2)
 					     :index (:reparseForDependency 1)
 					     :completion (:detailedLabel t))))
+
+
+(use-package clang-format
+  :ensure t
+  :config
+  (global-set-key [C-M-tab] 'clang-format-buffer))
 
 (with-eval-after-load 'lsp-mode
  (flycheck-add-next-checker 'lsp 'c/c++-clang))
@@ -512,6 +512,30 @@ FACE defaults to inheriting from default and highlight."
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status))
+
+(use-package gitconfig-mode
+  :ensure t
+  :defer t)
+
+(use-package gitignore-mode
+  :ensure t
+  :defer t)
+
+(use-package gnu-elpa
+  :defer t
+  :ensure t)
+
+(use-package gnu-elpa-keyring-update
+  :ensure t)
+
+(use-package goto-addr
+  :defer t
+  :hook ((prog-mode . goto-address-prog-mode)
+         (text-mode . goto-address-mode)))
+
+(use-package goto-line-preview
+  :ensure t
+  :config (global-set-key [remap goto-line] 'goto-line-preview))
 
 ;;Removes trailing whitespace and newline. I should check if emacs has a builtin mode(Probably has)
 (use-package ethan-wspace
@@ -686,22 +710,6 @@ FACE defaults to inheriting from default and highlight."
   ("C-c C-<" . mc/mark-all-like-this)
   ("M-<down-mouse-1>" . mc/add-cursor-on-click))
 
-(defun elfeed-start()
-  "Update elfeed feeds and start it."
-  (interactive)
-  (elfeed-update)
-  (elfeed))
-
-(use-package elfeed
-  :ensure t
-  :bind ("C-x w" . elfeed-start)
-  :init (setq elfeed-feeds
-	      '("https://github.com/languagetool-org/languagetool/releases.atom"
-		"https://www.reddit.com/r/emacs/.rss"
-		"https://www.reddit.com/r/archlinux/.rss"
-		"https://www.reddit.com/r/cpp/.rss"
-		"https://www.reddit.com/r/C_Programming/.rss")))
-
 (use-package rmsbolt
   :ensure t)
 
@@ -774,6 +782,13 @@ FACE defaults to inheriting from default and highlight."
   :config
   (setq reftex-cite-prompt-optional-args t)) ;; Prompt for empty optional arguments in cite
 
+(use-package company-reftex
+  :ensure t
+  :after company
+  :init
+  (add-to-list 'company-backends 'company-reftex-labels)
+  (add-to-list 'company-backends 'company-reftex-citations))
+
 (use-package tex
   :ensure auctex
   :hook (LaTex-mode . variable-pitch-mode)
@@ -829,7 +844,7 @@ FACE defaults to inheriting from default and highlight."
  '(org-agenda-files nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package undohist undo-tree sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
+   '(goto-line-preview gnu-elpa-keyring-update gitignore-mode eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background "#2B2B2B")
