@@ -318,11 +318,11 @@ FACE defaults to inheriting from default and highlight."
   	("M-x" . helm-M-x)
 	("C-s" . helm-swoop)
 	)
-    :init
-    (define-key helm-find-files-map (kbd "<C-backspace>") 'backward-kill-word)
-    (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
-    (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
-    (define-key helm-map (kbd "C-z") #'helm-select-action))
+  :init
+  (define-key helm-find-files-map (kbd "<C-backspace>") 'backward-kill-word)
+  (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+  (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z") #'helm-select-action))
 
 (use-package helm-swoop
   :ensure t
@@ -337,10 +337,6 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package helm-themes
   :ensure t)
-
-(use-package spell-fu
-  :ensure t
-  :init (global-spell-fu-mode))
 
 ;;C-h b
 (use-package helm-descbinds
@@ -386,8 +382,10 @@ FACE defaults to inheriting from default and highlight."
 ;;Shows every indentation block.
 (use-package highlight-indent-guides
   :ensure t
-  :hook ((prog-mode . highlight-indent-guides-mode))
-  :init (setq highlight-indent-guides-method 'character))
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :init
+  (setq highlight-indent-guides-method 'character)
+  (setq highlight-indent-guides-suppress-auto-error t))
 
 (use-package yasnippet
   :ensure t
@@ -408,7 +406,9 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package scala-mode
   :ensure t
-  :mode "\\.s\\(cala\\|bt\\)$")
+  :mode
+  (".scala" . scala-mode)
+  (".sbt" . scala-mode))
 
 (use-package sbt-mode
   :ensure t
@@ -420,17 +420,32 @@ FACE defaults to inheriting from default and highlight."
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map)
-   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-   (setq sbt:program-options '("-Dsbt.supershell=false")))
+  ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+  (setq sbt:program-options '("-Dsbt.supershell=false")))
+
+(use-package yaml-mode
+  :ensure t
+  :mode
+  (".yml" . yaml-mode)
+  (".yaml" . yaml-mode))
+
+(use-package lsp-latex
+  :ensure t
+  :init
+  (with-eval-after-load "LaTeX-mode"
+    (add-hook 'tex-mode-hook 'lsp)
+    (add-hook 'latex-mode-hook 'lsp)
+    (add-hook 'LaTeX-mode-hook 'lsp)))
 
 (use-package lsp-mode
   :ensure t
   :commands lsp
   :hook
   (scala-mode . lsp)
-  (LaTeX-mode . lsp)
   (sh-mode . lsp)
   (cmake-mode . lsp)
+  (LaTeX-mode . lsp)
+  (yaml-mode . lsp)
   :init
   (setq lsp-diagnostic-package :flycheck)
   (setq lsp-enable-indentation nil)
@@ -440,11 +455,9 @@ FACE defaults to inheriting from default and highlight."
   (setq lsp-signature-auto-activate t)
   (setq read-process-output-max (* 1024 1024 3))
   (with-eval-after-load 'lsp-mode
-    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
-  (setq lsp-prefer-capf t))
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
 (defvar home-dir (getenv "HOME"))
-(defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
 
 (use-package ccls
   :ensure t
@@ -465,7 +478,7 @@ FACE defaults to inheriting from default and highlight."
   (global-set-key [C-M-tab] 'clang-format-buffer))
 
 (with-eval-after-load 'lsp-mode
- (flycheck-add-next-checker 'lsp 'c/c++-clang))
+  (flycheck-add-next-checker 'lsp 'c/c++-clang))
 
 (use-package cmake-mode
   :ensure t)
@@ -493,7 +506,7 @@ FACE defaults to inheriting from default and highlight."
         lsp-ui-imenu-enable t))
 
 (with-eval-after-load 'lsp-ui-mode
-   (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
+  (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
 
 (use-package lsp-python-ms
   :ensure t
@@ -547,7 +560,7 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package whitespace
   :init
-  (setq whitespace-line-column 110)
+  (setq whitespace-line-column 120)
   (setq whitespace-style '(trailing))
   (global-whitespace-mode))
 
@@ -584,9 +597,9 @@ FACE defaults to inheriting from default and highlight."
 (if (require 'toc-org nil t)
     (add-hook 'org-mode-hook 'toc-org-mode)
 
-    ;; enable in markdown, too
-    (add-hook 'markdown-mode-hook 'toc-org-mode)
-    (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
+  ;; enable in markdown, too
+  (add-hook 'markdown-mode-hook 'toc-org-mode)
+  (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
 
 
 (use-package org-bullets
@@ -600,8 +613,8 @@ FACE defaults to inheriting from default and highlight."
   (org-mode . org-fancy-priorities-mode)
   :config
   (setq org-fancy-priorities-list '((?A . "❗")
-                                  (?B . "⬆")
-                                  (?C . "⬇"))))
+                                    (?B . "⬆")
+                                    (?C . "⬇"))))
 (use-package grip-mode
   :ensure t
   :hook ((markdown-mode) . grip-mode)
@@ -619,6 +632,7 @@ FACE defaults to inheriting from default and highlight."
   (defun load-mu4e ()
     "Load my mu4e configuration and afterwards call mu4e."
     (interactive)
+    (defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
     (load-file mu4e-config)
     (mu4e)))
 
@@ -630,7 +644,7 @@ FACE defaults to inheriting from default and highlight."
   :ensure t
   :init(add-hook 'after-init-hook #'global-emojify-mode)
   (with-eval-after-load "emojify"
-  (delete 'mu4e-headers-mode emojify-inhibit-major-modes)))
+    (delete 'mu4e-headers-mode emojify-inhibit-major-modes)))
 
 (use-package mu4e-alert
   :ensure t
@@ -746,17 +760,17 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package doom-modeline
   :ensure t
-  :hook (after-init . doom-modeline-mode)
   :init
   (setq doom-modeline-height 25)
   (setq doom-modeline-bar-width 3)
   (setq doom-modeline-buffer-file-name-style 'buffer-name)
   (setq doom-modeline-python-executable "python")
-  (setq doom-modeline-icon t)
-  (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-major-mode-color-icon t)
-  (setq doom-modeline-lsp t))
+  ;; (setq doom-modeline-icon t)
+  ;; (setq doom-modeline-major-mode-icon t)
+  ;; (setq doom-modeline-minor-modes nil)
+  ;; (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-lsp t)
+  (doom-modeline-mode 1))
 
 (use-package persistent-scratch
   :ensure t
@@ -844,7 +858,7 @@ FACE defaults to inheriting from default and highlight."
  '(org-agenda-files nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(goto-line-preview gnu-elpa-keyring-update gitignore-mode eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-lsp company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
+   '(helm-ext posframe goto-line-preview gnu-elpa-keyring-update gitignore-mode eldoc-cmake cmake-font-lock cmake-mode winum auto-dictionary auctex-latexmk yasnippet-snippets xcscope which-key use-package sublimity spacemacs-theme smartparens rmsbolt rainbow-delimiters pdf-tools org-plus-contrib org-bullets objed multiple-cursors mu4e-conversation mu4e-alert markdown-mode+ magit-popup magit lv lsp-ui lsp-sh lsp-python-ms langtool highlight-indent-guides helm-themes helm-descbinds graphql git-gutter ghub gcmh focus flycheck-pos-tip flycheck-clang-analyzer ethan-wspace elfeed eldoc-eval doom-modeline dashboard company-auctex color-identifiers-mode ccls bug-hunter beacon auto-package-update auto-compile all-the-icons-dired aggressive-indent ag academic-phrases))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background "#2B2B2B")
