@@ -35,6 +35,7 @@
 (remove-hook 'text-mode-hook #'auto-fill-mode)
 (setq doom-font "Monaco-12")
 (setq doom-theme 'doom-snazzy)
+
 (map! :after smartparens
       :map smartparens-mode-map
       "<C-left>" #'left-word
@@ -137,9 +138,6 @@ FACE defaults to inheriting from default and highlight."
     (defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
     (load-file mu4e-config)
     (mu4e)))
-
-(after! lsp-python-ms
-  (set-lsp-priority! 'mspyls 1))
 
 (after! smartparens
   (smartparens-global-mode t)
