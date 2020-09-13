@@ -31,11 +31,35 @@
 (add-hook! cmake-mode-hook eldoc-cmake-enable)
 (add-hook! prog-mode-hook goto-address-prog-mode)
 (add-hook! text-mode-hook goto-address-mode)
-(remove-hook 'doom-first-buffer-hook #'drag-stuff-global-mode)
-(remove-hook 'text-mode-hook #'auto-fill-mode)
+(add-hook! flycheck-mode  flycheck-clang-tidy-setup)
+(remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
+(remove-hook! text-mode-hook #'auto-fill-mode)
+(add-hook 'lsp-after-initialize-hook (lambda
+                                       ()
+                                       (flycheck-add-next-checker 'lsp 'c/c++-clang)))
+(add-hook 'lsp-after-initialize-hook (lambda
+                                       ()
+                                       (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
+(add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
+
+(defun bms/pdf-no-filter ()
+  "View pdf without colour filter."
+  (interactive)
+  (pdf-view-midnight-minor-mode -1))
+
+(defun bms/pdf-midnite-amber ()
+  "Set pdf-view-midnight-colors to amber on dark slate blue."
+  (interactive)
+  (setq pdf-view-midnight-colors '("#ff9900" . "#0a0a12" )) ; amber
+  (pdf-view-midnight-minor-mode))
+
 (setq doom-font "Monaco-12")
 (setq doom-theme 'doom-snazzy)
-
+(setq lsp-headerline-breadcrumb-enable t)
+(which-function-mode 1)
+(smartparens-global-mode)
+(smartparens-global-strict-mode)
+(beacon-mode 1)
 (map! :after smartparens
       :map smartparens-mode-map
       "<C-left>" #'left-word
@@ -74,7 +98,7 @@
    ((equal change-lang 0) (greek-keyboard))))
 
 (global-auto-revert-mode t)
-
+(whole-line-or-region-global-mode)
 (setq blink-matching-paren 'show)
 (defun bjm/kill-this-buffer ()
   "Kill the current buffer."
@@ -139,9 +163,12 @@ FACE defaults to inheriting from default and highlight."
     (load-file mu4e-config)
     (mu4e)))
 
-(after! smartparens
-  (smartparens-global-mode t)
-  (add-hook! prog-mode-hook turn-on-smartparens-strict-mode))
+(use-package! flycheck-clang-tidy
+  :after flycheck)
+
+(after! (flycheck gitlab-ci-mode)
+  (gitlab-ci-mode-flycheck-enable))
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

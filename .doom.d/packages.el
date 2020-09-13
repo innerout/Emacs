@@ -58,4 +58,8 @@
 (package! gitignore-mode)
 (package! goto-addr)
 (package! goto-line-preview)
-
+(package! flycheck-clang-tidy)
+(package! whole-line-or-region)
+(package! gitlab-ci-mode)
+(package! gitlab-ci-mode-flycheck)
+(package! beacon)
