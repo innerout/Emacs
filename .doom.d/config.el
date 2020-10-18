@@ -25,6 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
+(setq comp-deferred-compilation t)
 (add-hook! message-mode-hook word-wrap-mode)
 (add-hook! after-init-hook global-color-identifiers-mode)
 (add-hook! cmake-mode-hook cmake-font-lock-activate)
@@ -165,11 +166,9 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package! flycheck-clang-tidy
   :after flycheck)
-
+(after! magit (setq magit-diff-refine-hunk 'all))
 (after! (flycheck gitlab-ci-mode)
   (gitlab-ci-mode-flycheck-enable))
-
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
