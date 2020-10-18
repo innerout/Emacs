@@ -63,3 +63,4 @@
 (package! gitlab-ci-mode)
 (package! gitlab-ci-mode-flycheck)
 (package! beacon)
+(package! i3wm-config-mode)
