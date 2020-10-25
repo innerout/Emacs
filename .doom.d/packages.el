@@ -64,3 +64,4 @@
 (package! gitlab-ci-mode-flycheck)
 (package! beacon)
 (package! i3wm-config-mode)
+(package! clang-format)

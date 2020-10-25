@@ -33,6 +33,7 @@
 (add-hook! prog-mode-hook goto-address-prog-mode)
 (add-hook! text-mode-hook goto-address-mode)
 (add-hook! flycheck-mode  flycheck-clang-tidy-setup)
+(add-hook! after-init-hook global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
 (add-hook 'lsp-after-initialize-hook (lambda
@@ -57,6 +58,7 @@
 (setq doom-font "Monaco-12")
 (setq doom-theme 'doom-snazzy)
 (setq lsp-headerline-breadcrumb-enable t)
+(setq lsp-lens-enable t)
 (which-function-mode 1)
 (smartparens-global-mode)
 (smartparens-global-strict-mode)
@@ -68,7 +70,7 @@
       "<C-right>" #'right-word
       "<M-right>" #'right-word
       "M-]" #'sp-unwrap-sexp)
-
+(map! "C-M-<tab>" #'clang-format-buffer)
 (map! "C-x k" #'bjm/kill-this-buffer)
 (map! [remap goto-line] #'goto-line-preview)
 ;; If you use `org' and don't want your org files in the default location below,
@@ -166,9 +168,12 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package! flycheck-clang-tidy
   :after flycheck)
+
 (after! magit (setq magit-diff-refine-hunk 'all))
+
 (after! (flycheck gitlab-ci-mode)
   (gitlab-ci-mode-flycheck-enable))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
