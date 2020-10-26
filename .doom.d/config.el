@@ -56,7 +56,9 @@
   (pdf-view-midnight-minor-mode))
 
 (setq doom-font "Monaco-12")
-(setq doom-theme 'doom-snazzy)
+(if window-system 
+    (setq doom-theme 'doom-snazzy)
+  (setq doom-theme 'spacemacs-dark))
 (setq lsp-headerline-breadcrumb-enable t)
 (setq lsp-lens-enable t)
 (which-function-mode 1)
