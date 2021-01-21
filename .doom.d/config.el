@@ -33,6 +33,9 @@
 (add-hook! prog-mode-hook goto-address-prog-mode)
 (add-hook! text-mode-hook goto-address-mode)
 (add-hook! flycheck-mode  flycheck-clang-tidy-setup)
+(add-hook! org-mode (org-superstar-mode))
+(add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
+(add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
 (add-hook! after-init-hook global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
@@ -42,7 +45,9 @@
 (add-hook 'lsp-after-initialize-hook (lambda
                                        ()
                                        (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
-(add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
+(setq-default indent-tabs-mode t)
+(add-hook! lisp-mode (setq indent-tabs-mode nil))
+(add-hook! emacs-lisp-mode (setq indent-tabs-mode nil))
 
 (defun bms/pdf-no-filter ()
   "View pdf without colour filter."
@@ -56,11 +61,12 @@
   (pdf-view-midnight-minor-mode))
 
 (setq doom-font "Monaco-12")
+
 (if window-system 
     (setq doom-theme 'doom-snazzy)
   (setq doom-theme 'spacemacs-dark))
 (setq lsp-headerline-breadcrumb-enable t)
-(setq lsp-lens-enable t)
+;;(setq lsp-lens-enable t)
 (which-function-mode 1)
 (smartparens-global-mode)
 (smartparens-global-strict-mode)
@@ -173,8 +179,19 @@ FACE defaults to inheriting from default and highlight."
 
 (after! magit (setq magit-diff-refine-hunk 'all))
 
+(setq org-roam-directory "~/gitfolders/schedule-life")
+
+(setq org-ref-default-bibliography '("~/gitfolders/schedule-life/bibliography/biblio.bib")
+      org-ref-pdf-directory "~/gitfolders/schedule-life/pdfs/"
+      bibtex-completion-bibliography "~/gitfolders/schedule-life/bibliography/biblio.bib" )
+
+(setq org-ellipsis "⤵")
+
 (after! (flycheck gitlab-ci-mode)
   (gitlab-ci-mode-flycheck-enable))
+
+(use-package! dap-cpptools
+  :defer 5)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

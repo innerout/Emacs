@@ -66,3 +66,6 @@
 (package! i3wm-config-mode)
 (package! clang-format)
 (package! spacemacs-theme)
+(package! org-ref)
+(package! orgit)
+(package! org-superstar)
