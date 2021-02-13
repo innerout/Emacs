@@ -51,6 +51,7 @@
 (package! drag-stuff :disable t)
 (package! mu4e-maildirs-extension)
 (package! mu4e-alert)
+(package! mu4e-marker-icons)
 (package! color-identifiers-mode)
 (package! cmake-font-lock)
 (package! eldoc-cmake)

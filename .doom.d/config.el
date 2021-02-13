@@ -34,17 +34,18 @@
 (add-hook! text-mode-hook goto-address-mode)
 (add-hook! flycheck-mode  flycheck-clang-tidy-setup)
 (add-hook! org-mode (org-superstar-mode))
-(add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
-(add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
 (add-hook! after-init-hook global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
+(add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
+(add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
 (add-hook 'lsp-after-initialize-hook (lambda
                                        ()
                                        (flycheck-add-next-checker 'lsp 'c/c++-clang)))
 (add-hook 'lsp-after-initialize-hook (lambda
                                        ()
                                        (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
+
 (setq-default indent-tabs-mode t)
 (add-hook! lisp-mode (setq indent-tabs-mode nil))
 (add-hook! emacs-lisp-mode (setq indent-tabs-mode nil))
@@ -189,9 +190,6 @@ FACE defaults to inheriting from default and highlight."
 
 (after! (flycheck gitlab-ci-mode)
   (gitlab-ci-mode-flycheck-enable))
-
-(use-package! dap-cpptools
-  :defer 5)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
