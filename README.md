@@ -1,37 +1,34 @@
 # Requirements
-* Emacs configuration tested on the master branch on savannah.
+* My Emacs configuration is based on the emacs-pgtk-native-comp-git AUR package.
 
 ### Arch
 
-#### ```sudo yay -S emacs-git```
+To run my configuration you need to run the following commands in ArchLinux.
+#### `yay -S emacs-pgtk-native-comp-git texlab ccls-git npm python-pip clang-format ttf-monaco`
+#### `pip install pyright cmake-language-server grip --user`
+#### `sudo npm i -g yaml-language-server bash-language-server`
 
 ## Installation
 
 ``` bash
 1. git clone https://github.com/innerout/Emacs.git
-2. cd Emacs
-3. cp init.el ~/.emacs.d/init.el
+2. cp -r Emacs/.doom.d ~/
+3. cd ~/
+4. git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+5. ~/.emacs.d/bin/doom install
 ```
-
-## Notes
-
-* Font [Adobe Source Code Pro](https://www.archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/)
-
-# HOWTO SETUP PLUGINS
 
 ## Ccls
 
-__Dependencies__ :  [bear](https://github.com/rizsotto/Bear) [compdb](https://github.com/Sarcasm/compdb)
-### To install ccls use [archlinuxcn](https://github.com/archlinuxcn/repo) repo
+If you don't develop a cmake project you may need the tools below.
 
-sudo pacman -S ccls-git
+__Dependencies__ :  [bear](https://github.com/rizsotto/Bear) [compdb](https://github.com/Sarcasm/compdb)
 
 ### To use in a project
 
 ```bash
 
 cd MakefileDirectory
-touch .ccls-root
 bear make
 cd ..
 compdb -p MakefileDirectory/ list > compile_commands.json
@@ -39,18 +36,6 @@ mv compile_commands.json  MakefileDirectory/
 
 ```
 
-## Cmake Language Server
-
-__Dependencies__ : pip install cmake-language-server --user
-
-## Bash Language Server
-
-__Dependencies__ : npm i -g bash-language-server
-
 ## Markdown-mode
 
 __Dependencies__ : [pandoc](https://pandoc.org/) [grip](https://github.com/joeyespo/grip)
-
-## All-the-icons
-
-M-x all-the-icons-install-fonts
