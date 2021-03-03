@@ -38,13 +38,13 @@
 (remove-hook! text-mode-hook #'auto-fill-mode)
 (add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
 (add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
-(add-hook 'lsp-after-initialize-hook (lambda
-                                       ()
-                                       (flycheck-add-next-checker 'lsp 'c/c++-clang)))
-(add-hook 'lsp-after-initialize-hook (lambda
-                                       ()
-                                       (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
 (add-hook 'prog-mode-hook 'color-identifiers-mode)
+;; (add-hook 'lsp-after-initialize-hook (lambda
+;;                                        ()
+;;                                        (flycheck-add-next-checker 'lsp 'c/c++-clang)))
+;; (add-hook 'lsp-after-initialize-hook (lambda
+;;                                        ()
+;;                                        (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
 
 (setq-default indent-tabs-mode t)
 (add-hook! lisp-mode (setq indent-tabs-mode nil))
