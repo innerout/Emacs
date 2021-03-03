@@ -66,12 +66,27 @@
 (if window-system 
     (setq doom-theme 'doom-snazzy)
   (setq doom-theme 'spacemacs-dark))
+
 (setq lsp-headerline-breadcrumb-enable t)
-;;(setq lsp-lens-enable t)
-(which-function-mode 1)
+(setq lsp-ui-sideline-enable t)
+(setq lsp-modeline-diagnostics-enable t)
+(setq lsp-modeline-code-actions-enable t)
+(setq lsp-treemacs-sync-mode 1)
+(setq lsp-signature-function 'lsp-signature-posframe)
+
+(use-package! which-function
+  :defer 5
+  :init(which-function-mode 1))
+
+(use-package! beacon
+  :defer 5
+  :init(beacon-mode 1))
+
+(after! flycheck 'flycheck-clang-tidy)
+
 (smartparens-global-mode)
 (smartparens-global-strict-mode)
-(beacon-mode 1)
+
 (map! :after smartparens
       :map smartparens-mode-map
       "<C-left>" #'left-word
