@@ -131,6 +131,7 @@
 (global-auto-revert-mode t)
 (whole-line-or-region-global-mode)
 (setq blink-matching-paren 'show)
+(put 'narrow-to-region 'disabled nil)
 (defun bjm/kill-this-buffer ()
   "Kill the current buffer."
   (interactive)
@@ -194,9 +195,6 @@ FACE defaults to inheriting from default and highlight."
     (load-file mu4e-config)
     (mu4e)))
 
-(use-package! flycheck-clang-tidy
-  :after flycheck)
-
 (after! magit (setq magit-diff-refine-hunk 'all))
 
 (setq org-roam-directory "~/gitfolders/schedule-life")
@@ -210,6 +208,7 @@ FACE defaults to inheriting from default and highlight."
 (after! (flycheck gitlab-ci-mode)
   (gitlab-ci-mode-flycheck-enable))
 
+(after! magit (setq git-commit-summary-max-length 72))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
