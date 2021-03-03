@@ -27,7 +27,6 @@
 ;; `load-theme' function. This is the default:
 (setq comp-deferred-compilation t)
 (add-hook! message-mode-hook word-wrap-mode)
-(add-hook! after-init-hook global-color-identifiers-mode)
 (add-hook! cmake-mode-hook cmake-font-lock-activate)
 (add-hook! cmake-mode-hook eldoc-cmake-enable)
 (add-hook! prog-mode-hook goto-address-prog-mode)
@@ -45,6 +44,7 @@
 (add-hook 'lsp-after-initialize-hook (lambda
                                        ()
                                        (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
+(add-hook 'prog-mode-hook 'color-identifiers-mode)
 
 (setq-default indent-tabs-mode t)
 (add-hook! lisp-mode (setq indent-tabs-mode nil))
