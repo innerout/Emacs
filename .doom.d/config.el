@@ -94,9 +94,13 @@
       "<C-right>" #'right-word
       "<M-right>" #'right-word
       "M-]" #'sp-unwrap-sexp)
-(map! "C-M-<tab>" #'clang-format-buffer)
+
+(map! "C-M-i" #'clang-format-buffer)
 (map! "C-x k" #'bjm/kill-this-buffer)
 (map! [remap goto-line] #'goto-line-preview)
+(map! [remap zap-to-char] #'ace-jump-zap-to-char)
+(map! [remap zap-up-to-char] #'ace-jump-zap-up-to-char)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")

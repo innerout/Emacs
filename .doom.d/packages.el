@@ -70,3 +70,5 @@
 (package! org-ref)
 (package! orgit)
 (package! org-superstar)
+(package! lsp-treemacs)
+(package! ace-jump-zap)
