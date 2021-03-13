@@ -53,6 +53,8 @@
 (package! mu4e-alert)
 (package! mu4e-marker-icons)
 (package! mu4e-thread-folding)
+(package! mu4e-thread-folding :disable t
+  :recipe (:host github :repo "rougier/mu4e-thread-folding"))
 (package! color-identifiers-mode)
 (package! cmake-font-lock)
 (package! eldoc-cmake)
