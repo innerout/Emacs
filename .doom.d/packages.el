@@ -55,6 +55,10 @@
 (package! mu4e-thread-folding)
 (package! mu4e-thread-folding :disable t
   :recipe (:host github :repo "rougier/mu4e-thread-folding"))
+(package! mu4e-patch :disable t
+  :recipe (:host github :repo "seanfarley/mu4e-patch"))
+(package! vundo
+  :recipe (:host github :repo "casouri/vundo"))
 (package! color-identifiers-mode)
 (package! cmake-font-lock)
 (package! eldoc-cmake)
@@ -74,4 +78,8 @@
 (package! orgit)
 (package! org-superstar)
 (package! lsp-treemacs)
+(package! lsp-grammarly)
+(unpin! lsp-mode)
+(package! keytar
+  :recipe (:host github :repo "emacs-grammarly/keytar"))
 (package! ace-jump-zap)

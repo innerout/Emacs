@@ -82,10 +82,12 @@
   :defer 5
   :init(beacon-mode 1))
 
+(use-package! lsp-grammarly
+  :hook (text-mode . lsp!))
+
 (after! flycheck 'flycheck-clang-tidy)
 
 (smartparens-global-mode)
-(smartparens-global-strict-mode)
 
 (map! :after smartparens
       :map smartparens-mode-map
@@ -94,6 +96,13 @@
       "<C-right>" #'right-word
       "<M-right>" #'right-word
       "M-]" #'sp-unwrap-sexp)
+
+(map! :after vundo
+      :map vundo-mode-map
+      "n" #'vundo-next
+      "p" #'vundo-previous
+      "f" #'vundo-forward
+      "b" #'vundo-backward)
 
 (map! "C-M-i" #'clang-format-buffer)
 (map! "C-x k" #'bjm/kill-this-buffer)
@@ -173,9 +182,7 @@
          (blink-matching-open))))))
 
 (defun display-line-overlay+ (pos str &optional face)
-  "Display line at POS as STR with FACE.
-
-FACE defaults to inheriting from default and highlight."
+  "Display line at POS as STR with FACE.FACE defaults to inheriting from default and highlight."
   (let ((ol (save-excursion
               (goto-char pos)
               (make-overlay (line-beginning-position)
@@ -184,7 +191,6 @@ FACE defaults to inheriting from default and highlight."
     (overlay-put ol 'face
                  (or face '(:inherit default :inherit highlight)))
     ol))
-
 
 (defvar home-dir (getenv "HOME"))
 (when (file-directory-p (concat home-dir "/gitfolders/mu4e_setup/"))
