@@ -77,9 +77,12 @@
 (package! org-ref)
 (package! orgit)
 (package! org-superstar)
-(package! lsp-treemacs)
 (package! lsp-grammarly)
-(unpin! lsp-mode)
+(package! ssh-config-mode)
+;;(unpin! lsp-mode)
 (package! keytar
   :recipe (:host github :repo "emacs-grammarly/keytar"))
 (package! ace-jump-zap)
+(package! top-level-keybinds
+  :recipe (:host github
+           :repo "hugonobrega/top-level-keybinds"))

@@ -71,7 +71,7 @@
 (setq lsp-ui-sideline-enable t)
 (setq lsp-modeline-diagnostics-enable t)
 (setq lsp-modeline-code-actions-enable t)
-(setq lsp-treemacs-sync-mode 1)
+(after! lsp-treemacs (lsp-treemacs-sync-mode 1))
 (setq lsp-signature-function 'lsp-signature-posframe)
 
 (use-package! which-function
@@ -83,7 +83,16 @@
   :init(beacon-mode 1))
 
 (use-package! lsp-grammarly
-  :hook (text-mode . lsp!))
+  :hook (text-mode . lsp!)
+  :hook (latex-mode . lsp!))
+
+(use-package! ssh-config-mode
+  :init
+  (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
+  (add-to-list 'auto-mode-alist '("/sshd?_config\\'"      . ssh-config-mode))
+  (add-to-list 'auto-mode-alist '("/knownhosts\\'"       . ssh-known-hosts-mode))
+  (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
+  (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
 
 (after! flycheck 'flycheck-clang-tidy)
 
