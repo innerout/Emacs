@@ -215,6 +215,11 @@
   (gitlab-ci-mode-flycheck-enable))
 
 (after! magit (setq git-commit-summary-max-length 72))
+
+;;Load mu4e configuration based on Doom's templates
+(if (file-exists-p "~/gitfolders/mu4e_setup/doom_mu4e.el")
+  (load-file "~/gitfolders/mu4e_setup/doom_mu4e.el"))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
