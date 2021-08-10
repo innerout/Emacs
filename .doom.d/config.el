@@ -201,15 +201,6 @@
                  (or face '(:inherit default :inherit highlight)))
     ol))
 
-(defvar home-dir (getenv "HOME"))
-(when (file-directory-p (concat home-dir "/gitfolders/mu4e_setup/"))
-  (defun load-mu4e ()
-    "Load my mu4e configuration and afterwards call mu4e."
-    (interactive)
-    (defvar mu4e-config (concat home-dir "/gitfolders/mu4e_setup/mu4e-config.el"))
-    (load-file mu4e-config)
-    (mu4e)))
-
 (after! magit (setq magit-diff-refine-hunk 'all))
 
 (setq org-roam-directory "~/gitfolders/schedule-life")
