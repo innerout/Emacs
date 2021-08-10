@@ -220,6 +220,13 @@
 (if (file-exists-p "~/gitfolders/mu4e_setup/doom_mu4e.el")
   (load-file "~/gitfolders/mu4e_setup/doom_mu4e.el"))
 
+(use-package! elpy
+  :init
+  (elpy-enable))
+
+(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
+(setq +python-jupyter-repl-args '("--simple-prompt"))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

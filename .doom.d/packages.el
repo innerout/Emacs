@@ -86,3 +86,4 @@
 (package! top-level-keybinds
   :recipe (:host github
            :repo "hugonobrega/top-level-keybinds"))
+(package! elpy)
