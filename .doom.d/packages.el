@@ -49,17 +49,10 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! drag-stuff :disable t)
-(package! mu4e-maildirs-extension)
-(package! mu4e-alert)
-(package! mu4e-marker-icons)
-(package! mu4e-thread-folding)
-(package! mu4e-thread-folding :disable t
-  :recipe (:host github :repo "rougier/mu4e-thread-folding"))
-(package! mu4e-patch :disable t
-  :recipe (:host github :repo "seanfarley/mu4e-patch"))
 (package! vundo
   :recipe (:host github :repo "casouri/vundo"))
 (package! color-identifiers-mode)
+(package! mu4e-column-faces)
 (package! cmake-font-lock)
 (package! eldoc-cmake)
 (package! gitconfig-mode)
@@ -86,3 +79,4 @@
 (package! top-level-keybinds
   :recipe (:host github
            :repo "hugonobrega/top-level-keybinds"))
+(unpin! org-roam company-org-roam)
