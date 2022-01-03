@@ -86,6 +86,7 @@
 
        :tools
        ;;ansible
+       ;;biblio            ; Writes a PhD for you (citation needed)
        ;;(debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        docker
@@ -113,6 +114,7 @@
 
        :lang
        ;;agda              ; types of types of types of types...
+       ;;beancount	   ; mind the GAAP
        (cc +lsp)               ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
@@ -121,6 +123,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
+       ;;dhall
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses

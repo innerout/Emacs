@@ -49,20 +49,14 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! drag-stuff :disable t)
-(package! vundo
-  :recipe (:host github :repo "casouri/vundo"))
 (package! color-identifiers-mode)
 (package! mu4e-column-faces)
 (package! cmake-font-lock)
 (package! eldoc-cmake)
-(package! gitconfig-mode)
-(package! gitignore-mode)
 (package! goto-addr)
 (package! goto-line-preview)
 (package! flycheck-clang-tidy)
 (package! whole-line-or-region)
-(package! gitlab-ci-mode)
-(package! gitlab-ci-mode-flycheck)
 (package! beacon)
 (package! i3wm-config-mode)
 (package! clang-format)
@@ -70,11 +64,8 @@
 (package! org-ref)
 (package! orgit)
 (package! org-superstar)
-(package! lsp-grammarly)
 (package! ssh-config-mode)
-;;(unpin! lsp-mode)
-(package! keytar
-  :recipe (:host github :repo "emacs-grammarly/keytar"))
+(package! mu4e-alert :disable t)
 (package! ace-jump-zap)
 (package! top-level-keybinds
   :recipe (:host github

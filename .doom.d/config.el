@@ -26,14 +26,13 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq comp-deferred-compilation t)
-(add-hook! message-mode-hook word-wrap-mode)
-(add-hook! cmake-mode-hook cmake-font-lock-activate)
-(add-hook! cmake-mode-hook eldoc-cmake-enable)
-(add-hook! prog-mode-hook goto-address-prog-mode)
-(add-hook! text-mode-hook goto-address-mode)
-(add-hook! flycheck-mode  flycheck-clang-tidy-setup)
-(add-hook! org-mode (org-superstar-mode))
-(add-hook! after-init-hook global-color-identifiers-mode)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+(add-hook 'cmake-mode-hook 'eldoc-cmake-enable)
+(add-hook 'prog-mode-hook 'goto-address-prog-mode)
+(add-hook 'text-mode-hook 'goto-address-mode)
+(add-hook 'flycheck-mode  'flycheck-clang-tidy-setup)
+(add-hook 'org-mode '(org-superstar-mode))
+(add-hook 'after-init-hook 'global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
 (add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
@@ -47,8 +46,8 @@
 ;;                                        (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
 
 (setq-default indent-tabs-mode t)
-(add-hook! lisp-mode (setq indent-tabs-mode nil))
-(add-hook! emacs-lisp-mode (setq indent-tabs-mode nil))
+(add-hook 'lisp-mode (setq indent-tabs-mode nil))
+(add-hook 'emacs-lisp-mode (setq indent-tabs-mode nil))
 
 (defun bms/pdf-no-filter ()
   "View pdf without colour filter."
@@ -82,10 +81,6 @@
   :defer 5
   :init(beacon-mode 1))
 
-(use-package! lsp-grammarly
-  :hook (text-mode . lsp!)
-  :hook (latex-mode . lsp!))
-
 (use-package! ssh-config-mode
   :init
   (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
@@ -105,13 +100,6 @@
       "<C-right>" #'right-word
       "<M-right>" #'right-word
       "M-]" #'sp-unwrap-sexp)
-
-(map! :after vundo
-      :map vundo-mode-map
-      "n" #'vundo-next
-      "p" #'vundo-previous
-      "f" #'vundo-forward
-      "b" #'vundo-backward)
 
 (map! "C-M-i" #'clang-format-buffer)
 (map! "C-x k" #'bjm/kill-this-buffer)
@@ -210,9 +198,6 @@
       bibtex-completion-bibliography "~/gitfolders/schedule-life/bibliography/biblio.bib" )
 
 (setq org-ellipsis "⤵")
-
-(after! (flycheck gitlab-ci-mode)
-  (gitlab-ci-mode-flycheck-enable))
 
 (after! magit (setq git-commit-summary-max-length 72))
 
