@@ -56,8 +56,6 @@
 (package! goto-addr)
 (package! goto-line-preview)
 (package! flycheck-clang-tidy)
-(package! whole-line-or-region)
-(package! beacon)
 (package! i3wm-config-mode)
 (package! clang-format)
 (package! spacemacs-theme)

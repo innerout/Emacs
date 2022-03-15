@@ -77,10 +77,6 @@
   :defer 5
   :init(which-function-mode 1))
 
-(use-package! beacon
-  :defer 5
-  :init(beacon-mode 1))
-
 (use-package! ssh-config-mode
   :init
   (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
@@ -135,7 +131,6 @@
    ((equal change-lang 0) (greek-keyboard))))
 
 (global-auto-revert-mode t)
-(whole-line-or-region-global-mode)
 (setq blink-matching-paren 'show)
 (put 'narrow-to-region 'disabled nil)
 (defun bjm/kill-this-buffer ()
@@ -204,6 +199,14 @@
 ;;Load mu4e configuration based on Doom's templates
 (if (file-exists-p "~/gitfolders/mu4e_setup/doom_mu4e.el")
   (load-file "~/gitfolders/mu4e_setup/doom_mu4e.el"))
+
+(setq lsp-clients-clangd-args '("-j=3"
+                                "--background-index"
+                                "--completion-style=detailed"
+                                "--clang-tidy"
+				"--inlay-hints"))
+
+(setq-default evil-escape-key-sequence "jk")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
