@@ -61,6 +61,7 @@
   (pdf-view-midnight-minor-mode))
 
 (setq doom-font "Monaco-12")
+(setq confirm-kill-emacs nil)
 
 (if window-system 
     (setq doom-theme 'doom-snazzy)
