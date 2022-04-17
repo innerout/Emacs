@@ -68,4 +68,5 @@
 (package! top-level-keybinds
   :recipe (:host github
            :repo "hugonobrega/top-level-keybinds"))
-(unpin! org-roam company-org-roam)
+(package! ob-bitfield)
+(package! electric-operator)

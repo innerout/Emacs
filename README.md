@@ -5,7 +5,8 @@
 
 To run my configuration you need to run the following commands in ArchLinux.
 #### `yay -S emacs-pgtk-native-comp-git texlab npm python-pip clang ttf-monaco`
-#### `pip install pyright cmake-language-server grip --user`
+#### `pip install "python-lsp-server[all]" pyls-flake8 pylsp-mypy pyls-isort python-lsp-black pyls-memestra pylsp-rope`
+#### `pip install cmake-language-server grip --user`
 #### `sudo npm i -g yaml-language-server bash-language-server`
 
 ## Installation

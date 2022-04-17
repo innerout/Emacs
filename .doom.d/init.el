@@ -24,7 +24,7 @@
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;(ivy +fuzzy +icons +prescient +childframe)               ; a search engine for love and life +childframe
-       (vertico +icons)           ; the search engine of the future
+       (vertico +icons +childframe)           ; the search engine of the future
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -97,7 +97,7 @@
        lookup              ; navigate your code and its documentation
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
-       magit             ; a git porcelain for Emacs
+       (magit +forge)             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf               ; pdf enhancements
@@ -155,7 +155,7 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyright)            ; beautiful is better than ugly
+       (python +lsp)       ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6

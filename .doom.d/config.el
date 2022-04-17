@@ -197,6 +197,18 @@
 
 (after! magit (setq git-commit-summary-max-length 72))
 
+(defun nicer-org()
+  (progn
+    (org-num-mode 1)
+    (variable-pitch-mode 1)
+    (org-superstar-mode 1)
+    (display-line-numbers-mode -1)
+  ))
+
+(add-hook! 'org-mode-hook 'nicer-org)
+(use-package! ob-bitfield
+  :after org)
+(add-hook! 'prog-mode-hook #'electric-operator-mode)
 ;;Load mu4e configuration based on Doom's templates
 (if (file-exists-p "~/gitfolders/mu4e_setup/doom_mu4e.el")
   (load-file "~/gitfolders/mu4e_setup/doom_mu4e.el"))
@@ -208,6 +220,7 @@
 				"--inlay-hints"))
 
 (setq-default evil-escape-key-sequence "jk")
+(setq tramp-default-method "sshx")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
