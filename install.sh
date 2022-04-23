@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xe
 
 distro=$(grep "^ID=" /etc/os-release | cut -d\= -f2 | sed -e 's/"//g')
 
