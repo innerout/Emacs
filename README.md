@@ -1,15 +1,15 @@
 # Requirements
-* My Emacs configuration is based on the emacs-pgtk-native-comp-git AUR package.
+My Emacs configuration is based on the [emacs-nativecomp](https://archlinux.org/packages/extra/x86_64/emacs-nativecomp/emacs-nativecomp) package although versions >= 27 should work for other distributions too.
 
-### Arch
+### Dependencies
 
-To run my configuration you need to run the following commands in ArchLinux.
-#### `yay -S emacs-pgtk-native-comp-git texlab npm python-pip clang ttf-monaco`
-#### `pip install "python-lsp-server[all]" pyls-flake8 pylsp-mypy pyls-isort python-lsp-black pyls-memestra pylsp-rope`
-#### `pip install cmake-language-server grip --user`
-#### `sudo npm i -g yaml-language-server bash-language-server`
+To install the dependencies for my configuration run:
 
-## Installation
+	./install.sh
+
+I have tested it in Arch as my daily driver and in WSL Ubuntu.
+
+### Installation
 
 ``` bash
 1. git clone https://github.com/innerout/Emacs.git
@@ -18,7 +18,3 @@ To run my configuration you need to run the following commands in ArchLinux.
 4. git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 5. ~/.emacs.d/bin/doom install
 ```
-
-## Markdown-mode
-
-__Dependencies__ : [pandoc](https://pandoc.org/) [grip](https://github.com/joeyespo/grip)
