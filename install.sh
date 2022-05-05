@@ -26,6 +26,7 @@ case $distro in
 		;;
 	"arch" | "manjaro")
 		yay -S emacs-native-comp texlab npm python-pip clang ttf-monaco fd ripgrep --noconfirm
+		yay -S libvoikko nuspell hspell hunspell aspell aspell-en hunspell-en_us
 		;;
 	*)
 		echo "\"$distro\" is not supported distro, so please install packages manually."
