@@ -110,7 +110,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type nil)
 
 (global-set-key (kbd "<prior>") 'change-language)
 (defvar change-lang 0)
@@ -202,16 +202,16 @@
     (org-num-mode 1)
     (variable-pitch-mode 1)
     (org-superstar-mode 1)
-    (display-line-numbers-mode -1)
-  ))
+    (ws-butler-mode nil)))
 
 (add-hook! 'org-mode-hook 'nicer-org)
 (use-package! ob-bitfield
   :after org)
-(add-hook! 'prog-mode-hook #'electric-operator-mode)
+
 ;;Load mu4e configuration based on Doom's templates
-(if (file-exists-p "~/gitfolders/mu4e_setup/doom_mu4e.el")
-  (load-file "~/gitfolders/mu4e_setup/doom_mu4e.el"))
+(defvar mu4e-config-file "~/.emacs.d/doom_mu4e.el")
+(if (file-exists-p mu4e-config-file)
+  (load-file mu4e-config-file))
 
 (setq lsp-clients-clangd-args '("-j=3"
                                 "--background-index"

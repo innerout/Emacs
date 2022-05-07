@@ -69,4 +69,3 @@
   :recipe (:host github
            :repo "hugonobrega/top-level-keybinds"))
 (package! ob-bitfield)
-(package! electric-operator)
