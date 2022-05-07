@@ -28,8 +28,8 @@ case $distro in
 		setup_monaco_font
 		;;
 	"arch" | "manjaro")
-		yay -S emacs-native-comp texlab npm python-pip clang ttf-monaco fd ripgrep bash-language-server --noconfirm
-		yay -S libvoikko nuspell hspell hunspell aspell aspell-en hunspell-en_us
+		yay -S emacs-native-comp texlab npm python-pip clang ttf-monaco fd ripgrep bash-language-server ttf-fira-code --noconfirm
+		yay -S libvoikko nuspell hspell hunspell aspell aspell-en hunspell-en_us --noconfirm
 		;;
 	*)
 		echo "\"$distro\" is not supported distro, so please install packages manually."
