@@ -18,17 +18,17 @@ setup_monaco_font() {
 
 case $distro in
 	"ubuntu" | "debian")
-		sudo apt install emacs npm yarn python3-pip gcc clang fd-find ripgrep aspell aspell-en hunspell -y
+		sudo apt install emacs npm yarn python3-pip gcc clang fd-find ripgrep aspell aspell-en hunspell pandoc -y
 		setup_texlab
 		setup_monaco_font
 		;;
 	"fedora")
-		sudo dnf install emacs npm yarn python3-pip gcc clang fd-find ripgrep aspell aspell-en hunspell -y
+		sudo dnf install emacs npm yarn python3-pip gcc clang fd-find ripgrep aspell aspell-en hunspell pandoc -y
 		setup_texlab
 		setup_monaco_font
 		;;
 	"arch" | "manjaro")
-		yay -S emacs-native-comp texlab npm python-pip clang ttf-monaco fd ripgrep bash-language-server ttf-fira-code --noconfirm
+		yay -S emacs-native-comp texlab npm python-pip clang ttf-monaco fd ripgrep bash-language-server ttf-fira-code pandoc-bin --noconfirm
 		yay -S libvoikko nuspell hspell hunspell aspell aspell-en hunspell-en_us --noconfirm
 		;;
 	*)
