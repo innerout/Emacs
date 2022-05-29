@@ -20,7 +20,7 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       (company +tng)           ; the ultimate code completion backend
+       company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;(ivy +fuzzy +icons +prescient +childframe)               ; a search engine for love and life +childframe
@@ -97,7 +97,7 @@
        lookup              ; navigate your code and its documentation
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
-       (magit +forge)      ; a git porcelain for Emacs
+       magit      ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf                 ; pdf enhancements

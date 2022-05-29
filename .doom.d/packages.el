@@ -60,12 +60,11 @@
 (package! clang-format)
 (package! spacemacs-theme)
 (package! org-ref)
-(package! orgit)
 (package! org-superstar)
 (package! ssh-config-mode)
 (package! mu4e-alert :disable t)
-(package! ace-jump-zap)
 (package! top-level-keybinds
   :recipe (:host github
            :repo "hugonobrega/top-level-keybinds"))
 (package! ob-bitfield)
+(package! docstr)

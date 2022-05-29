@@ -25,7 +25,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq comp-deferred-compilation t)
+(setq native-comp-async-report-warnings-errors nil)
+(setq load-prefer-newer t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 (add-hook 'cmake-mode-hook 'eldoc-cmake-enable)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
@@ -35,7 +36,7 @@
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
-(add-hook 'pdf-view-mode-hook (lambda () (bms/pdf-midnite-amber)))
+(add-hook 'pdf-view-mode-hook (lambda () (pdf-midnite-amber)))
 (add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
 (add-hook 'prog-mode-hook 'color-identifiers-mode)
 ;; (add-hook 'lsp-after-initialize-hook (lambda
@@ -49,18 +50,18 @@
 (add-hook 'lisp-mode (setq indent-tabs-mode nil))
 (add-hook 'emacs-lisp-mode (setq indent-tabs-mode nil))
 
-(defun bms/pdf-no-filter ()
+(defun pdf-no-filter ()
   "View pdf without colour filter."
   (interactive)
   (pdf-view-midnight-minor-mode -1))
 
-(defun bms/pdf-midnite-amber ()
+(defun pdf-midnite-amber ()
   "Set pdf-view-midnight-colors to amber on dark slate blue."
   (interactive)
   (setq pdf-view-midnight-colors '("#ff9900" . "#0a0a12" )) ; amber
   (pdf-view-midnight-minor-mode))
 
-(setq doom-font "Monaco-12")
+(setq doom-font "Fira Code 12")
 (setq confirm-kill-emacs nil)
 
 (if window-system 
@@ -71,7 +72,6 @@
 (setq lsp-ui-sideline-enable t)
 (setq lsp-modeline-diagnostics-enable t)
 (setq lsp-modeline-code-actions-enable t)
-(after! lsp-treemacs (lsp-treemacs-sync-mode 1))
 (setq lsp-signature-function 'lsp-signature-posframe)
 
 (use-package! which-function
@@ -86,10 +86,7 @@
   (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
   (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
 
-(after! flycheck 'flycheck-clang-tidy)
-
 (smartparens-global-mode)
-
 (map! :after smartparens
       :map smartparens-mode-map
       "<C-left>" #'left-word
@@ -99,7 +96,6 @@
       "M-]" #'sp-unwrap-sexp)
 
 (map! "C-M-i" #'clang-format-buffer)
-(map! "C-x k" #'bjm/kill-this-buffer)
 (map! [remap goto-line] #'goto-line-preview)
 (map! [remap zap-to-char] #'ace-jump-zap-to-char)
 (map! [remap zap-up-to-char] #'ace-jump-zap-up-to-char)
@@ -134,10 +130,6 @@
 (global-auto-revert-mode t)
 (setq blink-matching-paren 'show)
 (put 'narrow-to-region 'disabled nil)
-(defun bjm/kill-this-buffer ()
-  "Kill the current buffer."
-  (interactive)
-  (kill-buffer (current-buffer)))
 
 (remove-hook 'post-self-insert-hook
              #'blink-paren-post-self-insert-function)
@@ -185,7 +177,6 @@
                  (or face '(:inherit default :inherit highlight)))
     ol))
 
-(after! magit (setq magit-diff-refine-hunk 'all))
 
 (setq org-roam-directory "~/gitfolders/schedule-life")
 
@@ -194,8 +185,6 @@
       bibtex-completion-bibliography "~/gitfolders/schedule-life/bibliography/biblio.bib" )
 
 (setq org-ellipsis "⤵")
-
-(after! magit (setq git-commit-summary-max-length 72))
 
 (defun nicer-org()
   (progn
@@ -221,6 +210,14 @@
 
 (setq-default evil-escape-key-sequence "jk")
 (setq tramp-default-method "sshx")
+
+(map! [remap dabbrev-expand] 'hippie-expand)
+
+(after! lsp-treemacs (lsp-treemacs-sync-mode 1))
+(after! flycheck 'flycheck-clang-tidy)
+(after! lsp-ui (setq lsp-ui-doc-show-with-cursor t))
+(after! magit (setq magit-diff-refine-hunk 'all))
+(after! magit (setq git-commit-summary-max-length 72))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
