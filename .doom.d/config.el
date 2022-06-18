@@ -185,6 +185,8 @@
       bibtex-completion-bibliography "~/gitfolders/schedule-life/bibliography/biblio.bib" )
 
 (setq org-ellipsis "⤵")
+(setq docstr-c-style 'javadoc)
+(setq docstr-key-support t)
 
 (defun nicer-org()
   (progn
@@ -210,6 +212,11 @@
 
 (setq-default evil-escape-key-sequence "jk")
 (setq tramp-default-method "sshx")
+;; (after! lsp (lsp-register-client
+;; 	      (make-lsp-client :new-connection (lsp-tramp-connection "/usr/bin/clangd")
+;; 			       :major-modes '(c-mode c++-mode)
+;; 			       :remote? t
+;; 			       :server-id 'clangd-remote)))
 
 (map! [remap dabbrev-expand] 'hippie-expand)
 
