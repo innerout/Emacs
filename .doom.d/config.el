@@ -27,6 +27,7 @@
 ;; `load-theme' function. This is the default:
 (setq native-comp-async-report-warnings-errors nil)
 (setq load-prefer-newer t)
+;;(setq debug-on-error t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 (add-hook 'cmake-mode-hook 'eldoc-cmake-enable)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
@@ -106,7 +107,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type nil)
+(setq display-line-numbers-type t)
 
 (global-set-key (kbd "<prior>") 'change-language)
 (defvar change-lang 0)
@@ -132,7 +133,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 (remove-hook 'post-self-insert-hook
-             #'blink-paren-post-self-insert-function)
+	     #'blink-paren-post-self-insert-function)
 
 (let ((ov nil)) ; keep track of the overlay
   (advice-add
@@ -145,36 +146,36 @@
      ;; check if it's appropriate to show match info,
      ;; see `blink-paren-post-self-insert-function'
      (when (and (overlay-buffer show-paren--overlay)
-                (not (or cursor-in-echo-area
-                         executing-kbd-macro
-                         noninteractive
-                         (minibufferp)
-                         this-command))
-                (and (not (bobp))
-                     (memq (char-syntax (char-before)) '(?\) ?\$)))
-                (= 1 (logand 1 (- (point)
-                                  (save-excursion
-                                    (forward-char -1)
-                                    (skip-syntax-backward "/\\")
-                                    (point))))))
+		(not (or cursor-in-echo-area
+			 executing-kbd-macro
+			 noninteractive
+			 (minibufferp)
+			 this-command))
+		(and (not (bobp))
+		     (memq (char-syntax (char-before)) '(?\) ?\$)))
+		(= 1 (logand 1 (- (point)
+				  (save-excursion
+				    (forward-char -1)
+				    (skip-syntax-backward "/\\")
+				    (point))))))
        ;; rebind `minibuffer-message' called by
        ;; `blink-matching-open' to handle the overlay display
        (cl-letf (((symbol-function #'minibuffer-message)
-                  (lambda (msg &rest args)
-                    (let ((msg (apply #'format-message msg args)))
-                      (setq ov (display-line-overlay+
-                                (window-start) msg ))))))
-         (blink-matching-open))))))
+		  (lambda (msg &rest args)
+		    (let ((msg (apply #'format-message msg args)))
+		      (setq ov (display-line-overlay+
+				(window-start) msg ))))))
+	 (blink-matching-open))))))
 
 (defun display-line-overlay+ (pos str &optional face)
   "Display line at POS as STR with FACE.FACE defaults to inheriting from default and highlight."
   (let ((ol (save-excursion
-              (goto-char pos)
-              (make-overlay (line-beginning-position)
-                            (line-end-position)))))
+	      (goto-char pos)
+	      (make-overlay (line-beginning-position)
+			    (line-end-position)))))
     (overlay-put ol 'display str)
     (overlay-put ol 'face
-                 (or face '(:inherit default :inherit highlight)))
+		 (or face '(:inherit default :inherit highlight)))
     ol))
 
 
@@ -202,13 +203,16 @@
 ;;Load mu4e configuration based on Doom's templates
 (defvar mu4e-config-file "~/.emacs.d/doom_mu4e.el")
 (if (file-exists-p mu4e-config-file)
-  (load-file mu4e-config-file))
+    (load-file mu4e-config-file))
 
-(setq lsp-clients-clangd-args '("-j=3"
-                                "--background-index"
-                                "--completion-style=detailed"
-                                "--clang-tidy"
-				"--inlay-hints"))
+(setq lsp-clients-clangd-args '("-j=8"
+				"--background-index"
+				"--completion-style=detailed"
+				"--header-insertion=iwyu"
+				"--clang-tidy"
+				"--function-arg-placeholders"
+				"--limit-references=0"
+				"--limit-results=0"))
 
 (setq-default evil-escape-key-sequence "jk")
 (setq tramp-default-method "sshx")

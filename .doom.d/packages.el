@@ -68,3 +68,5 @@
            :repo "hugonobrega/top-level-keybinds"))
 (package! ob-bitfield)
 (package! docstr)
+(package! multi-vterm :recipe (:host github
+			       :repo "suonlight/multi-vterm"))
