@@ -70,3 +70,4 @@
 (package! docstr)
 (package! multi-vterm :recipe (:host github
 			       :repo "suonlight/multi-vterm"))
+(package! info-colors)

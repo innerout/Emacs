@@ -40,6 +40,7 @@
 (add-hook 'pdf-view-mode-hook (lambda () (pdf-midnite-amber)))
 (add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
 (add-hook 'prog-mode-hook 'color-identifiers-mode)
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
 ;; (add-hook 'lsp-after-initialize-hook (lambda
 ;;                                        ()
 ;;                                        (flycheck-add-next-checker 'lsp 'c/c++-clang)))
