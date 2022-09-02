@@ -41,6 +41,7 @@
 (add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
 (add-hook 'prog-mode-hook 'color-identifiers-mode)
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
+
 ;; (add-hook 'lsp-after-initialize-hook (lambda
 ;;                                        ()
 ;;                                        (flycheck-add-next-checker 'lsp 'c/c++-clang)))
@@ -203,8 +204,10 @@
 
 ;;Load mu4e configuration based on Doom's templates
 (defvar mu4e-config-file "~/.emacs.d/doom_mu4e.el")
+
 (if (file-exists-p mu4e-config-file)
     (load-file mu4e-config-file))
+
 
 (setq lsp-clients-clangd-args '("-j=8"
 				"--background-index"
@@ -230,6 +233,7 @@
 (after! lsp-ui (setq lsp-ui-doc-show-with-cursor t))
 (after! magit (setq magit-diff-refine-hunk 'all))
 (after! magit (setq git-commit-summary-max-length 72))
+;;(setq debug-on-message "vacuous schema")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
