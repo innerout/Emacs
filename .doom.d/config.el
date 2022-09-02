@@ -76,6 +76,7 @@
 (setq lsp-modeline-diagnostics-enable t)
 (setq lsp-modeline-code-actions-enable t)
 (setq lsp-signature-function 'lsp-signature-posframe)
+(setq lsp-semantic-tokens-enable t)
 
 (use-package! which-function
   :defer 5
