@@ -64,7 +64,7 @@
   (setq pdf-view-midnight-colors '("#ff9900" . "#0a0a12" )) ; amber
   (pdf-view-midnight-minor-mode))
 
-(setq doom-font "Fira Code 12")
+(setq doom-font "Monaco 12")
 (setq confirm-kill-emacs nil)
 
 (if window-system 
@@ -75,8 +75,7 @@
 (setq lsp-ui-sideline-enable t)
 (setq lsp-modeline-diagnostics-enable t)
 (setq lsp-modeline-code-actions-enable t)
-(setq lsp-signature-function 'lsp-signature-posframe)
-(setq lsp-semantic-tokens-enable t)
+;;(setq lsp-signature-function 'lsp-signature-posframe)
 
 (use-package! which-function
   :defer 5
@@ -99,6 +98,7 @@
       "<M-right>" #'right-word
       "M-]" #'sp-unwrap-sexp)
 
+(map! "C-M-z" 'company-complete)
 (map! "C-M-i" #'clang-format-buffer)
 (map! [remap goto-line] #'goto-line-preview)
 (map! [remap zap-to-char] #'ace-jump-zap-to-char)
@@ -110,7 +110,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 (global-set-key (kbd "<prior>") 'change-language)
 (defvar change-lang 0)
@@ -220,6 +220,9 @@
 				"--limit-results=0"))
 
 (setq-default evil-escape-key-sequence "jk")
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
 (setq tramp-default-method "sshx")
 ;; (after! lsp (lsp-register-client
 ;; 	      (make-lsp-client :new-connection (lsp-tramp-connection "/usr/bin/clangd")
@@ -234,8 +237,36 @@
 (after! lsp-ui (setq lsp-ui-doc-show-with-cursor t))
 (after! magit (setq magit-diff-refine-hunk 'all))
 (after! magit (setq git-commit-summary-max-length 72))
+(after! company (setq company-idle-delay nil))
+
 ;;(setq debug-on-message "vacuous schema")
 
+(use-package! sideline
+  :hook (flycheck-mode . sideline-mode)
+  :init
+  (setq	sideline-order-left 'down              ; or 'up
+	sideline-order-right 'up               ; or 'down
+	sideline-format-left "%s   "           ; format for left aligment
+	sideline-format-right "   %s"          ; format for right aligment
+	sideline-priority 100                  ; overlays' priority
+	sideline-display-backend-name t)
+  (setq sideline-backends-right '(sideline-lsp sideline-flycheck sideline-flymake))
+
+;; (setq sideline-backends-right '(sideline-flycheck)
+;;         ;;sideline-backends-right '(sideline-lsp)
+;; 	)
+  )      ; display the backend name
+(use-package! sideline-lsp
+  :init
+  (setq sideline-lsp-update-mode 'line))
+(use-package! sideline
+  :hook (flymake-mode-hook . sideline-mode)
+  :init
+  (setq sideline-flymake-display-errors-whole-line 'line))
+
+(use-package! lsp-mode :hook (lsp-mode-hook . sideline-mode))
+(use-package! lsp-ui :init (setq lsp-ui-sideline-enable nil))  ; disable original sideline
+(use-package! sideline-flycheck :hook (flycheck-mode-hook . sideline-flycheck-setup))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
