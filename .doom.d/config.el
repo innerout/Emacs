@@ -89,6 +89,12 @@
   (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
   (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
 
+(use-package! gnuplot
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.gp\\'" . gnuplot-mode))
+  (add-to-list 'auto-mode-alist '("\\.gnuplot\\'" . gnuplot-mode)))
+
 (smartparens-global-mode)
 (map! :after smartparens
       :map smartparens-mode-map
@@ -252,9 +258,9 @@
 	sideline-display-backend-name t)
   (setq sideline-backends-right '(sideline-lsp sideline-flycheck sideline-flymake))
 
-;; (setq sideline-backends-right '(sideline-flycheck)
-;;         ;;sideline-backends-right '(sideline-lsp)
-;; 	)
+  ;; (setq sideline-backends-right '(sideline-flycheck)
+  ;;         ;;sideline-backends-right '(sideline-lsp)
+  ;; 	)
   )      ; display the backend name
 (use-package! sideline-lsp
   :init
