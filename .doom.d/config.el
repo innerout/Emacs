@@ -67,10 +67,10 @@
 (setq doom-font "Monaco 12")
 (setq confirm-kill-emacs nil)
 
-(if window-system 
-    (setq doom-theme 'doom-snazzy)
-  (setq doom-theme 'spacemacs-dark))
-
+;; (if window-system
+;;     (setq doom-theme 'doom-snazzy)
+;;   (setq doom-theme 'spacemacs-dark))
+(setq doom-theme 'spacemacs-dark)
 (setq lsp-headerline-breadcrumb-enable t)
 (setq lsp-ui-sideline-enable t)
 (setq lsp-modeline-diagnostics-enable t)
@@ -273,6 +273,19 @@
 (use-package! lsp-mode :hook (lsp-mode-hook . sideline-mode))
 (use-package! lsp-ui :init (setq lsp-ui-sideline-enable nil))  ; disable original sideline
 (use-package! sideline-flycheck :hook (flycheck-mode-hook . sideline-flycheck-setup))
+(defun +lsp/definition-in-split ()
+  "Jump to definition in a split window on the right."
+  (interactive)
+  (let ((old-window (selected-window)))
+    (select-window (split-window-right))
+    (call-interactively #'+lookup/definition)
+    (when (eq old-window (selected-window))
+      (select-window (next-window)))))
+
+(map! :leader
+      :desc "Jump to definition in split"
+      "c d" #'+lsp/definition-in-split)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
