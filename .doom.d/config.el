@@ -34,13 +34,14 @@
 (add-hook 'text-mode-hook 'goto-address-mode)
 (add-hook 'flycheck-mode  'flycheck-clang-tidy-setup)
 (add-hook 'org-mode '(org-superstar-mode))
-(add-hook 'after-init-hook 'global-color-identifiers-mode)
+;;(add-hook 'after-init-hook 'global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
 (add-hook 'pdf-view-mode-hook (lambda () (pdf-midnite-amber)))
 (add-hook 'pdf-view-mode-hook 'pdf-view-auto-slice-minor-mode)
-(add-hook 'prog-mode-hook 'color-identifiers-mode)
+;; (add-hook 'prog-mode-hook 'color-identifiers-mode)
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
+
 
 ;; (add-hook 'lsp-after-initialize-hook (lambda
 ;;                                        ()
@@ -52,6 +53,7 @@
 (setq-default indent-tabs-mode t)
 (add-hook 'lisp-mode (setq indent-tabs-mode nil))
 (add-hook 'emacs-lisp-mode (setq indent-tabs-mode nil))
+(setq-default tab-width 4)
 
 (defun pdf-no-filter ()
   "View pdf without colour filter."
@@ -70,11 +72,12 @@
 ;; (if window-system
 ;;     (setq doom-theme 'doom-snazzy)
 ;;   (setq doom-theme 'spacemacs-dark))
-(setq doom-theme 'spacemacs-dark)
+(setq doom-theme 'doom-vibrant)
 (setq lsp-headerline-breadcrumb-enable t)
 (setq lsp-ui-sideline-enable t)
 (setq lsp-modeline-diagnostics-enable t)
 (setq lsp-modeline-code-actions-enable t)
+(setq lsp-inlay-hint-enable t)
 ;;(setq lsp-signature-function 'lsp-signature-posframe)
 
 (use-package! which-function
@@ -270,6 +273,15 @@
   :init
   (setq sideline-flymake-display-errors-whole-line 'line))
 
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("C-<tab>" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion)
+              ;;("C-TAB" . 'copilot-accept-completion-by-word)
+              ;;("C-<tab>" . 'copilot-accept-completion-by-word)
+	      ))
+
 (use-package! lsp-mode :hook (lsp-mode-hook . sideline-mode))
 (use-package! lsp-ui :init (setq lsp-ui-sideline-enable nil))  ; disable original sideline
 (use-package! sideline-flycheck :hook (flycheck-mode-hook . sideline-flycheck-setup))
@@ -282,10 +294,29 @@
     (when (eq old-window (selected-window))
       (select-window (next-window)))))
 
-(map! :leader
-      :desc "Jump to definition in split"
-      "c d" #'+lsp/definition-in-split)
+;; (map! :leader
+;;       :desc "Jump to definition in split"
+;;       "c d" #'+lsp/definition-in-split)
 
+
+
+(defun insert-plan-entry ()
+  "Insert today's date at the top if it's not already present and position point below it."
+  (interactive)
+  (let ((today (format-time-string "%Y-%m-%d")))
+    (goto-char (point-min))
+    (unless (search-forward today nil t)
+      (goto-char (point-min))
+      (insert (concat today "\n" "----------------\n\n")))
+    (goto-char (point-min))
+    (search-forward today nil t)
+    (forward-line 2)))
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (and (buffer-file-name)
+                       (string-match-p "plan" (downcase (buffer-file-name))))
+              (insert-plan-entry))))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
