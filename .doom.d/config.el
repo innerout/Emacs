@@ -78,6 +78,8 @@
 (setq lsp-modeline-diagnostics-enable t)
 (setq lsp-modeline-code-actions-enable t)
 (setq lsp-inlay-hint-enable t)
+(setq lsp-lens-enable t)
+(setq lsp-enable-symbol-highlighting t)
 ;;(setq lsp-signature-function 'lsp-signature-posframe)
 
 (use-package! which-function
