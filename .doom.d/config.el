@@ -319,6 +319,12 @@
             (when (and (buffer-file-name)
                        (string-match-p "plan" (downcase (buffer-file-name))))
               (insert-plan-entry))))
+
+(after! dockerfile-mode
+  (set-formatter! 'dockerfmt '("dockerfmt" filepath) :modes '(dockerfile-mode)))
+
+(after! python-mode
+  (set-formatter! 'ruff '("ruff" "format" filepath) :modes '(python-mode)))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
