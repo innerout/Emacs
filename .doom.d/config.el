@@ -267,13 +267,26 @@
   ;;         ;;sideline-backends-right '(sideline-lsp)
   ;; 	)
   )      ; display the backend name
+
 (use-package! sideline-lsp
   :init
   (setq sideline-lsp-update-mode 'line))
+
 (use-package! sideline
   :hook (flymake-mode-hook . sideline-mode)
   :init
   (setq sideline-flymake-display-errors-whole-line 'line))
+
+(after! dockerfile-mode
+  (set-formatter! 'dockerfmt '("dockerfmt" filepath) :modes '(dockerfile-mode)))
+
+(after! python-mode
+  (set-formatter! 'ruff '("ruff" "format" filepath) :modes '(python-mode)))
+
+(after! lsp-pylsp
+  (setq lsp-pylsp-plugins-autopep8-enabled nil)
+  (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
+  (setq lsp-pylsp-plugins-flake8-enabled nil))
 
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
@@ -320,11 +333,6 @@
                        (string-match-p "plan" (downcase (buffer-file-name))))
               (insert-plan-entry))))
 
-(after! dockerfile-mode
-  (set-formatter! 'dockerfmt '("dockerfmt" filepath) :modes '(dockerfile-mode)))
-
-(after! python-mode
-  (set-formatter! 'ruff '("ruff" "format" filepath) :modes '(python-mode)))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
