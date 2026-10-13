@@ -303,6 +303,32 @@
               ;;("C-<tab>" . 'copilot-accept-completion-by-word)
 	      ))
 
+(use-package! codex
+  :commands (codex codex-transient codex-toggle codex-resume
+             codex-send-command codex-send-command-with-context
+             codex-send-region codex-switch-to-buffer codex-kill)
+  :init
+  (setq codex-terminal-backend 'vterm
+        codex-display-window-fn #'display-buffer
+        ;; The installed CLI has removed this experimental feature.
+        codex-disable-terminal-resize-reflow nil
+        ;; The optional hook installer rewrites ~/.codex configuration files.
+        codex-enable-hooks nil)
+  (map! :leader
+        (:prefix ("o x" . "Codex")
+         :desc "Start session" "c" #'codex
+         :desc "Command menu" "m" #'codex-transient
+         :desc "Toggle window" "t" #'codex-toggle
+         :desc "Resume session" "R" #'codex-resume
+         :desc "Send prompt" "s" #'codex-send-command
+         :desc "Send prompt with context" "x" #'codex-send-command-with-context
+         :desc "Send region or buffer" "r" #'codex-send-region
+         :desc "Switch session" "b" #'codex-switch-to-buffer
+         :desc "Stop session" "k" #'codex-kill))
+  :config
+  (set-popup-rule! "^\\*codex" :side 'right :size 0.45
+    :select t :quit nil :ttl nil))
+
 (use-package! lsp-mode :hook (lsp-mode-hook . sideline-mode))
 (use-package! lsp-ui :init (setq lsp-ui-sideline-enable nil))  ; disable original sideline
 (use-package! sideline-flycheck :hook (flycheck-mode-hook . sideline-flycheck-setup))

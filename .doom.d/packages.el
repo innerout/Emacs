@@ -81,3 +81,6 @@
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 (package! copilot-chat)
+(package! codex
+  :recipe (:host github :repo "benthamite/codex"
+           :files (:defaults "bin")))
