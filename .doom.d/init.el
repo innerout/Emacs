@@ -15,6 +15,7 @@
 ;;      directory (for easy access to its source code).
 
 (doom! :input
+       ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        ;;chinese
        ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
@@ -30,7 +31,7 @@
        :ui
        ;;deft              ; notational velocity for Emacs
        doom                ; what makes DOOM look the way it does
-       doom-dashboard      ; a nifty splash screen for Emacs
+       dashboard           ; a nifty splash screen for Emacs
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;(emoji +ascii +github +unicode)  ; 🙂
        ;;fill-column       ; a `fill-column' indicator
@@ -43,6 +44,7 @@
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints             ; highlight the region an operation acts on
        (popup +all +defaults)   ; tame sudden yet inevitable temporary windows
+       ;;smooth-scroll     ; So smooth you won't believe it's not butter
        ;;tabs              ; a tab bar for Emacs
        (treemacs +lsp)     ; a project drawer, like neotree but cooler
        ;;unicode             ; extended unicode support for various languages
@@ -81,6 +83,7 @@
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
+       ;;ghostel           ; the best terminal emulation in Emacs
 
        :checkers
        (syntax ;+childframe
@@ -133,6 +136,7 @@
        emacs-lisp          ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
+       ;;factor
        ;;faust             ; dsp, but you get to keep your soul
        ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
        ;;fsharp            ; ML stands for Microsoft's Language
@@ -157,7 +161,8 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +dragndrop +attach +babel +capture +export +roam2)               ; organize your plain life in plain text
+       ;;odin              ; C, minus its footguns
+       (org +dragndrop +roam) ; attachments, Babel, capture and export are built in
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
@@ -170,6 +175,7 @@
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;scad              ; trust the preview, regret the render
        ;;(scala +lsp)             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        (sh +lsp +tree-sitter)           ; she sells {ba,z,fi}sh shells on the C xor
@@ -196,3 +202,7 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+;; If you see a white flash when starting Emacs with a dark theme, uncomment
+;; this and adjust the background color to match your theme.
+;; (add-to-list 'initial-frame-alist '(background-color . "#000000"))

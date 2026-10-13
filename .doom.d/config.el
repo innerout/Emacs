@@ -30,10 +30,13 @@
 ;;(setq debug-on-error t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 (add-hook 'cmake-mode-hook 'eldoc-cmake-enable)
+(add-hook 'cmake-ts-mode-hook #'eldoc-cmake-enable)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
 (add-hook 'text-mode-hook 'goto-address-mode)
-(add-hook 'flycheck-mode  'flycheck-clang-tidy-setup)
-(add-hook 'org-mode '(org-superstar-mode))
+(use-package! flycheck-clang-tidy
+  :after flycheck
+  :config
+  (flycheck-clang-tidy-setup))
 ;;(add-hook 'after-init-hook 'global-color-identifiers-mode)
 (remove-hook! doom-first-buffer-hook #'drag-stuff-global-mode)
 (remove-hook! text-mode-hook #'auto-fill-mode)
@@ -51,8 +54,8 @@
 ;;                                        (flycheck-add-next-checker 'lsp 'c/c++-clang-tidy)))
 
 (setq-default indent-tabs-mode t)
-(add-hook 'lisp-mode (setq indent-tabs-mode nil))
-(add-hook 'emacs-lisp-mode (setq indent-tabs-mode nil))
+(add-hook! '(lisp-mode-hook emacs-lisp-mode-hook)
+  (setq-local indent-tabs-mode nil))
 (setq-default tab-width 4)
 
 (defun pdf-no-filter ()
@@ -92,7 +95,7 @@
   (add-to-list 'auto-mode-alist '("/sshd?_config\\'"      . ssh-config-mode))
   (add-to-list 'auto-mode-alist '("/knownhosts\\'"       . ssh-known-hosts-mode))
   (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
-  (add-hook 'ssh-config-mode-hook 'turn-on-font-lock))
+  (add-hook 'ssh-config-mode-hook #'font-lock-mode))
 
 (use-package! gnuplot
   :defer t
@@ -109,11 +112,10 @@
       "<M-right>" #'right-word
       "M-]" #'sp-unwrap-sexp)
 
-(map! "C-M-z" 'company-complete)
+(map! "C-M-z" #'completion-at-point)
 (map! "C-M-i" #'clang-format-buffer)
 (map! [remap goto-line] #'goto-line-preview)
-(map! [remap zap-to-char] #'ace-jump-zap-to-char)
-(map! [remap zap-up-to-char] #'ace-jump-zap-up-to-char)
+;; Keep the built-in zap commands until ace-jump-zap is explicitly installed.
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -203,22 +205,26 @@
 (setq docstr-c-style 'javadoc)
 (setq docstr-key-support t)
 
-(defun nicer-org()
-  (progn
-    (org-num-mode 1)
-    (variable-pitch-mode 1)
-    (org-superstar-mode 1)
-    (ws-butler-mode nil)))
+(defun nicer-org ()
+  "Enable the preferred Org appearance without trimming its whitespace."
+  (org-num-mode 1)
+  (variable-pitch-mode 1)
+  (org-superstar-mode 1)
+  (ws-butler-mode -1))
 
 (add-hook! 'org-mode-hook 'nicer-org)
 (use-package! ob-bitfield
   :after org)
 
-;;Load mu4e configuration based on Doom's templates
-(defvar mu4e-config-file "~/.emacs.d/doom_mu4e.el")
+;; Load mail settings from the private config or the existing Emacs locations.
+(defvar mu4e-config-file
+  (seq-find #'file-exists-p
+            (list (expand-file-name "doom_mu4e.el" doom-user-dir)
+                  (expand-file-name "doom_mu4e.el" doom-emacs-dir)
+                  (expand-file-name "~/.emacs.d/doom_mu4e.el"))))
 
-(if (file-exists-p mu4e-config-file)
-    (load-file mu4e-config-file))
+(when mu4e-config-file
+  (load-file mu4e-config-file))
 
 
 (setq lsp-clients-clangd-args '("-j=8"
@@ -244,11 +250,9 @@
 (map! [remap dabbrev-expand] 'hippie-expand)
 
 (after! lsp-treemacs (lsp-treemacs-sync-mode 1))
-(after! flycheck 'flycheck-clang-tidy)
 (after! lsp-ui (setq lsp-ui-doc-show-with-cursor t))
 (after! magit (setq magit-diff-refine-hunk 'all))
 (after! magit (setq git-commit-summary-max-length 72))
-(after! company (setq company-idle-delay nil))
 
 ;;(setq debug-on-message "vacuous schema")
 
@@ -280,8 +284,10 @@
 (after! dockerfile-mode
   (set-formatter! 'dockerfmt '("dockerfmt" filepath) :modes '(dockerfile-mode)))
 
-(after! python-mode
-  (set-formatter! 'ruff '("ruff" "format" filepath) :modes '(python-mode)))
+;; Format buffer contents through stdin, retaining project Ruff settings.
+(after! apheleia
+  (set-formatter! 'ruff '("ruff" "format" "--stdin-filename" filepath "-")
+    :modes '(python-mode python-ts-mode)))
 
 (after! lsp-pylsp
   (setq lsp-pylsp-plugins-autopep8-enabled nil)

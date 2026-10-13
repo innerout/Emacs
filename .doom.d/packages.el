@@ -53,7 +53,7 @@
 (package! mu4e-column-faces)
 (package! cmake-font-lock)
 (package! eldoc-cmake)
-(package! goto-addr)
+(package! goto-addr :built-in t)
 (package! goto-line-preview)
 (package! flycheck-clang-tidy)
 (package! i3wm-config-mode)
